@@ -1,8 +1,8 @@
 # Requires
-catepillar = require "#{__dirname}/../lib/caterpillar.coffee"
+caterpillar = require "#{__dirname}/../lib/caterpillar.coffee"
 
 # Create
-logger = new catepillar.Logger
+logger = new caterpillar.Logger
 	transports:
 		level: 7
 		formatter:
@@ -10,10 +10,17 @@ logger = new catepillar.Logger
 
 # Logs
 for own name,code of logger.config.levels
-	logger.log name, "this is #{name}"
+	logger.log name, "this is #{name} and is level #{code}"
 
 # Standard
+logger.log ''
 logger.log 'this is awesome'
+logger.log 'this','is','awesome'
+
+# Colors
+colors = caterpillar.colors
+logger.log ''
+logger.log 'this is', colors.magenta.bold.italic.underline('awesome')
 
 # Grouping
 logger.config.autoFlush = false

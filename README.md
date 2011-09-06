@@ -7,14 +7,14 @@ Caterpillar is an awesome, simple console logger for [node.js](http://nodejs.org
 
 ### [examples/console.coffee](https://github.com/balupton/caterpillar.npm/blob/master/examples/console.coffee)
 
-<img src="https://github.com/balupton/caterpillar.npm/raw/master/media/caterpillar-84x21.png"/>
+<img src="https://github.com/balupton/caterpillar.npm/raw/master/media/caterpillar.npm.png"/>
 
 ``` coffeescript
 # Requires
-catepillar = require "#{__dirname}/../lib/caterpillar.coffee"
+caterpillar = require "#{__dirname}/../lib/caterpillar.coffee"
 
 # Create
-logger = new catepillar.Logger
+logger = new caterpillar.Logger
 	transports:
 		level: 7
 		formatter:
@@ -22,10 +22,17 @@ logger = new catepillar.Logger
 
 # Logs
 for own name,code of logger.config.levels
-	logger.log name, "this is #{name}"
+	logger.log name, "this is #{name} and is level #{code}"
 
 # Standard
+logger.log ''
 logger.log 'this is awesome'
+logger.log 'this','is','awesome'
+
+# Colors
+colors = caterpillar.colors
+logger.log ''
+logger.log 'this is', colors.magenta.bold.italic.underline('awesome')
 
 # Grouping
 logger.config.autoFlush = false
