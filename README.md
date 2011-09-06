@@ -48,7 +48,7 @@ setTimeout(
 		
 		npm -g install coffee-script
 
-1. Install DocPad
+1. Install Caterpillar
 
 		npm install caterpillar
 
