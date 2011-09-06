@@ -5,7 +5,9 @@ Caterpillar is an awesome, simple console logging framework for [Node.js](http:/
 
 ## Example
 
-<img src=""/>
+### [examples/console.coffee](https://github.com/balupton/caterpillar.npm/blob/master/examples/console.coffee)
+
+<img src="https://github.com/balupton/caterpillar.npm/raw/master/media/caterpillar-84x21.png"/>
 
 ``` coffeescript
 # Requires
