@@ -1,6 +1,6 @@
 # Caterpillar
 
-Caterpillar is an awesome, simple console logger for [node.js](http://nodejs.org/). It supports grouping of messages, filtering log levels, colors, times, modules, custom formatters and custom transports.
+Caterpillar is an awesome, simple, intuitive console logger for [node.js](http://nodejs.org/). It supports grouping of messages, filtering log levels, colors, times, modules, custom formatters and custom transports.
 
 
 ## Example
