@@ -59,14 +59,14 @@ setTimeout(
 Uses the following:
 
 - [RFC3164](http://www.faqs.org/rfcs/rfc3164.html) for the level codes and names
-- [Mariusz Nowak](https://github.com/medikoo)'s [CLI-Color](https://github.com/medikoo/cli-color)
+- [Mariusz Nowak's](https://github.com/medikoo) [CLI-Color](https://github.com/medikoo/cli-color)
 
 Inspired by the following:
 
-- [Alexander Dorofeev](https://github.com/akaspin)'s [AIN](https://github.com/akaspin/ain)
-- [TJ Holowaychuk](https://github.com/visionmedia)'s [Log.js](https://github.com/visionmedia/log.js)
-- [Igor Urminček](https://github.com/igo)'s [NLogger](https://github.com/igo/nlogger)
-- [SchizoDuckie](https://github.com/SchizoDuckie)'s [Node-CLI](https://github.com/SchizoDuckie/Node-CLI/)
+- [Alexander Dorofeev's](https://github.com/akaspin) [AIN](https://github.com/akaspin/ain)
+- [TJ Holowaychuk's](https://github.com/visionmedia) [Log.js](https://github.com/visionmedia/log.js)
+- [Igor Urminček's](https://github.com/igo) [NLogger](https://github.com/igo/nlogger)
+- [SchizoDuckie's](https://github.com/SchizoDuckie) [Node-CLI](https://github.com/SchizoDuckie/Node-CLI/)
 
 
 ## License
