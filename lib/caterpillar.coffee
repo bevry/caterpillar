@@ -136,6 +136,10 @@ Logger = class
 	transports: []
 
 	constructor: (config) ->
+		# Prepare
+		@messages = []
+		@transports = []
+		
 		# Apply config
 		config or= {}
 		config[key] ?= value	for own key,value of @config
