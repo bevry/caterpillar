@@ -17,8 +17,6 @@ caterpillar = require "#{__dirname}/../lib/caterpillar.coffee"
 logger = new caterpillar.Logger
 	transports:
 		level: 7
-		formatter:
-			module: module
 
 # Logs
 for own name,code of logger.config.levels

@@ -5,7 +5,6 @@ util = require 'util'
 # Formatter
 Formatter = class
 	config:
-		module: null # (object or null) the node.js global `module`
 		colors:
 			0: 'red'
 			1: 'red'
@@ -17,6 +16,9 @@ Formatter = class
 			7: 'green'
 
 	constructor: (config) ->
+		# Eden
+		@config.eden = new Error()
+
 		# Apply config
 		config or= {}
 		config[key] ?= value	for own key,value of @config
@@ -40,8 +42,7 @@ Formatter = class
 
 	details: (levelCode, levelName, args) ->
 		date = @getDate()
-		className = @getClassName()
-		line = @getLine()
+		{file,line,method} = @getLineInfo()
 		color = @getColor(levelCode)
 
 		parts = []
@@ -53,7 +54,7 @@ Formatter = class
 					util.inspect value, false, 10
 		message = parts.join ' '
 
-		{date,className,line,color,levelName,message}
+		{date,file,line,method,color,levelName,message}
 
 	format: (levelCode,levelName,args) ->
 		{date,className,line,levelName,message} = @details levelCode, levelName, args
@@ -77,35 +78,40 @@ Formatter = class
 		ms       = @padLeft '0', 3, now.getMilliseconds()
 		"#{year}-#{month}-#{date} #{hours}:#{minutes}:#{seconds}.#{ms}"
 	
-	getLine: ->
+	getLineInfo: ->
+		# Prepare
+		result =
+			line: -1
+			method: 'unknown'
+
+		# Retrieve
 		try
 			throw new Error()
 		catch e
-			line = e.stack.split('\n')[3].split(':')[1]
-		return line
-	
-	getClassName: (module) ->
-		module or= @config.module
-		if module
-			if module.id
-				if module.id == '.'
-					'main'
-				else
-					module.id
-			else
-				module
-		else
-			'unknown'
+			lines = e.stack.split('\n')
+			for line in lines
+				continue  if line.indexOf('caterpillar.coffee') isnt -1 or line.indexOf(' at ') is -1
+				parts = line.split(':')
+				result.method = parts[0].replace(/^.+?\ at\ /, '').replace(/\ \(.+$/, '')
+				result.line = parts[1]
+				result.file = parts[0].replace(/^.+?\(/, '')
+				break
+		return result
 
 # Console Formatter
 ConsoleFormatter = class extends Formatter
 	format: (levelCode,levelName,args) ->
-		{date,className,line,color,levelName,message} = @details levelCode, levelName, args
+		{date,file,line,method,color,levelName,message} = @details levelCode, levelName, args
 		if !message 
 			message
 		else
 			color = color and colors[color] or (str) -> str
-			message = "[#{date}] [#{className}: #{line}] "+color(@padLeft ' ', 10, "#{levelName}:")+" #{message}"
+			levelName = @padLeft ' ', 9, levelName
+			lineFormatter = colors.white
+			messageFormatter = colors.black
+			message =
+				lineFormatter("[#{date}] [#{file}:#{line}] [#{method}]") +
+				messageFormatter("\n\t"+color("#{levelName}:")+" #{message}")
 
 # Logger
 Logger = class
