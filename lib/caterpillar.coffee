@@ -92,9 +92,13 @@ Formatter = class
 			for line in lines
 				continue  if line.indexOf('caterpillar.coffee') isnt -1 or line.indexOf(' at ') is -1
 				parts = line.split(':')
-				result.method = parts[0].replace(/^.+?\ at\ /, '').replace(/\ \(.+$/, '')
+				if parts[0].indexOf('(') is -1
+					result.method = 'unknown'
+					result.file = parts[0].replace(/^.+?\s+at\s+/, '')
+				else
+					result.method = parts[0].replace(/^.+?\s+at\s+/, '').replace(/\s+\(.+$/, '')
+					result.file = parts[0].replace(/^.+?\(/, '')
 				result.line = parts[1]
-				result.file = parts[0].replace(/^.+?\(/, '')
 				break
 		return result
 
