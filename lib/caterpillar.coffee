@@ -16,9 +16,6 @@ Formatter = class
 			7: 'green'
 
 	constructor: (config) ->
-		# Eden
-		@config.eden = new Error()
-
 		# Apply config
 		config or= {}
 		config[key] ?= value	for own key,value of @config
@@ -110,12 +107,17 @@ ConsoleFormatter = class extends Formatter
 			message
 		else
 			color = color and colors[color] or (str) -> str
-			levelName = @padLeft ' ', 9, levelName
+			#levelName = @padRight ' ', 10, levelName+':'
+			levelName = color(levelName+':')
 			lineFormatter = colors.white
-			messageFormatter = colors.black
+			messageFormatter = colors.black.bold
+
+			seperator = '\n    → '
+
 			message =
-				lineFormatter("[#{date}] [#{file}:#{line}] [#{method}]") +
-				messageFormatter("\n\t"+color("#{levelName}:")+" #{message}")
+				messageFormatter("#{levelName} #{message}") +
+				seperator +
+				lineFormatter("[#{date}] [#{file}:#{line}] [#{method}]")
 
 # Logger
 Logger = class
