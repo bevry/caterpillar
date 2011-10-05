@@ -107,17 +107,19 @@ ConsoleFormatter = class extends Formatter
 			message
 		else
 			color = color and colors[color] or (str) -> str
-			#levelName = @padRight ' ', 10, levelName+':'
 			levelName = color(levelName+':')
-			lineFormatter = colors.white
-			messageFormatter = colors.black.bold
+
+			lineFormatter = false #colors.white
+			messageFormatter = colors.bold
 
 			seperator = '\n    → '
+			lineString = "[#{date}] [#{file}:#{line}] [#{method}]"
+			messageString = "#{levelName} #{message}"
+			lineString = lineFormatter(lineString)  if lineFormatter
+			messageString = messageFormatter(messageString)  if messageFormatter
 
-			message =
-				messageFormatter("#{levelName} #{message}") +
-				seperator +
-				lineFormatter("[#{date}] [#{file}:#{line}] [#{method}]")
+
+			message = "#{messageString}#{seperator}#{lineString}"
 
 # Logger
 Logger = class
