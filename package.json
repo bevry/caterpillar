@@ -1,6 +1,6 @@
 {
 	"name": "caterpillar",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"description": "Caterpillar is an awesome, simple console logger for node.js. It supports grouping of messages, filtering log levels, colors, times, modules, custom formatters and custom transports. It's awesome.",
 	"homepage": "https://github.com/balupton/caterpillar.npm",
 	"keywords": [
