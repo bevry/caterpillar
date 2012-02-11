@@ -5,44 +5,25 @@ Caterpillar is an awesome, simple, intuitive console logger for [node.js](http:/
 
 ## Example
 
-### [examples/console.coffee](https://github.com/balupton/caterpillar.npm/blob/master/examples/console.coffee)
+### Running Normally
 
-<img src="https://github.com/balupton/caterpillar.npm/raw/master/media/caterpillar.npm.png"/>
+Running the [console example](https://github.com/balupton/caterpillar.npm/blob/master/examples/console.coffee#files) with `coffee examples/console.coffee`
 
-``` coffeescript
-# Requires
-caterpillar = require "#{__dirname}/../lib/caterpillar.coffee"
+<img src="https://github.com/balupton/caterpillar.npm/raw/master/media/caterpillar-normal.png"/>
 
-# Create
-logger = new caterpillar.Logger
-	transports:
-		level: 7
 
-# Logs
-for own name,code of logger.config.levels
-	logger.log name, "this is #{name} and is level #{code}"
+### Running in Debug Mode (log level 7)
 
-# Standard
-logger.log ''
-logger.log 'this is awesome'
-logger.log 'this','is','awesome'
+Running the [console example](https://github.com/balupton/caterpillar.npm/blob/master/examples/console.coffee#files) with `coffee examples/console.coffee -d`
 
-# Colors
-colors = caterpillar.colors
-logger.log ''
-logger.log 'this is', colors.magenta.bold.italic.underline('awesome')
+<img src="https://github.com/balupton/caterpillar.npm/raw/master/media/caterpillar-debug.png"/>
 
-# Grouping
-logger.config.autoFlush = false
-logger.log ''
-logger.log 'one'
-logger.log 'two'
-logger.log 'three'
-setTimeout(
-	-> logger.flush()
-	3000
-)
-```
+When you set the log level to level 7 (debug level), then the `ConsoleFormatter` will also output a debug line, containing the time, file, function and line number of what triggered the log message.
+
+
+## Using
+
+Please refer to the [console example](https://github.com/balupton/caterpillar.npm/blob/master/examples/console.coffee#files) for usage.
 
 
 # Install
@@ -76,4 +57,4 @@ Inspired by the following:
 ## License
 
 Licensed under the [MIT License](http://creativecommons.org/licenses/MIT/)
-Copyright 2011 [Benjamin Arthur Lupton](http://balupton.com)
+Copyright 2011-2012 [Benjamin Arthur Lupton](http://balupton.com)
