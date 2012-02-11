@@ -56,5 +56,5 @@ Inspired by the following:
 
 ## License
 
-Licensed under the [MIT License](https://github.com/balupton/caterpillar.npm/blob/master/LICENSE.txt#files)
+Licensed under the [MIT License](http://creativecommons.org/licenses/MIT/)
 Copyright 2011-2012 [Benjamin Arthur Lupton](http://balupton.com)
