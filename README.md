@@ -57,4 +57,4 @@ Inspired by the following:
 ## License
 
 Licensed under the [MIT License](http://creativecommons.org/licenses/MIT/)
-Copyright 2011-2012 [Benjamin Arthur Lupton](http://balupton.com)
+<br/>Copyright &copy; 2011-2012 [Benjamin Arthur Lupton](http://balupton.com)
