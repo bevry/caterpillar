@@ -2,8 +2,10 @@
 caterpillar = require "#{__dirname}/../lib/caterpillar.coffee"
 
 # Create
-logger = new caterpillar.Logger
-	level: 7
+logger = new caterpillar.Logger()
+logger.setLevel(if '-d' in process.argv then 7 else 6)
+# level 7 is the debug level, which will output the debug line
+# set it to level 6 or higher, to hide debug messages and ignore the debug line
 
 # Logs
 for own name,code of logger.config.levels

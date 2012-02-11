@@ -119,7 +119,7 @@ class Formatter
 		catch e
 			lines = e.stack.split('\n')
 			for line in lines
-				continue  if line.indexOf('caterpillar.coffee') isnt -1 or line.indexOf(' at ') is -1
+				continue  if line.indexOf(__dirname) isnt -1 or line.indexOf(' at ') is -1
 				parts = line.split(':')
 				if parts[0].indexOf('(') is -1
 					result.method = 'unknown'
@@ -129,6 +129,7 @@ class Formatter
 					result.file = parts[0].replace(/^.+?\(/, '')
 				result.line = parts[1]
 				break
+		
 		return result
 
 # Console Formatter
