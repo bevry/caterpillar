@@ -16,9 +16,9 @@ Running the [console example](https://github.com/balupton/caterpillar.npm/blob/m
 
 Running the [console example](https://github.com/balupton/caterpillar.npm/blob/master/examples/console.coffee#files) with `coffee examples/console.coffee -d`
 
-<img src="https://github.com/balupton/caterpillar.npm/raw/master/media/caterpillar-debug.png"/>
-
 When you set the log level to level 7 (debug level), then the `ConsoleFormatter` will also output a debug line, containing the time, file, function and line number of what triggered the log message.
+
+<img src="https://github.com/balupton/caterpillar.npm/raw/master/media/caterpillar-debug.png"/>
 
 
 ## Using
