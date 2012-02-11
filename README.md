@@ -16,17 +16,17 @@ Running the [console example](https://github.com/balupton/caterpillar.npm/blob/m
 
 Running the [console example](https://github.com/balupton/caterpillar.npm/blob/master/examples/console.coffee#files) with `coffee examples/console.coffee -d`
 
-When you set the log level to level 7 (debug level), then the `ConsoleFormatter` will also output a debug line, containing the time, file, function and line number of what triggered the log message.
+When you set the log level to level 7 (debug level), then the `ConsoleFormatter` will also output a debug line, containing the time, file, function and line number of what triggered the log message
 
 <img src="https://github.com/balupton/caterpillar.npm/raw/master/media/caterpillar-debug.png"/>
 
 
 ## Using
 
-Please refer to the [console example](https://github.com/balupton/caterpillar.npm/blob/master/examples/console.coffee#files) for usage.
+Please refer to the [console example](https://github.com/balupton/caterpillar.npm/blob/master/examples/console.coffee#files) for usage
 
 
-# Install
+## Install
 
 1. [Install Node.js](https://github.com/balupton/node/wiki/Installing-Node.js)
 
