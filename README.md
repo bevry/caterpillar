@@ -7,23 +7,23 @@ Caterpillar is an awesome, simple, intuitive console logger for [Node.js](http:/
 
 ### Running Normally
 
-Running the [console example](https://github.com/balupton/caterpillar.npm/blob/master/examples/console.coffee#files) with `coffee examples/console.coffee`
+Running the [console example](https://github.com/bevry/caterpillar/blob/master/examples/console.coffee#files) with `coffee examples/console.coffee`
 
-<img src="https://github.com/balupton/caterpillar.npm/raw/master/media/caterpillar-normal.png"/>
+<img src="https://github.com/bevry/caterpillar/raw/master/media/caterpillar-normal.png"/>
 
 
 ### Running in Debug Mode (log level 7)
 
-Running the [console example](https://github.com/balupton/caterpillar.npm/blob/master/examples/console.coffee#files) with `coffee examples/console.coffee -d`
+Running the [console example](https://github.com/bevry/caterpillar/blob/master/examples/console.coffee#files) with `coffee examples/console.coffee -d`
 
 When you set the log level to level 7 (debug level), then the `ConsoleFormatter` will also output a debug line, containing the time, file, function and line number of what triggered the log message
 
-<img src="https://github.com/balupton/caterpillar.npm/raw/master/media/caterpillar-debug.png"/>
+<img src="https://github.com/bevry/caterpillar/raw/master/media/caterpillar-debug.png"/>
 
 
 ## Using
 
-Please refer to the [console example](https://github.com/balupton/caterpillar.npm/blob/master/examples/console.coffee#files) for usage
+Please refer to the [console example](https://github.com/bevry/caterpillar/blob/master/examples/console.coffee#files) for usage
 
 
 ## Install
