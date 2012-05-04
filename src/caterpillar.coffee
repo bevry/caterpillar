@@ -1,7 +1,7 @@
 # Requires
-{cliColor,Formatter,ConsoleFormatter} = require("#{__dirname}/formatter")
-{Logger} = require("#{__dirname}/logger")
-{Transport,ConsoleTransport} = require("#{__dirname}/transport")
+{cliColor,Formatter,ConsoleFormatter} = require(__dirname+'/formatter')
+{Logger} = require(__dirname+'/logger')
+{Transport,ConsoleTransport} = require(__dirname+'/transport')
 
 # Export
 module.exports = {
