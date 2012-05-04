@@ -14,4 +14,9 @@ clean:
 	rm -Rf node_modules/ npm-debug.log
 	npm install
 
-.PHONY: dev docs example example-debug clean
+test:
+	make clean
+	make example
+	make example-debug
+
+.PHONY: dev docs example example-debug clean test

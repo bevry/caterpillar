@@ -1,6 +1,6 @@
 {
 	"name": "caterpillar",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "Caterpillar is an awesome, simple console logger for node.js. It supports grouping of messages, filtering log levels, colors, times, modules, custom formatters and custom transports. It's awesome.",
 	"homepage": "https://github.com/bevry/caterpillar",
 	"keywords": [
@@ -28,12 +28,11 @@
 		"node": ">=0.4.0"
 	},
 	"dependencies": {
-		"request": "2.9.x"
+		"cli-color": "0.1.x"
 	},
 	"devDependencies": {
 		"coffee-script": "1.3.x",
-		"docco": "0.3.x",
-		"mocha": "1.0.x"
+		"docco": "0.3.x"
 	},
 	"directories": {
 		"lib": "lib"
