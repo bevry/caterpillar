@@ -1,5 +1,5 @@
 # Requires
-{Transport,ConsoleTransport} = require("#{__dirname}/transport")
+{Transport,ConsoleTransport} = require(__dirname+'/transport')
 
 # Logger
 class Logger

@@ -1,5 +1,5 @@
 # Requires
-{Formatter,ConsoleFormatter} = require("#{__dirname}/formatter")
+{Formatter,ConsoleFormatter} = require(__dirname+'/formatter')
 
 # Transport
 class Transport
