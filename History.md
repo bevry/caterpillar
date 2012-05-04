@@ -1,5 +1,8 @@
 ## History
 
+- v1.1.1 May 4, 2012
+	- Fixed dependency overwrite
+
 - v1.1.0 May 4, 2012
 	- Caterpillar now pre-compiles, so the coffee-script dependency is no longer needed
 
