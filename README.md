@@ -30,13 +30,21 @@ Please refer to the [console example](https://github.com/bevry/caterpillar/blob/
 
 1. [Install Node.js](https://github.com/balupton/node/wiki/Installing-Node.js)
 
-1. Install [CoffeeScript](http://jashkenas.github.com/coffee-script/)
-		
-		npm -g install coffee-script
-
 1. Install Caterpillar
 
 		npm install caterpillar
+
+
+## History
+
+You can discover the history inside the [History.md](https://github.com/bevry/caterpillar/blob/master/History.md#files) file
+
+
+## License
+
+Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://creativecommons.org/licenses/MIT/)
+<br/>Copyright &copy; 2012 [Bevry Pty Ltd](http://bevry.me)
+<br/>Copyright &copy; 2011 [Benjamin Lupton](http://balupton.com)
 
 
 ## Thanks
@@ -52,9 +60,3 @@ Inspired by the following:
 - [TJ Holowaychuk's](https://github.com/visionmedia) [Log.js](https://github.com/visionmedia/log.js)
 - [Igor Urminček's](https://github.com/igo) [NLogger](https://github.com/igo/nlogger)
 - [SchizoDuckie's](https://github.com/SchizoDuckie) [Node-CLI](https://github.com/SchizoDuckie/Node-CLI/)
-
-
-## License
-
-Licensed under the [MIT License](http://creativecommons.org/licenses/MIT/)
-<br/>Copyright &copy; 2011-2012 [Benjamin Arthur Lupton](http://balupton.com)

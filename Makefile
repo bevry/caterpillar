@@ -1,24 +1,17 @@
-test:
-	./node_modules/.bin/mocha \
-		--reporter spec \
-		--ui bdd \
-		--ignore-leaks \
-		--growl
-
-test-debug:
-	node --debug-brk ./node_modules/.bin/mocha \
-		--reporter spec \
-		--ui bdd \
-		--ignore-leaks \
-		--growl
+dev:
+	./node_modules/.bin/coffee -w -o lib/ -c src/
 
 docs:
-	./node_modules/.bin/docco lib/*.coffee
+	./node_modules/.bin/docco src/*.coffee
 
 example:
-	coffee ./examples/console.coffee
+	./node_modules/.bin/coffee ./example/console.coffee
 
 example-debug:
-	coffee ./examples/console.coffee -d
+	./node_modules/.bin/coffee ./example/console.coffee -d
 
-.PHONY: test
+clean:
+	rm -Rf node_modules/ npm-debug.log
+	npm install
+
+.PHONY: dev docs example example-debug clean
