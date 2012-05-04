@@ -1,5 +1,5 @@
 # Requires
-{Transport,ConsoleTransport} = require("#{__dirname}/transport.coffee")
+{Transport,ConsoleTransport} = require("#{__dirname}/transport")
 
 # Logger
 class Logger
@@ -24,7 +24,7 @@ class Logger
 			note: 5
 
 			default: 6
-		
+
 	messages: []
 	formatter: null
 	transports: []
@@ -33,7 +33,7 @@ class Logger
 		# Prepare
 		@messages = []
 		@transports = []
-		
+
 		# Apply config
 		config or= {}
 		config[key] ?= value	for own key,value of @config
@@ -63,26 +63,26 @@ class Logger
 
 	getLevel: ->
 		@config.level ? null
-	
+
 	setLevel: (level) ->
 		# Apply
 		@config.level = level
 		for transport in @transports
 			transport.setLevel(level)
-		
+
 		# Chain
 		@
-	
+
 	getLevelCode: (name) ->
 		# Return
 		@config.levels[name] ? null
-	
+
 	getLevelName: (code) ->
 		# Try to treturn the levelName
 		for own key,value of @config.levels
 			if value is code
 				return key
-		
+
 		# else return
 		null
 
@@ -99,16 +99,16 @@ class Logger
 				levelCode = @getLevelCode 'default'
 				levelName = @getLevelName levelCode
 				args.unshift(level)
-		
+
 		# Write the entry?
 		if @config.autoFlush
 			@write levelCode,levelName,args
 		else
 			@messages.push {levelCode,levelName,args}
-		
+
 		# Chain
 		@
-	
+
 	flush: ->
 		# Write messages
 		for {levelCode,levelName,args} in @messages
@@ -116,12 +116,12 @@ class Logger
 
 		# Chain
 		@
-	
+
 	write: (levelCode,levelName,args) ->
 		# Write the message
 		for transport in @transports
 			transport.write levelCode,levelName,args
-		
+
 		# Chain
 		@
 

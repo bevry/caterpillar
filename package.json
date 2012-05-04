@@ -1,8 +1,8 @@
 {
 	"name": "caterpillar",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "Caterpillar is an awesome, simple console logger for node.js. It supports grouping of messages, filtering log levels, colors, times, modules, custom formatters and custom transports. It's awesome.",
-	"homepage": "https://github.com/balupton/caterpillar.npm",
+	"homepage": "https://github.com/bevry/caterpillar",
 	"keywords": [
 		"console",
 		"log",
@@ -10,49 +10,36 @@
 		"logging",
 		"debug"
 	],
-	"author": {
-		"name": "Benjamin Lupton",
-		"email": "b@lupton.cc",
-		"url": "http://balupton.com"
-	},
+	"author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
 	"maintainers": [
-		{
-			"name": "Benjamin Lupton",
-			"email": "b@lupton.cc",
-			"url": "http://balupton.com"
-		}
+		"Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
 	],
 	"contributors": [
-		{
-			"name": "Benjamin Lupton",
-			"email": "b@lupton.cc",
-			"url": "http://balupton.com"
-		}
+		"Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
 	],
 	"bugs": {
-		"url": "https://github.com/balupton/caterpillar.npm/issues"
+		"url": "https://github.com/bevry/caterpillar/issues"
 	},
-	"licenses": [
-		{
-			"type": "MIT",
-			"url": "http://creativecommons.org/licenses/MIT/"
-		}
-	],
 	"repository" : {
-		"type" : "git",
-		"url" : "http://github.com/balupton/caterpillar.npm.git"
-	},
-	"dependencies": {
-		"cli-color": "0.1.x"
-	},
-	"devDependencies": {
-		"docco": "0.3.x"
+		"type": "git",
+		"url": "http://github.com/bevry/caterpillar.git"
 	},
 	"engines" : {
 		"node": ">=0.4.0"
 	},
+	"dependencies": {
+		"request": "2.9.x"
+	},
+	"devDependencies": {
+		"coffee-script": "1.3.x",
+		"docco": "0.3.x",
+		"mocha": "1.0.x"
+	},
 	"directories": {
 		"lib": "lib"
 	},
-	"main": "./lib/caterpillar.coffee"
+	"scripts": {
+		"test": "node ./node_modules/mocha/bin/mocha"
+	},
+	"main": "./lib/caterpillar"
 }
