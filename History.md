@@ -1,5 +1,9 @@
 ## History
 
+- v1.1.2 August 10, 2012
+	- Rejigged directory structure
+	- Re-added markdown files to npm distribution as they are required for the npm website
+
 - v1.1.1 May 4, 2012
 	- Fixed dependency overwrite
 

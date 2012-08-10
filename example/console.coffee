@@ -1,5 +1,5 @@
 # Requires
-caterpillar = require "#{__dirname}/../lib/caterpillar"
+caterpillar = require "#{__dirname}/../out/lib/caterpillar"
 
 # Create
 logger = new caterpillar.Logger()
