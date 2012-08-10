@@ -1,8 +1,14 @@
-dev:
-	./node_modules/.bin/coffee -w -o lib/ -c src/
+# If you change something here, be sure to change it in package.json's scripts as well
 
-docs:
-	./node_modules/.bin/docco src/*.coffee
+dev:
+	./node_modules/.bin/coffee -w -o out/ -c src/
+
+compile:
+	./node_modules/.bin/coffee -o out/ -c src/
+
+clean:
+	rm -Rf lib node_modules/ npm-debug.log
+	npm install
 
 example:
 	./node_modules/.bin/coffee ./example/console.coffee
@@ -10,13 +16,4 @@ example:
 example-debug:
 	./node_modules/.bin/coffee ./example/console.coffee -d
 
-clean:
-	rm -Rf node_modules/ npm-debug.log
-	npm install
-
-test:
-	make clean
-	make example
-	make example-debug
-
-.PHONY: dev docs example example-debug clean test
+.PHONY: dev compile clean example example-debug
