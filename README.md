@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/bevry/caterpillar.png)](http://travis-ci.org/bevry/caterpillar)
 # Caterpillar
 
 Caterpillar is an awesome, simple, intuitive console logger for [Node.js](http://nodejs.org/). It supports grouping of messages, filtering log levels, colors, times, modules, custom formatters and custom transports
