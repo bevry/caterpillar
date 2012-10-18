@@ -1,5 +1,9 @@
 ## History
 
+- v1.1.3 October 18, 2012
+	- Updated cli-color from 0.1 to 0.2
+	- Make cli-color an optional dependency
+
 - v1.1.2 August 10, 2012
 	- Rejigged directory structure
 	- Re-added markdown files to npm distribution as they are required for the npm website

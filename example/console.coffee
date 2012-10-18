@@ -19,7 +19,7 @@ logger.log 'this','is','awesome'
 # Colors
 cliColor = caterpillar.cliColor
 logger.log ''
-logger.log 'this is', cliColor.magenta.bold.italic.underline('awesome')
+logger.log 'this is', (cliColor?.magenta.bold.italic.underline('awesome') or 'awesome')
 
 # Grouping
 logger.config.autoFlush = false
