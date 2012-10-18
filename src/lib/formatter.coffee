@@ -1,6 +1,9 @@
 # Requires
 util = require('util')
-cliColor = require('cli-color')
+try
+	cliColor = require('cli-color')
+catch err
+	cliColor = null
 
 # Formatter
 class Formatter
@@ -24,21 +27,21 @@ class Formatter
 
 	getLevel: ->
 		@config.level ? null
-	
+
 	setLevel: (level) ->
 		@config.level = level
 		@
-	
+
 	padLeft: (padding,size,msg) ->
 		# Prepare
 		padding = String(padding)
 		msg = String(msg)
-		
+
 		# Handle
 		if msg.length < size
 			for i in [0...size-msg.length]
 				msg = padding+msg
-		
+
 		# Return
 		msg
 
@@ -51,7 +54,7 @@ class Formatter
 		if msg.length < size
 			for i in [0...size-msg.length]
 				msg += padding
-		
+
 		# Return
 		msg
 
@@ -92,7 +95,7 @@ class Formatter
 				@config.colors[levelCode]
 			else
 				false
-	
+
 	getDate: ->
 		# Prepare
 		now      = new Date()
@@ -106,7 +109,7 @@ class Formatter
 
 		# Return
 		"#{year}-#{month}-#{date} #{hours}:#{minutes}:#{seconds}.#{ms}"
-	
+
 	getLineInfo: ->
 		# Prepare
 		result =
@@ -129,7 +132,7 @@ class Formatter
 					result.file = parts[0].replace(/^.+?\(/, '')
 				result.line = parts[1]
 				break
-		
+
 		return result
 
 # Console Formatter
@@ -137,24 +140,24 @@ class ConsoleFormatter extends Formatter
 	format: (levelCode,levelName,args) ->
 		# Prepare
 		{date,file,line,method,color,levelName,message} = @details(levelCode, levelName, args)
-		
+
 		# Check
-		if !message 
+		if !message
 			message
 		else
 			# Mappings
-			color = color and cliColor[color] or (str) -> str
+			color = color and cliColor?[color] or (str) -> str
 			levelName = color(levelName+':')
 
 			# Formatters
 			debugFormatter = false #cliColor.white
-			messageFormatter = cliColor.bold
+			messageFormatter = color and cliColor?.bold
 
 			# Message
 			messageString = "#{levelName} #{message}"
 			messageString = messageFormatter(messageString)  if messageFormatter
 
-			# 
+			#
 			if @config.level is 7
 				# Debug Information
 				seperator = '\n    → '
