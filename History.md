@@ -1,5 +1,8 @@
 ## History
 
+- v1.1.4 March 25, 2013
+	- Repackaged
+
 - v1.1.3 October 18, 2012
 	- Updated cli-color from 0.1 to 0.2
 	- Make cli-color an optional dependency
