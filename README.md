@@ -1,6 +1,6 @@
 # Caterpillar
 
-Caterpillar is an awesome, simple, intuitive console logger for [Node.js](http://nodejs.org/). It supports grouping of messages, filtering log levels, colors, times, modules, custom formatters and custom transports
+Caterpillar is a simple but powerful intuitive console logger for [Node.js](http://nodejs.org/). It supports grouping of messages, filtering log levels, colors, times, modules, custom formatters and custom transports.
 
 
 ## Example
@@ -23,16 +23,18 @@ When you set the log level to level 7 (debug level), then the `ConsoleFormatter`
 
 ## Using
 
-Please refer to the [console example](https://github.com/bevry/caterpillar/blob/master/example/console.coffee#files) for usage
+Refer to the [console example](https://github.com/bevry/caterpillar/blob/master/example/console.coffee#files) for usage
 
 
 ## Install
 
-1. [Install Node.js](https://github.com/balupton/node/wiki/Installing-Node.js)
+1. [Install Node.js](http://bevry.me/node/install)
 
 1. Install Caterpillar
 
-		npm install caterpillar
+	```
+	npm install caterpillar
+	```
 
 
 ## History
@@ -43,7 +45,7 @@ You can discover the history inside the [History.md](https://github.com/bevry/ca
 ## License
 
 Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://creativecommons.org/licenses/MIT/)
-<br/>Copyright &copy; 2012 [Bevry Pty Ltd](http://bevry.me)
+<br/>Copyright &copy; 2012+ [Bevry Pty Ltd](http://bevry.me)
 <br/>Copyright &copy; 2011 [Benjamin Lupton](http://balupton.com)
 
 

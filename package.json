@@ -1,7 +1,7 @@
 {
 	"name": "caterpillar",
-	"version": "1.1.3",
-	"description": "Caterpillar is an awesome, simple console logger for node.js. It supports grouping of messages, filtering log levels, colors, times, modules, custom formatters and custom transports. It's awesome.",
+	"version": "1.1.4",
+	"description": "Caterpillar is a simple but powerful console logger for node.js. It supports grouping of messages, filtering log levels, colors, times, modules, custom formatters and custom transports.",
 	"homepage": "https://github.com/bevry/caterpillar",
 	"keywords": [
 		"console",
@@ -12,10 +12,10 @@
 	],
 	"author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
 	"maintainers": [
-		"Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
+		"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
 	],
 	"contributors": [
-		"Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
+		"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
 	],
 	"bugs": {
 		"url": "https://github.com/bevry/caterpillar/issues"
@@ -25,17 +25,17 @@
 		"url": "http://github.com/bevry/caterpillar.git"
 	},
 	"engines" : {
-		"node": ">=0.4.0"
+		"node": ">=0.4"
 	},
 	"dependencies": {},
 	"optionalDependencies": {
-		"cli-color": "0.2.x"
+		"cli-color": "~0.2.2"
 	},
 	"devDependencies": {
-		"coffee-script": "1.3.x"
+		"coffee-script": "~1.6.2"
 	},
 	"directories": {
 		"lib": "./out/lib"
 	},
-	"main": "./out/lib/caterpillar"
+	"main": "./out/lib/caterpillar.js"
 }
