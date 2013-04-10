@@ -1,5 +1,8 @@
 # Caterpillar
 
+[![NPM version](https://badge.fury.io/js/caterpillar.png)](https://npmjs.org/package/caterpillar)
+[![Flattr this project](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/344188/balupton-on-Flattr)
+
 Caterpillar is a simple but powerful intuitive console logger for [Node.js](http://nodejs.org/). It supports grouping of messages, filtering log levels, colors, times, modules, custom formatters and custom transports.
 
 
