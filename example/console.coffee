@@ -1,11 +1,12 @@
 # Requires
-caterpillar = require "#{__dirname}/../out/lib/caterpillar"
+caterpillar = require('../')
 
 # Create
-logger = new caterpillar.Logger()
-logger.setLevel(if '-d' in process.argv then 7 else 6)
-# level 7 is the debug level, which will output the debug line
-# set it to level 6 or higher, to hide debug messages and ignore the debug line
+level = if '-d' in process.argv then 7 else 6
+logger = new caterpillar.Logger({level})
+filter = new caterpillar.Filter()
+human  = new caterpillar.Human()
+logger.pipe(filter).pipe(human).pipe(process.stdout)
 
 # Logs
 for own name,code of logger.config.levels
@@ -20,14 +21,3 @@ logger.log 'this','is','awesome'
 cliColor = caterpillar.cliColor
 logger.log ''
 logger.log 'this is', (cliColor?.magenta.bold.italic.underline('awesome') or 'awesome')
-
-# Grouping
-logger.config.autoFlush = false
-logger.log ''
-logger.log 'one'
-logger.log 'two'
-logger.log 'three'
-setTimeout(
-	-> logger.flush()
-	3000
-)

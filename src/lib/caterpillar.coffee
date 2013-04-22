@@ -1,14 +1,5 @@
-# Requires
-{cliColor,Formatter,ConsoleFormatter} = require(__dirname+'/formatter')
-{Logger} = require(__dirname+'/logger')
-{Transport,ConsoleTransport} = require(__dirname+'/transport')
+# Import
+extendr = require('extendr')
 
 # Export
-module.exports = {
-	cliColor,
-	Formatter,
-	ConsoleFormatter,
-	Logger,
-	Transport,
-	ConsoleTransport
-}
+module.exports = extendr.extend({}, require('./logger'), require('./formatter'))
