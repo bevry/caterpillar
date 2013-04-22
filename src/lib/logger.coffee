@@ -1,12 +1,10 @@
-# Requires
-{Transport,ConsoleTransport} = require(__dirname+'/transport')
+# Import
+extendr = require('extendr')
+stream = require('stream')
 
 # Logger
-class Logger
+class Logger extends stream.Transform
 	config:
-		autoFlush: true # (true or false) whether or not to auto flush after each message
-		transports: null # (Transport, object, array or false)
-		level: 7
 		levels:
 			emergency: 0
 			alert: 1
@@ -25,57 +23,26 @@ class Logger
 
 			default: 6
 
-	messages: []
-	formatter: null
-	transports: []
+	constructor: (opts) ->
+		@setConfig(opts)
+		super
 
-	constructor: (config) ->
-		# Prepare
-		@messages = []
-		@transports = []
+	pipe: (child) ->
+		if child.setConfig?(@config) then @on('config', child.setConfig)
+		super
 
-		# Apply config
-		config or= {}
-		config[key] ?= value	for own key,value of @config
-
-		# Apply levels
-		levels = {}
-		levels[key] ?= value	for own key,value of config.levels
-		config.levels = levels
-
-		# Apply transports
-		unless config.transports
-			config.transports = new ConsoleTransport
-		unless config.transports instanceof Array
-			config.transports = [config.transports]
-		for transport in config.transports
-			if transport instanceof Transport
-				@transports.push transport
-			else if transport
-				@transports.push new ConsoleTransport transport
-		delete config.transports
-
-		# Level
-		@setLevel(config.level)  if config.level
-
-		# Apply config
-		@config = config
-
-	getLevel: ->
-		@config.level ? null
-
-	setLevel: (level) ->
-		# Apply
-		@config.level = level
-		for transport in @transports
-			transport.setLevel(level)
-
-		# Chain
+	setConfig: (opts) =>
+		@config = extendr.deepExtend({}, @config, opts)
 		@
+
+	getConfig: -> @config
+
+	_transform: (chunk, encoding, next) ->
+		return next(null, chunk)
 
 	getLevelCode: (name) ->
 		# Return
-		@config.levels[name] ? null
+		return @config.levels[name] ? null
 
 	getLevelName: (code) ->
 		# Try to treturn the levelName
@@ -83,48 +50,79 @@ class Logger
 			if value is code
 				return key
 
-		# else return
-		null
+		# Return
+		return null
 
-	log: (level, args...) ->
+	getLevelInfo: (level) ->
+		# Prepare
+		result =
+			levelCode: null
+			levelName: null
+
 		# Log the entry
 		if typeof level is 'number'
 			levelCode = level
-			levelName = @getLevelName levelCode
+			levelName = @getLevelName(levelCode)
 		else
 			levelName = level
-			levelCode = @getLevelCode levelName
-			levelName = @getLevelName levelCode
+			levelCode = @getLevelCode(levelName)
+			levelName = @getLevelName(levelCode)
 			unless levelCode?
-				levelCode = @getLevelCode 'default'
-				levelName = @getLevelName levelCode
-				args.unshift(level)
+				levelCode = @getLevelCode('default')
+				levelName = @getLevelName(levelCode)
 
-		# Write the entry?
-		if @config.autoFlush
-			@write levelCode,levelName,args
-		else
-			@messages.push {levelCode,levelName,args}
+		# Apply
+		result.levelCode = levelCode
+		result.levelName = levelName
+
+		# Return
+		return result
+
+	getLineInfo: ->
+		# Prepare
+		result =
+			line: -1
+			method: 'unknown'
+			file: 'unknown'
+
+		# Retrieve
+		err = new Error()
+		lines = err.stack.split('\n')
+		for line in lines
+			continue  if line.indexOf(__dirname) isnt -1 or line.indexOf(' at ') is -1
+			parts = line.split(':')
+			if parts[0].indexOf('(') is -1
+				result.method = 'unknown'
+				result.file = parts[0].replace(/^.+?\s+at\s+/, '')
+			else
+				result.method = parts[0].replace(/^.+?\s+at\s+/, '').replace(/\s+\(.+$/, '')
+				result.file = parts[0].replace(/^.+?\(/, '')
+			result.line = parts[1]
+			break
+
+		# Return
+		return result
+
+	format: (level, args...) ->
+		# Prepare
+		entry = {}
+		entry.args = args
+		entry.date = new Date().toISOString()
+		entry[key] = value  for own key,value of @getLevelInfo(level)
+		entry[key] = value  for own key,value of @getLineInfo(level)
+
+		# Return
+		return entry
+
+	log: (level, args...) ->
+		# Prepare
+		entry = @format(level, args...)
+
+		# Write the entry
+		@write(JSON.stringify(entry))
 
 		# Chain
 		@
-
-	flush: ->
-		# Write messages
-		for {levelCode,levelName,args} in @messages
-			@write levelCode,levelName,args
-
-		# Chain
-		@
-
-	write: (levelCode,levelName,args) ->
-		# Write the message
-		for transport in @transports
-			transport.write levelCode,levelName,args
-
-		# Chain
-		@
-
 
 # Export
 module.exports = {

@@ -1,12 +1,14 @@
-# Requires
+# Import
+extendr = require('extendr')
+stream = require('stream')
 util = require('util')
 try
 	cliColor = require('cli-color')
 catch err
 	cliColor = null
 
-# Formatter
-class Formatter
+# Human
+class Human extends stream.Transform
 	config:
 		colors:
 			0: 'red'
@@ -17,20 +19,36 @@ class Formatter
 			5: 'yellow'
 			6: 'green'
 			7: 'green'
-		level: 7
 
-	constructor: (config) ->
-		# Apply config
-		config or= {}
-		config[key] ?= value	for own key,value of @config
-		@config = config
+	constructor: (opts) ->
+		@setConfig(opts)
+		super
 
-	getLevel: ->
-		@config.level ? null
+	pipe: (child) ->
+		if child.setConfig?(@config) then @on('config', child.setConfig)
+		super
 
-	setLevel: (level) ->
-		@config.level = level
+	setConfig: (opts) =>
+		@config = extendr.deepExtend({}, @config, opts)
 		@
+
+	getConfig: -> @config
+
+	_transform: (chunk, encoding, next) =>
+		entry = JSON.parse(chunk.toString())
+		message = @format(entry)
+		return next(null, message)
+
+	getColor: (levelCode) ->
+		# Determine
+		color =
+			if @config.colors
+				@config.colors[levelCode]
+			else
+				false
+
+		# Return
+		return color
 
 	padLeft: (padding,size,msg) ->
 		# Prepare
@@ -58,122 +76,104 @@ class Formatter
 		# Return
 		msg
 
-	details: (levelCode, levelName, args) ->
-		# Prepare
-		date = @getDate()
-		{file,line,method} = @getLineInfo()
-		color = @getColor(levelCode)
-
+	formatArguments: (args) ->
 		# Handle
 		parts = []
-		for value, index in args
+		for value,index in args
 			parts[index] =
 				if typeof value is 'string'
 					value
 				else
 					util.inspect value, false, 10
-		message = parts.join ' '
+		text = parts.join(' ')
 
 		# Return
-		{date,file,line,method,color,levelName,message}
+		return text
 
-	format: (levelCode,levelName,args) ->
+	formatDate: (now) ->
 		# Prepare
-		{date,className,line,levelName,message} = @details levelCode, levelName, args
-		# Return
-		if @config.level is 7
-			# Debug
-			message = "[#{date}] [#{className}: #{line}] "+@padLeft(' ', 10, "#{levelName}:")+" #{message}"
-		else
-			# Normal
-			message = @padLeft(' ', 10, "#{levelName}:")+" #{message}"
-
-	getColor: (levelCode) ->
-		# Return
-		color =
-			if @config.colors
-				@config.colors[levelCode]
-			else
-				false
-
-	getDate: ->
-		# Prepare
-		now      = new Date()
+		now      = new Date(now)
 		year     = now.getFullYear()
-		month    = @padLeft '0', 2, now.getMonth() + 1
-		date     = @padLeft '0', 2, now.getDate()
-		hours    = @padLeft '0', 2, now.getHours()
-		minutes  = @padLeft '0', 2, now.getMinutes()
-		seconds  = @padLeft '0', 2, now.getSeconds()
-		ms       = @padLeft '0', 3, now.getMilliseconds()
+		month    = @padLeft('0', 2, now.getMonth() + 1)
+		date     = @padLeft('0', 2, now.getDate())
+		hours    = @padLeft('0', 2, now.getHours())
+		minutes  = @padLeft('0', 2, now.getMinutes())
+		seconds  = @padLeft('0', 2, now.getSeconds())
+		ms       = @padLeft('0', 3, now.getMilliseconds())
+
+		# Apply
+		result = "#{year}-#{month}-#{date} #{hours}:#{minutes}:#{seconds}.#{ms}"
 
 		# Return
-		"#{year}-#{month}-#{date} #{hours}:#{minutes}:#{seconds}.#{ms}"
-
-	getLineInfo: ->
-		# Prepare
-		result =
-			line: -1
-			method: 'unknown'
-
-		# Retrieve
-		try
-			throw new Error()
-		catch e
-			lines = e.stack.split('\n')
-			for line in lines
-				continue  if line.indexOf(__dirname) isnt -1 or line.indexOf(' at ') is -1
-				parts = line.split(':')
-				if parts[0].indexOf('(') is -1
-					result.method = 'unknown'
-					result.file = parts[0].replace(/^.+?\s+at\s+/, '')
-				else
-					result.method = parts[0].replace(/^.+?\s+at\s+/, '').replace(/\s+\(.+$/, '')
-					result.file = parts[0].replace(/^.+?\(/, '')
-				result.line = parts[1]
-				break
-
 		return result
 
-# Console Formatter
-class ConsoleFormatter extends Formatter
-	format: (levelCode,levelName,args) ->
+	format: (entry) =>
 		# Prepare
-		{date,file,line,method,color,levelName,message} = @details(levelCode, levelName, args)
+		entry.color = @getColor(entry.levelCode)
+		entry.timestamp = @formatDate(entry.date)
+		entry.text = @formatArguments(entry.args)
+		result = null
 
 		# Check
-		if !message
-			message
-		else
-			# Mappings
-			color = color and cliColor?[color] or (str) -> str
-			levelName = color(levelName+':')
-
+		if entry.text
 			# Formatters
+			colorFormatter = entry.color and cliColor?[entry.color] or (str) -> str
 			debugFormatter = false #cliColor.white
-			messageFormatter = color and cliColor?.bold
+			messageFormatter = colorFormatter and cliColor?.bold
 
 			# Message
-			messageString = "#{levelName} #{message}"
+			levelName = colorFormatter(entry.levelName+':')
+			messageString = "#{levelName} #{entry.text}"
 			messageString = messageFormatter(messageString)  if messageFormatter
 
-			#
+			# Level
 			if @config.level is 7
 				# Debug Information
 				seperator = '\n    → '
-				debugString = "[#{date}] [#{file}:#{line}] [#{method}]"
+				debugString = "[#{entry.timestamp}] [#{entry.file}:#{entry.line}] [#{entry.method}]"
 				debugString = lineFormatter(debugString)  if debugFormatter
 
 				# Result
-				message = "#{messageString}#{seperator}#{debugString}"
+				result = "#{messageString}#{seperator}#{debugString}\n"
 			else
 				# Result
-				message = messageString
+				result = messageString+'\n'
 
+		# Return
+		return result
+
+# Filter
+class Filter extends stream.Transform
+	config:
+		level: 6
+
+	constructor: (opts) ->
+		@setConfig(opts)
+		super
+
+	pipe: (child) ->
+		if child.setConfig?(@config) then @on('config', child.setConfig)
+		super
+
+	setConfig: (opts) =>
+		@config = extendr.deepExtend({}, @config, opts)
+		@
+
+	getConfig: -> @config
+
+	_transform: (chunk, encoding, next) =>
+		entry = JSON.parse(chunk.toString())
+		message = @format(entry)
+		message = JSON.stringify(message)  if message
+		return next(null, message)
+
+	format: (entry) ->
+		return null  if entry.levelCode > @config.level
+		return entry
 
 # Export
 module.exports = {
-	cliColor,
-	Formatter,
-	ConsoleFormatter
+	cliColor
+	Human
+	Filter
 }
