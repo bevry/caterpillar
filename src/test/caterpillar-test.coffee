@@ -2,7 +2,7 @@
 {expect} = require('chai')
 joe = require('joe')
 {Transform,Logger} = require('../../')
-{PassThrough} = require('stream')
+{PassThrough} = require('readable-stream')
 
 # Prepare
 cleanChanging = (item) ->
