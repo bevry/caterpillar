@@ -1,6 +1,6 @@
 # Import
 extendr = require('extendr')
-stream = require('stream')
+stream = require('readable-stream')
 
 # Transform
 class Transform extends stream.Transform

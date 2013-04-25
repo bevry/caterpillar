@@ -1,6 +1,6 @@
 {
 	"name": "caterpillar",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "Caterpillar is the ultimate logging system for Node.js, based on transform streams you can log to it and pipe the output off to different locations, including some pre-made ones. Caterpillar also supports log levels according to the RFC standard, as well as line, method, and file fetching for messages.",
 	"homepage": "https://github.com/bevry/caterpillar",
 	"keywords": [
@@ -23,10 +23,11 @@
 		"url": "http://github.com/bevry/caterpillar.git"
 	},
 	"engines" : {
-		"node": ">=0.10"
+		"node": ">=0.8"
 	},
 	"dependencies": {
-		"extendr": "~2.0.1"
+		"extendr": "~2.0.1",
+		"readable-stream": "~1.0.2"
 	},
 	"devDependencies": {
 		"caterpillar-filter": "2.x",
