@@ -1,5 +1,8 @@
 ## History
 
+- v2.0.0 April 25, 2013
+	- Rewrote using streams
+
 - v1.1.4 March 25, 2013
 	- Repackaged
 

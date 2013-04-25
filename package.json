@@ -1,14 +1,12 @@
 {
 	"name": "caterpillar",
 	"version": "2.0.0",
-	"description": "Caterpillar is a simple but powerful console logger for node.js. It supports grouping of messages, filtering log levels, colors, times, modules, custom formatters and custom transports.",
+	"description": "Caterpillar is the ultimate logging system for Node.js, based on transform streams you can log to it and pipe the output off to different locations, including some pre-made ones. Caterpillar also supports log levels according to the RFC standard, as well as line, method, and file fetching for messages.",
 	"homepage": "https://github.com/bevry/caterpillar",
 	"keywords": [
-		"console",
-		"log",
-		"logger",
-		"logging",
-		"debug"
+		"caterpillar",
+		"console", "log", "logger", "logging", "debug",
+		"stream", "transform"
 	],
 	"author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
 	"maintainers": [
@@ -30,14 +28,19 @@
 	"dependencies": {
 		"extendr": "~2.0.1"
 	},
-	"optionalDependencies": {
-		"cli-color": "~0.2.2"
-	},
 	"devDependencies": {
-		"coffee-script": "~1.6.2"
+		"caterpillar-filter": "2.x",
+		"caterpillar-human": "2.x",
+		"coffee-script": "~1.6.2",
+		"joe": "~1.2.0",
+		"joe-reporter-console": "~1.2.1",
+		"chai": "~1.5.0"
 	},
 	"directories": {
 		"lib": "./out/lib"
+	},
+	"scripts": {
+		"test": "node ./out/test/caterpillar-test.js"
 	},
 	"main": "./out/lib/caterpillar.js"
 }
