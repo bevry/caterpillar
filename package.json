@@ -23,7 +23,7 @@
 		"url": "http://github.com/bevry/caterpillar.git"
 	},
 	"engines" : {
-		"node": ">=0.4"
+		"node": ">=0.10"
 	},
 	"dependencies": {
 		"extendr": "~2.0.1"
