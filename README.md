@@ -76,7 +76,7 @@ new (require('caterpillar').Transform)(config)
 ```
 
 - Methods
-	- `constructor(config?)` create our new filter instance with the config, config is optional
+	- `constructor(config?)` create our new instance with the config, config is optional
 	- `pipe(child)` pipe our stream to the child, also sync our config to it
 	- `setConfig(config)` set the configuration and emit the `config` event
 	- `getConfig()` get the configuration
@@ -94,7 +94,7 @@ new (require('caterpillar').Logger)(config)
 ```
 
 - Methods
-	- `constructor(config?)` create our new filter instance with the config, config is optional
+	- `constructor(config?)` create our new instance with the config, config is optional
 	- `log(args...)` write a log message, the first argument is suppose to be the level (will use the default level if it isn't)
 	- `format(level, args...)` create a log entry ready for writing to the logger stream, output is as follows:
 
