@@ -73,6 +73,7 @@ class Logger extends Transform
 		result =
 			levelNumber: null
 			levelName: null
+			defaulted: false
 
 		# Log the entry
 		if typeof level is 'number'
@@ -85,6 +86,7 @@ class Logger extends Transform
 			unless levelNumber?
 				levelNumber = @getLevelNumber('default')
 				levelName = @getLevelName(levelNumber)
+				result.defaulted = true
 
 		# Apply
 		result.levelNumber = levelNumber
@@ -121,17 +123,26 @@ class Logger extends Transform
 	format: (level, args...) ->
 		# Prepare
 		entry = {}
-		entry.args = args
 		entry.date = new Date().toISOString()
-		entry[key] = value  for own key,value of @getLevelInfo(level)
-		entry[key] = value  for own key,value of @getLineInfo(level)
+
+		# Prepare
+		levelInfo  = @getLevelInfo(level)
+		lineInfo   = @getLineInfo(level)
+
+		# Add the level to the message arguments if it was not a level
+		args.unshift(level)  if levelInfo.defaulted and level isnt 'default'
+		delete levelInfo.defaulted
+
+		# Apply
+		entry.args = args
+		extendr.extend(entry, levelInfo, lineInfo)
 
 		# Return
 		return entry
 
-	log: (level, args...) ->
+	log: (args...) ->
 		# Prepare
-		entry = @format(level, args...)
+		entry = @format(args...)
 		entryString = JSON.stringify(entry)
 
 		# Write the entry

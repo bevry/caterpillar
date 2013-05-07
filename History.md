@@ -1,5 +1,9 @@
 ## History
 
+- v2.0.2 May 7, 2013
+	- Fixed defaulting the log level
+		- Closes [issue #6](https://github.com/bevry/caterpillar/issues/6) reported by [Erik Dasque](https://github.com/edasque)
+
 - v2.0.1 April 25, 2013
 	- Node 0.8 support
 
