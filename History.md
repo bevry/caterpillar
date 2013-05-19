@@ -1,5 +1,8 @@
 ## History
 
+- v2.0.3 May 19, 2013
+	- iOS support (iOS devices do not have `new Error().stack`)
+
 - v2.0.2 May 7, 2013
 	- Fixed defaulting the log level
 		- Closes [issue #6](https://github.com/bevry/caterpillar/issues/6) reported by [Erik Dasque](https://github.com/edasque)

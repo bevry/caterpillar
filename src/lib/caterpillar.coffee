@@ -104,7 +104,7 @@ class Logger extends Transform
 
 		# Retrieve
 		err = new Error()
-		lines = err.stack.split('\n')
+		lines = err.stack?.split('\n') or []  # ios devices do not have err.stack available
 		for line in lines
 			continue  if line.indexOf(__dirname) isnt -1 or line.indexOf(' at ') is -1
 			parts = line.split(':')
@@ -143,9 +143,12 @@ class Logger extends Transform
 	log: (args...) ->
 		# Prepare
 		entry = @format(args...)
-		entryString = JSON.stringify(entry)
+
+		# Emit the entry
+		@emit('log', entry)
 
 		# Write the entry
+		entryString = JSON.stringify(entry)
 		@write(entryString)
 
 		# Chain
