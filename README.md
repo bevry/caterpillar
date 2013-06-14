@@ -23,7 +23,7 @@ Caterpillar is the ultimate logging system for Node.js, based on [transform stre
 
 ## Usage
 
-### Example with the [Filter](https://github.com/bevry/caterpillar-filter) and [Human](https://github.com/bevry/caterpillar-filter) transforms
+### Example with the [Filter](https://github.com/bevry/caterpillar-filter) and [Human](https://github.com/bevry/caterpillar-human) transforms
 
 ``` javascript
 // Import
