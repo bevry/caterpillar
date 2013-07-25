@@ -1,5 +1,9 @@
 ## History
 
+- v2.0.4 July 23, 2013
+	- Added `lineOffset` configuration offset to allow you to detect the correct line of the reporting when using wrappers
+	- Updated dependencies
+
 - v2.0.3 May 19, 2013
 	- iOS support (iOS devices do not have `new Error().stack`)
 

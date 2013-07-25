@@ -35,6 +35,7 @@ class Transform extends stream.Transform
 # Logger
 class Logger extends Transform
 	config:
+		lineOffset: 0
 		levels:
 			emergency: 0
 			alert: 1
@@ -105,8 +106,15 @@ class Logger extends Transform
 		# Retrieve
 		err = new Error()
 		lines = err.stack?.split('\n') or []  # ios devices do not have err.stack available
+		offset = @config.lineOffset
 		for line in lines
-			continue  if line.indexOf(__dirname) isnt -1 or line.indexOf(' at ') is -1
+			if line.indexOf(__dirname) isnt -1 or line.indexOf(' at ') is -1
+				continue
+
+			if offset isnt 0
+				--offset
+				continue
+
 			parts = line.split(':')
 			if parts[0].indexOf('(') is -1
 				result.method = 'unknown'

@@ -116,6 +116,7 @@ new (require('caterpillar').Logger)(config)
 	- `getLineInfo()` get the file, method, and line that the `log` method was called on
 
 - Configuration
+	- `lineOffset` the amount of lines to offset when doing our line detection, useful for wrappers, defaults to `0`
 	- `levels` the level names and their associated number, also includes `default` for when no level was specified, defaults to:
 	
 		``` javascript
