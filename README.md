@@ -28,7 +28,7 @@ Caterpillar is the ultimate logging system for Node.js, based on [transform stre
 ``` javascript
 // Import
 var level  = process.argv.indexOf('-d') === -1 ? 6 : 7;
-var logger = new (require('./').Logger)({level:level});
+var logger = new (require('caterpillar').Logger)({level:level});
 var filter = new (require('caterpillar-filter').Filter)();
 var human  = new (require('caterpillar-human').Human)();
 
