@@ -75,12 +75,17 @@ logger.log('you','can','also','use','as','many','arguments','as','you','want',1,
 
 Result with log level 6 (info):
 
-<img src="https://github.com/bevry/caterpillar/raw/master/media/caterpillar-normal.png"/>
+<img src="http://d.pr/i/DBFD+"/>
 
 
 Result with log level 7 (debug):
 
-<img src="https://github.com/bevry/caterpillar/raw/master/media/caterpillar-debug.png"/>
+<img src="http://d.pr/i/IZ8I+"/>
+
+
+Result with log level 7 (debug) in the browser with the [Browser Transform](https://github.com/bevry/caterpillar-browser)
+
+<img src="http://d.pr/i/SK8d+">
 
 
 ### Transform API, extends [stream.Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform)
