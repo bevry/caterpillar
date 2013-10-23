@@ -1,8 +1,8 @@
 // Import
 var level  = process.argv.indexOf('-d') === -1 ? 6 : 7;
-var logger = new (require('./').Logger)({level:level});
-var filter = new (require('caterpillar-filter').Filter)();
-var human  = new (require('caterpillar-human').Human)();
+var logger = require('./').createLogger({level:level});
+var filter = require('caterpillar-filter').createFilter();
+var human  = require('caterpillar-human').createHuman();
 
 // Pipe logger output to filter, then filter output to stdout
 logger.pipe(filter).pipe(human).pipe(process.stdout);
