@@ -1,24 +1,38 @@
+
+<!-- TITLE/ -->
+
 # Caterpillar
 
-[![Build Status](https://secure.travis-ci.org/bevry/caterpillar.png?branch=master)](http://travis-ci.org/bevry/caterpillar)
-[![NPM version](https://badge.fury.io/js/caterpillar.png)](https://npmjs.org/package/caterpillar)
-[![Flattr this project](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/344188/balupton-on-Flattr)
+<!-- /TITLE -->
+
+
+<!-- BADGES/ -->
+
+[![Build Status](http://img.shields.io/travis-ci/bevry/caterpillar.png?branch=master)](http://travis-ci.org/bevry/caterpillar "Check this project's build status on TravisCI")
+[![NPM version](https://badge.fury.io/js/caterpillar.png)](https://npmjs.org/package/caterpillar "View this project on NPM")
+[![Gittip donate button](http://img.shields.io/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
+[![Flattr donate button](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
+[![PayPayl donate button](https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+
+<!-- /BADGES -->
+
 
 Caterpillar is the ultimate logging system for Node.js, based on [transform streams](http://nodejs.org/api/stream.html#stream_class_stream_transform) you can log to it and pipe the output off to different locations, including [some pre-made ones](http://npmjs.org/keyword/caterpillar-transform). Caterpillar also supports log levels according to the [RFC standard](http://www.faqs.org/rfcs/rfc3164.html), as well as line, method, and file fetching for messages. You can even use it in web browsers with the [Browser Transform](https://github.com/bevry/caterpillar-browser).
 
 
+<!-- INSTALL/ -->
 
 ## Install
 
-### Backend
+### [Node](http://nodejs.org/), [Browserify](http://browserify.org/)
+- Use: `require('caterpillar')`
+- Install: `npm install --save caterpillar`
 
-1. [Install Node.js](http://bevry.me/node/install)
-2. `npm install --save caterpillar`
+### [Ender](http://ender.jit.su/)
+- Use: `require('caterpillar')`
+- Install: `ender add caterpillar`
 
-### Frontend
-
-1. [See Browserify](http://browserify.org/)
-
+<!-- /INSTALL -->
 
 
 ## Usage
@@ -28,9 +42,9 @@ Caterpillar is the ultimate logging system for Node.js, based on [transform stre
 ``` javascript
 // Import
 var level  = process.argv.indexOf('-d') === -1 ? 6 : 7;
-var logger = new (require('caterpillar').Logger)({level:level});
-var filter = new (require('caterpillar-filter').Filter)();
-var human  = new (require('caterpillar-human').Human)();
+var logger = require('caterpillar').createLogger({level:level});
+var filter = require('caterpillar-filter').createFilter();
+var human  = require('caterpillar-human').createHuman();
 
 // Pipe logger output to filter, then filter output to stdout
 logger.pipe(filter).pipe(human).pipe(process.stdout);
@@ -145,26 +159,53 @@ new (require('caterpillar').Logger)(config)
 
 
 
+<!-- HISTORY/ -->
+
 ## History
-You can discover the history inside the [History.md](https://github.com/bevry/caterpillar/blob/master/History.md#files) file
+[Discover the change history by heading on over to the `History.md` file.](https://github.com/bevry/caterpillar/blob/master/History.md#files)
+
+<!-- /HISTORY -->
 
 
+<!-- BACKERS/ -->
+
+## Backers
+
+### Maintainers
+
+These amazing people are maintaining this project:
+
+- Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
+
+### Sponsors
+
+No sponsors yet! Will you be the first?
+
+[![Gittip donate button](http://img.shields.io/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
+[![Flattr donate button](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
+[![PayPayl donate button](https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+
+### Contributors
+
+These amazing people have contributed code to this project:
+
+- Benjamin Lupton <b@lupton.cc> (https://github.com/balupton) - [view contributions](https://github.com/bevry/caterpillar/commits?author=balupton)
+- t-visualappeal (https://github.com/t-visualappeal) - [view contributions](https://github.com/bevry/caterpillar/commits?author=t-visualappeal)
+
+[Become a contributor!](https://github.com/bevry/caterpillar/blob/master/Contributing.md#files)
+
+<!-- /BACKERS -->
+
+
+<!-- LICENSE/ -->
 
 ## License
-Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://creativecommons.org/licenses/MIT/)
-<br/>Copyright &copy; 2012+ [Bevry Pty Ltd](http://bevry.me)
-<br/>Copyright &copy; 2011 [Benjamin Lupton](http://balupton.com)
+
+Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT license](http://creativecommons.org/licenses/MIT/)
+
+Copyright &copy; 2012+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
+<br/>Copyright &copy; 2011 Benjamin Lupton <b@lupton.cc> (http://balupton.com)
+
+<!-- /LICENSE -->
 
 
-
-## Thanks
-Uses the following:
-
-- [RFC3164](http://www.faqs.org/rfcs/rfc3164.html) for the level codes and names
-
-Inspired by the following:
-
-- [Alexander Dorofeev's](https://github.com/akaspin) [AIN](https://github.com/akaspin/ain)
-- [TJ Holowaychuk's](https://github.com/visionmedia) [Log.js](https://github.com/visionmedia/log.js)
-- [Igor Urminček's](https://github.com/igo) [NLogger](https://github.com/igo/nlogger)
-- [SchizoDuckie's](https://github.com/SchizoDuckie) [Node-CLI](https://github.com/SchizoDuckie/Node-CLI/)

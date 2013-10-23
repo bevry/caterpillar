@@ -1,5 +1,10 @@
 ## History
 
+- v2.0.5 October 23, 2013
+	- Added `create` API to make life easier when doing one liners
+	- Project meta data files are now maintained by [Projectz](https://github.com/bevry/projectz)
+	- Updated dependencies
+
 - v2.0.4 July 23, 2013
 	- Added `lineOffset` configuration offset to allow you to detect the correct line of the reporting when using wrappers
 	- Updated dependencies

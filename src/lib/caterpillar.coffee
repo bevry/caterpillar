@@ -164,6 +164,11 @@ class Logger extends Transform
 
 # Export
 module.exports = {
+	# Classes
 	Transform
 	Logger
+
+	# Instantiators
+	createTransform: (args...) ->  new Transform(args...)
+	createLogger: (args...) ->  new Logger(args...)
 }
