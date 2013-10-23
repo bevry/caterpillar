@@ -1,5 +1,8 @@
 ## History
 
+- v2.0.6 October 23, 2013
+	- `Logger:log` is now permantely bound to the logger instance, for easy passing around
+
 - v2.0.5 October 23, 2013
 	- Added `create` API to make life easier when doing one liners
 	- Project meta data files are now maintained by [Projectz](https://github.com/bevry/projectz)

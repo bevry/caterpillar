@@ -148,7 +148,7 @@ class Logger extends Transform
 		# Return
 		return entry
 
-	log: (args...) ->
+	log: (args...) =>
 		# Prepare
 		entry = @format(args...)
 
