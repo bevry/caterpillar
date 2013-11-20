@@ -48,7 +48,9 @@
     "lib": "./out/lib"
   },
   "scripts": {
-    "test": "node ./out/test/caterpillar-test.js"
+    "preinstall": "node ./cyclic.js",
+    "test": "node ./out/test/caterpillar-test.js",
+    "start": "node ./node_modules/coffee-script/bin/cake watch"
   },
   "main": "./out/lib/caterpillar.js",
   "license": {
