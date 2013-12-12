@@ -1,9 +1,19 @@
 {
   "title": "Caterpillar",
   "name": "caterpillar",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "Caterpillar is the ultimate logging system for Node.js, based on transform streams you can log to it and pipe the output off to different locations, including some pre-made ones. Caterpillar also supports log levels according to the RFC standard, as well as line, method, and file fetching for messages. You can even use it in web browsers with caterpillar-browser.",
   "homepage": "https://github.com/bevry/caterpillar",
+  "license": {
+    "type": "MIT"
+  },
+  "badges": {
+    "travis": true,
+    "npm": true,
+    "gittip": "bevry",
+    "flattr": "344188/balupton-on-Flattr",
+    "paypal": "QB8GQPZAH84N6"
+  },
   "keywords": [
     "caterpillar",
     "console",
@@ -32,6 +42,7 @@
   "engines": {
     "node": ">=0.8"
   },
+  "browsers": true,
   "dependencies": {
     "extendr": "~2.1.0",
     "readable-stream": "~1.1.9"
@@ -39,26 +50,20 @@
   "devDependencies": {
     "caterpillar-filter": "2.x",
     "caterpillar-human": "2.x",
-    "coffee-script": "~1.6.2",
+    "caterpillar-browser": "2.x",
+    "coffee-script": "~1.6.3",
     "joe": "~1.3.0",
     "joe-reporter-console": "~1.2.1",
-    "chai": "~1.8.1"
+    "chai": "~1.8.1",
+    "projectz": "~0.3.0"
   },
   "directories": {
     "lib": "./out/lib"
   },
   "scripts": {
-    "test": "node ./out/test/caterpillar-test.js"
+    "test": "node ./out/test/caterpillar-test.js",
+    "browserify": "browserify -e example.js > example-browser.js",
+    "webpack": "webpack --progress --colors ./example.js example-browser.js"
   },
-  "main": "./out/lib/caterpillar.js",
-  "license": {
-    "type": "MIT"
-  },
-  "badges": {
-    "travis": true,
-    "npm": true,
-    "gittip": "bevry",
-    "flattr": "344188/balupton-on-Flattr",
-    "paypal": "QB8GQPZAH84N6"
-  }
+  "main": "./out/lib/caterpillar.js"
 }

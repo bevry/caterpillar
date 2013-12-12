@@ -9,10 +9,10 @@
 <!-- BADGES/ -->
 
 [![Build Status](http://img.shields.io/travis-ci/bevry/caterpillar.png?branch=master)](http://travis-ci.org/bevry/caterpillar "Check this project's build status on TravisCI")
-[![NPM version](https://badge.fury.io/js/caterpillar.png)](https://npmjs.org/package/caterpillar "View this project on NPM")
+[![NPM version](http://badge.fury.io/js/caterpillar.png)](https://npmjs.org/package/caterpillar "View this project on NPM")
 [![Gittip donate button](http://img.shields.io/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
-[![Flattr donate button](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
-[![PayPayl donate button](https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+[![Flattr donate button](http://img.shields.io/flattr/donate.png?color=yellow)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
+[![PayPayl donate button](http://img.shields.io/paypal/donate.png?color=yellow)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
 
 <!-- /BADGES -->
 
@@ -24,9 +24,14 @@ Caterpillar is the ultimate logging system for Node.js, based on [transform stre
 
 ## Install
 
-### [Node](http://nodejs.org/), [Browserify](http://browserify.org/)
+### [Node](http://nodejs.org/)
 - Use: `require('caterpillar')`
 - Install: `npm install --save caterpillar`
+
+### [Browserify](http://browserify.org/)
+- Use: `require('caterpillar')`
+- Install: `npm install --save caterpillar`
+- CDN URL: `//wzrd.in/bundle/caterpillar@2.0.7`
 
 ### [Ender](http://ender.jit.su/)
 - Use: `require('caterpillar')`
@@ -41,17 +46,27 @@ Caterpillar is the ultimate logging system for Node.js, based on [transform stre
 
 ``` javascript
 // Import
-var level  = process.argv.indexOf('-d') === -1 ? 6 : 7;
-var logger = require('caterpillar').createLogger({level:level});
-var filter = require('caterpillar-filter').createFilter();
-var human  = require('caterpillar-human').createHuman();
+var level   = process.argv.indexOf('-d') === -1 ? 6 : 7;
+var logger  = require('caterpillar').createLogger({level:level});
+var filter  = require('caterpillar-filter').createFilter();
+var human   = require('caterpillar-human').createHuman();
+var browser = require('caterpillar-browser').createBrowser();
 
-// Pipe logger output to filter, then filter output to stdout
-logger.pipe(filter).pipe(human).pipe(process.stdout);
+// Where to output?
+if ( process.title === 'browser' ) {
+	// Pipe the filter to human to console.log
+	logger.pipe(filter).pipe(human).on('data', function(message){
+		console.log(message.toString());
+	});
+}
+else {
+	// Pipe the filter to human to stdout
+	logger.pipe(filter).pipe(human).pipe(process.stdout);
 
-// If we are debugging, then write the original logger data to debug.log
-if ( level === 7 ) {
-	logger.pipe(require('fs').createWriteStream('./debug.log'));
+	// If we are debugging, then write the original logger data to debug.log
+	if ( level === 7 ) {
+		logger.pipe(require('fs').createWriteStream('./debug.log'));
+	}
 }
 
 // Log messages
@@ -167,7 +182,7 @@ new (require('caterpillar').Logger)(config)
 <!-- HISTORY/ -->
 
 ## History
-[Discover the change history by heading on over to the `History.md` file.](https://github.com/bevry/caterpillar/blob/master/History.md#files)
+[Discover the change history by heading on over to the `HISTORY.md` file.](https://github.com/bevry/caterpillar/blob/master/HISTORY.md#files)
 
 <!-- /HISTORY -->
 
@@ -187,8 +202,8 @@ These amazing people are maintaining this project:
 No sponsors yet! Will you be the first?
 
 [![Gittip donate button](http://img.shields.io/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
-[![Flattr donate button](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
-[![PayPayl donate button](https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+[![Flattr donate button](http://img.shields.io/flattr/donate.png?color=yellow)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
+[![PayPayl donate button](http://img.shields.io/paypal/donate.png?color=yellow)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
 
 ### Contributors
 
@@ -197,7 +212,7 @@ These amazing people have contributed code to this project:
 - Benjamin Lupton <b@lupton.cc> (https://github.com/balupton) - [view contributions](https://github.com/bevry/caterpillar/commits?author=balupton)
 - t-visualappeal (https://github.com/t-visualappeal) - [view contributions](https://github.com/bevry/caterpillar/commits?author=t-visualappeal)
 
-[Become a contributor!](https://github.com/bevry/caterpillar/blob/master/Contributing.md#files)
+[Become a contributor!](https://github.com/bevry/caterpillar/blob/master/CONTRIBUTING.md#files)
 
 <!-- /BACKERS -->
 

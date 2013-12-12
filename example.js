@@ -1,15 +1,25 @@
 // Import
-var level  = process.argv.indexOf('-d') === -1 ? 6 : 7;
-var logger = require('./').createLogger({level:level});
-var filter = require('caterpillar-filter').createFilter();
-var human  = require('caterpillar-human').createHuman();
+var level   = process.argv.indexOf('-d') === -1 ? 6 : 7;
+var logger  = require('caterpillar').createLogger({level:level});
+var filter  = require('caterpillar-filter').createFilter();
+var human   = require('caterpillar-human').createHuman();
+var browser = require('caterpillar-browser').createBrowser();
 
-// Pipe logger output to filter, then filter output to stdout
-logger.pipe(filter).pipe(human).pipe(process.stdout);
+// Where to output?
+if ( process.title === 'browser' ) {
+	// Pipe the filter to human to console.log
+	logger.pipe(filter).pipe(human).on('data', function(message){
+		console.log(message.toString());
+	});
+}
+else {
+	// Pipe the filter to human to stdout
+	logger.pipe(filter).pipe(human).pipe(process.stdout);
 
-// If we are debugging, then write the original logger data to debug.log
-if ( level === 7 ) {
-	logger.pipe(require('fs').createWriteStream('./debug.log'));
+	// If we are debugging, then write the original logger data to debug.log
+	if ( level === 7 ) {
+		logger.pipe(require('fs').createWriteStream('./debug.log'));
+	}
 }
 
 // Log messages

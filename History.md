@@ -1,4 +1,8 @@
-## History
+# History
+
+- v2.0.7 December 12, 2013
+	-  Use native streams if available, otherwise fallback to [readable-stream](https://npmjs.org/package/readable-stream)
+	- Repackaged
 
 - v2.0.6 October 23, 2013
 	- `Logger:log` is now permantely bound to the logger instance, for easy passing around

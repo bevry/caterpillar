@@ -1,6 +1,7 @@
 # Import
 extendr = require('extendr')
-stream = require('readable-stream')
+stream = require('stream')
+stream = require('readable-stream')  if stream.Transform? is false
 
 # Transform
 class Transform extends stream.Transform
@@ -11,7 +12,7 @@ class Transform extends stream.Transform
 		@setConfig(opts)
 		super
 
-	pipe: (child) ->
+	pipe: (child) =>
 		if child.setConfig?(@config) then @on('config', child.setConfig)
 		super
 
