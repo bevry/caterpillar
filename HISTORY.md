@@ -1,5 +1,9 @@
 # History
 
+## v2.0.9 February 18, 2015
+- Fixed an issue when fetching `(new Error()).stack` would fail
+- More robust stack parsing
+
 ## v2.0.8 February 7, 2015
 - Updated dependencies
 

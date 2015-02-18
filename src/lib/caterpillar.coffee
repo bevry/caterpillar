@@ -104,27 +104,56 @@ class Logger extends Transform
 			method: 'unknown'
 			file: 'unknown'
 
-		# Retrieve
-		err = new Error()
-		lines = err.stack?.split('\n') or []  # ios devices do not have err.stack available
-		offset = @config.lineOffset
-		for line in lines
-			if line.indexOf(__dirname) isnt -1 or line.indexOf(' at ') is -1
-				continue
+		try
+			# Create an error
+			err = new Error()
 
-			if offset isnt 0
-				--offset
-				continue
+			# And attempt to retrieve it's stack
+			# https://github.com/winstonjs/winston/issues/401#issuecomment-61913086
+			try
+				stack = err.stack
+			catch
+				try
+					stack = err.__previous__?.stack
+				catch
+					stack = null
 
-			parts = line.split(':')
-			if parts[0].indexOf('(') is -1
-				result.method = 'unknown'
-				result.file = parts[0].replace(/^.+?\s+at\s+/, '')
+			# Handle different stack formats
+			if stack
+				if Array.isArray(err.stack)
+					lines = err.stack
+				else
+					lines = err.stack.toString().split('\n')
 			else
-				result.method = parts[0].replace(/^.+?\s+at\s+/, '').replace(/\s+\(.+$/, '')
-				result.file = parts[0].replace(/^.+?\(/, '')
-			result.line = parts[1]
-			break
+				lines = []
+
+			# Handle different line formats
+			lines = lines
+				.map (line) -> (line or '').toString()
+				.filter (line) -> line.length isnt 0
+
+			# Parse our lines
+			offset = @config.lineOffset
+			for line in lines
+				if line.indexOf(__dirname) isnt -1 or line.indexOf(' at ') is -1
+					continue
+
+				if offset isnt 0
+					--offset
+					continue
+
+				parts = line.split(':')
+				if parts.length >= 2
+					if parts[0].indexOf('(') is -1
+						result.method = 'unknown'
+						result.file = parts[0].replace(/^.+?\s+at\s+/, '')
+					else
+						result.method = parts[0].replace(/^.+?\s+at\s+/, '').replace(/\s+\(.+$/, '')
+						result.file = parts[0].replace(/^.+?\(/, '')
+					result.line = parts[1]
+					break
+		catch err
+			throw new Error('Caterpillar.getLineInfo: Failed to parse the error stack: '+err.toString())
 
 		# Return
 		return result
@@ -135,8 +164,8 @@ class Logger extends Transform
 		entry.date = new Date().toISOString()
 
 		# Prepare
-		levelInfo  = @getLevelInfo(level)
-		lineInfo   = @getLineInfo(level)
+		levelInfo = @getLevelInfo(level)
+		lineInfo = @getLineInfo(level)
 
 		# Add the level to the message arguments if it was not a level
 		args.unshift(level)  if levelInfo.defaulted and level isnt 'default'

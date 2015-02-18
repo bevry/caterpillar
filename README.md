@@ -36,7 +36,7 @@ Caterpillar is the ultimate logging system for Node.js, based on [transform stre
 ### [Browserify](http://browserify.org/)
 - Use: `require('caterpillar')`
 - Install: `npm install --save caterpillar`
-- CDN URL: `//wzrd.in/bundle/caterpillar@2.0.7`
+- CDN URL: `//wzrd.in/bundle/caterpillar@2.0.9`
 
 ### [Ender](http://ender.jit.su/)
 - Use: `require('caterpillar')`
