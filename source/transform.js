@@ -43,7 +43,7 @@ export class Transform extends _Transform {
 		}
 	}
 
-	_transform (chunk /* :Buffer */, encoding /* :string */, next /* :function */ ) /* :void */ {
+	_transform (chunk /* :Buffer|string */, encoding /* :string */, next /* :function */ ) /* :void */ {
 		const entry = JSON.parse(chunk.toString())
 		let message = this.format(entry)
 		if ( message ) {
