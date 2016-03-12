@@ -1,5 +1,4 @@
-
-// Import
+/* @flow */
 import {extend, deep} from 'extendr'
 import {PassThrough} from 'stream'
 

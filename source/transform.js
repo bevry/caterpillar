@@ -1,4 +1,4 @@
-
+/* @flow */
 import {Transform as _Transform} from 'stream'
 import {deep} from 'extendr'
 

@@ -1,5 +1,4 @@
-
-// Import
+/* @flow */
 import {Transform, Logger} from './index.js'
 import {PassThrough} from 'stream'
 import joe from 'joe'
