@@ -4,21 +4,7 @@
   "version": "2.0.9",
   "description": "Caterpillar is the ultimate logging system for Node.js, based on transform streams you can log to it and pipe the output off to different locations, including some pre-made ones. Caterpillar also supports log levels according to the RFC standard, as well as line, method, and file fetching for messages. You can even use it in web browsers with caterpillar-browser.",
   "homepage": "https://github.com/bevry/caterpillar",
-  "license": {
-    "type": "MIT"
-  },
-  "badges": {
-    "travis": true,
-    "npm": true,
-    "npmdownloads": true,
-    "david": true,
-    "daviddev": true,
-    "gratipay": "bevry",
-    "flattr": "344188/balupton-on-Flattr",
-    "paypal": "QB8GQPZAH84N6",
-    "bitcoin": "https://coinbase.com/checkouts/9ef59f5479eec1d97d63382c9ebcb93a",
-    "wishlist": "http://amzn.com/w/2F8TXKSNAFG4V"
-  },
+  "license": "MIT",
   "keywords": [
     "caterpillar",
     "console",
@@ -29,6 +15,32 @@
     "stream",
     "transform"
   ],
+  "badges": {
+    "list": [
+      "travisci",
+      "npmversion",
+      "npmdownloads",
+      "daviddm",
+      "daviddmdev",
+      "---",
+      "slackin",
+      "patreon",
+      "gratipay",
+      "flattr",
+      "paypal",
+      "bitcoin",
+      "wishlist"
+    ],
+    "config": {
+      "patreonUsername": "bevry",
+      "gratipayUsername": "bevry",
+      "flattrUsername": "balupton",
+      "paypalURL": "https://bevry.me/paypal",
+      "bitcoinURL": "https://bevry.me/bitcoin",
+      "wishlistURL": "https://bevry.me/wishlist",
+      "slackinURL": "https://slack.bevry.me"
+    }
+  },
   "author": "2012+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me), 2011 Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
   "maintainers": [
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
@@ -43,38 +55,44 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/bevry/caterpillar.git"
+    "url": "https://github.com/bevry/caterpillar.git"
   },
   "engines": {
-    "node": ">=0.8"
+    "node": ">=0.10"
   },
-  "browsers": true,
+  "main": "es2015/index.js",
+  "browser": "es2015/index.js",
+  "scripts": {
+    "setup": "npm install",
+    "clean": "rm -Rf ./docs ./es2015",
+    "compile": "npm run compile:es2015",
+    "compile:es2015": "babel ./source --out-dir ./es2015 --presets es2015",
+    "meta": "npm run meta:docs && npm run meta:projectz",
+    "meta:docs": "documentation build -f html -g source/**.js -o docs",
+    "meta:projectz": "projectz compile",
+    "prepare": "npm run compile && npm run test && npm run meta",
+    "release": "npm run prepare && npm run release:tag && npm run release:push",
+    "release:tag": "git tag v$npm_package_version -a",
+    "release:push": "git push origin master && git push origin --tags",
+    "pretest": "npm run test:eslint && npm run test:flow",
+    "test:eslint": "eslint ./source",
+    "test:flow": "flow check",
+    "test": "node --harmony ./es2015/test.js"
+  },
   "dependencies": {
-    "extendr": "^2.1.0",
-    "readable-stream": "^1.0.33"
+    "extendr": "^3.1.0"
   },
   "devDependencies": {
-    "browserify": "^8.1.3",
-    "caterpillar-browser": "2.x",
-    "caterpillar-filter": "2.x",
-    "caterpillar-human": "2.x",
-    "chai": "^1.10.0",
-    "coffee-script": "^1.9.0",
+    "assert-helpers": "^4.1.0",
+    "babel-cli": "^6.6.5",
+    "babel-preset-es2015": "^6.6.0",
+    "documentation": "^4.0.0-beta",
+    "eslint": "^2.3.0",
+    "eslint-plugin-babel": "^3.1.0",
+    "eslint-plugin-react": "^4.2.1",
+    "flow-bin": "^0.22.1",
     "joe": "^1.6.0",
     "joe-reporter-console": "^1.2.1",
-    "projectz": "^0.3.17",
-    "webpack": "^1.5.3"
-  },
-  "directories": {
-    "lib": "./out/lib"
-  },
-  "scripts": {
-    "test": "node ./out/test/caterpillar-test.js",
-    "browserify": "./node_modules/.bin/browserify -e example.js > example-browser.js",
-    "webpack": "./node_modules/.bin/webpack --progress --colors ./example.js example-browser.js"
-  },
-  "main": "./out/lib/caterpillar.js",
-  "cakeConfiguration": {
-    "COFFEE_SRC_PATH": "src"
+    "projectz": "^1.0.9"
   }
 }
