@@ -1,5 +1,9 @@
 # History
 
+## v3.0.0 March X, 2016
+- Many fixes
+- Many api changes
+
 ## v2.0.9 February 18, 2015
 - Fixed an issue when fetching `(new Error()).stack` would fail
 - More robust stack parsing

@@ -42,7 +42,7 @@ const loggerDefaultConfig = {
 }
 
 // Logger
-export class Logger extends PassThrough {
+export default class Logger extends PassThrough {
 	// ===================================
 	// Generic
 

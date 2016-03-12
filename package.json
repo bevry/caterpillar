@@ -41,14 +41,14 @@
       "slackinURL": "https://slack.bevry.me"
     }
   },
-  "author": "2012+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me), 2011 Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
+  "author": "2012+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me), 2011 Benjamin Lupton <b@lupton.cc> (https://balupton.com)",
   "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+    "Benjamin Lupton <b@lupton.cc> (https://balupton.com)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
+    "Benjamin Lupton <b@lupton.cc> (https://balupton.com)",
     "t-visualappeal (https://github.com/t-visualappeal)",
-    "thelfensdrfer (https://github.com/thelfensdrfer)"
+    "Tim Helfensdörfer <tim@visualappeal.de> (http://thelfensdrfer.de)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/caterpillar/issues"

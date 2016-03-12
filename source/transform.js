@@ -3,7 +3,7 @@ import {Transform as _Transform} from 'stream'
 import {deep} from 'extendr'
 
 // Transform
-export class Transform extends _Transform {
+export default class Transform extends _Transform {
 	// ===================================
 	// Generic
 
