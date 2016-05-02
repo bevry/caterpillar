@@ -1,6 +1,6 @@
 /* @flow */
-import {extend, deep} from 'extendr'
-import {PassThrough} from 'stream'
+const {extend, deep} = require('extendr')
+const {PassThrough} = require('stream')
 
 /* ::
 type levelInfo = {
@@ -41,28 +41,118 @@ const loggerDefaultConfig = {
 	}
 }
 
-// Logger
-export default class Logger extends PassThrough {
+/**
+Logger.
+This is what we write to.
+It extends the Transform stream so that we can pipe data to it (PassThrough with log isn't enough for this).
+The transformation pulls in debugging information and puts it into a useful JSON format.
+
+@example <caption>Default Configuration</caption>
+{
+	lineOffset: 0,
+	levels: {
+		// Compliant with http://www.faqs.org/rfcs/rfc3164.html
+		emergency: 0,
+		alert: 1,
+		critical: 2,
+		error: 3,
+		warning: 4,
+		notice: 5,
+		info: 6,
+		debug: 7,
+
+		emerg: 0,
+		crit: 2,
+		err: 3,
+		warn: 4,
+		note: 5,
+
+		'default': 6
+	}
+}
+
+@example <caption>Creation</caption>
+// Via class
+const Logger = require('caterpillar').Logger
+const logger = new Logger()
+// Via create helper
+const logger = Logger.create()
+// Via create alias
+const logger = require('caterpillar').create()
+
+@extends stream.PassThrough
+*/
+class Logger extends PassThrough {
+
+	/**
+	Construct our Logger with the specified configuration.
+	Configuration is applied via `setConfig`.
+	@param {Object} [config]
+	*/
+	constructor (config /* :?Object */) {
+		super(config)  // new stream.Transform([options])
+		if ( config ) {
+			this.setConfig(loggerDefaultConfig, config)
+		}
+		else {
+			this.setConfig(loggerDefaultConfig)
+		}
+	}
+
 	// ===================================
 	// Generic
+	// This code is shared between Logger and Transform
 
+	/**
+	Internal configuration object
+	@private
+	@property {Object} _config
+	*/
 	/* :: _config:Object; */
 
+	/**
+	Alternative constructor.
+	Alternative way of creating an instance of the class without having to use the `new` keyword.
+	Useful when creating the class directly from `require` statements.
+	@static
+	@param {...*} args
+	@returns {Logger}
+	*/
 	static create (...args) {
 		return new this(...args)
 	}
 
+	/**
+	Get the current configuration object for this instance.
+	@returns {Object}
+	*/
 	getConfig () /* :Object */ {
+		// if ( this._parent ) return deep({}, this._parent.getConfig(), this._config)
 		return this._config || {}
 	}
 
+	/**
+	Apply the specified configurations to this instance's configuration via deep merging.
+	@example
+	setConfig({a: 1}, {b: 2})
+	getConfig()  // {a: 1, b: 2}
+	@param {...*} configs - As many configuration objects as you wish to merge
+	@returns {this}
+	*/
 	setConfig (...configs /* :Array<Object> */ ) /* :this */ {
 		this._config = deep(this.getConfig(), ...configs)
 		this.emit('config', ...configs)
 		return this
 	}
 
+	/**
+	Pipe this data to some other writable stream.
+	If the child stream also has a `setConfig` method, we will ensure the childs configuration is kept consistent with parents.
+	@param {stream.Writable} child stream to be piped to
+	@returns {stream.Writable} the result of the pipe operation
+	*/
 	pipe (child /* :Object */ ) /* :any */ {
+		// child._parent = child
 		if ( child.setConfig ) {
 			child.setConfig(this.getConfig())
 			const listener = child.setConfig.bind(child)
@@ -75,16 +165,12 @@ export default class Logger extends PassThrough {
 	// ===================================
 	// Transform
 
-	constructor (config /* :?Object */) {
-		super(config)  // new stream.Transform([options])
-		if ( config ) {
-			this.setConfig(loggerDefaultConfig, config)
-		}
-		else {
-			this.setConfig(loggerDefaultConfig)
-		}
-	}
-
+	/**
+	Receive a level name and return the level number
+	@param {string} name
+	@returns {number}
+	@throws {Error} will throw an error if no result was found
+	*/
 	getLevelNumber (name /* :string */) /* :number */ {
 		const {levels} = this.getConfig()
 		if ( levels[name] == null ) {
@@ -95,6 +181,12 @@ export default class Logger extends PassThrough {
 		}
 	}
 
+	/**
+	Receive a level number and return the level name
+	@param {number} number
+	@returns {string}
+	@throws {Error} will throw an error if returned empty handed
+	*/
 	getLevelName (number /* :number */) /* :string */ {
 		const {levels} = this.getConfig()
 
@@ -112,6 +204,19 @@ export default class Logger extends PassThrough {
 		throw new Error(`No level name was found for the level number: ${number}`)
 	}
 
+	/**
+	Receive either the level name or number and return the combination.
+	@example <caption>Input</caption>
+	logger.getLevelInfo('note')
+	@example <caption>Result</caption>
+	{
+		"levelNumber": 5,
+		"levelName": "notice"
+	}
+	@param {string|number} level
+	@returns {Object}
+	@throws {Error} will throw an error if returned empty handed
+	*/
 	getLevelInfo (level /* :string|number */) /* :levelInfo */ {
 		if ( typeof level === 'string' ) {
 			const levelNumber = this.getLevelNumber(level)  // will throw if not found
@@ -127,6 +232,19 @@ export default class Logger extends PassThrough {
 		}
 	}
 
+	/**
+	The current line info of whatever called this.
+	@example <caption>Input</caption>
+	logger.getLineInfo()
+	@example <caption>Result</caption>
+	{
+		"line": "60",
+		"method": "Object.<anonymous>",
+		"file": "/Users/balupton/some-project/calling-file.js"
+	}
+	@returns {Object}
+	@throws {Error} will throw an error if returned empty handed
+	*/
 	getLineInfo () /* :lineInfo */ {
 		// Prepare
 		let offset = this.getConfig().lineOffset
@@ -209,6 +327,36 @@ export default class Logger extends PassThrough {
 		return result
 	}
 
+	/**
+	Log the arguments into the logger stream as formatted data.
+
+	@example <caption>Inputs</caption>
+	logger.log('note', 'this is working swell')
+	logger.log('this', 'worked', 'swell')
+
+	@example <caption>Results</caption>
+	{
+		"args": ["this is working swell"],
+		"date": "2013-04-25T10:18:25.722Z",
+		"levelNumber": 5,
+		"levelName": "notice",
+		"line": "59",
+		"method": "Object.<anonymous>",
+		"file": "/Users/balupton/some-project/calling-file.js"
+	}
+	{
+		"args": ["this", "worked", "well"],
+		"date": "2013-04-25T10:18:26.539Z",
+		"levelNumber": 6,
+		"levelName": "info",
+		"line": "60",
+		"method": "Object.<anonymous>",
+		"file": "/Users/balupton/some-project/calling-file.js"
+	}
+
+	@param {...*} args
+	@returns {Object}
+	*/
 	log (...args /* :Array<any> */ ) /* :this */ {
 		const date = new Date().toISOString()
 		const lineInfo = this.getLineInfo()
@@ -234,3 +382,6 @@ export default class Logger extends PassThrough {
 		return this
 	}
 }
+
+// Export
+module.exports = Logger

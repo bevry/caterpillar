@@ -1,8 +1,10 @@
 /* @flow */
-import {Transform, Logger} from './index.js'
-import {PassThrough} from 'stream'
-import joe from 'joe'
-import {equal, deepEqual} from 'assert-helpers'
+/* eslint no-console:0 */
+const {Transform, Logger, create} = require('../')
+const {PassThrough} = require('stream')
+const {suite} = require('joe')
+const {equal, deepEqual} = require('assert-helpers')
+const {ok} = require('assert')
 
 // Prepare
 function cleanChanging (item) {
@@ -15,33 +17,38 @@ function cleanChanging (item) {
 }
 
 // Test
-joe.describe('caterpillar', function (describe) {
+suite('caterpillar', function (suite) {
 
-	describe('transform', function (describe, it) {
-		it('should instantiate correctly', function () {
-			/* eslint no-unused-vars:0 */
+	suite('transform', function (suite, test) {
+		test('should instantiate correctly', function () {
 			const transform = new Transform()
+			ok(transform instanceof Transform, 'transform is instance')
 		})
 
-		it('should set configuration correctly', function () {
+		test('should instantiate correctly, using Transform.create()', function () {
+			const transform = Transform.create()
+			ok(transform instanceof Transform, 'transform is instance')
+		})
+
+		test('should set configuration correctly', function () {
 			const transform = new Transform()
 			transform.setConfig({level: 5})
 			equal(transform.getConfig().level, 5)
 		})
 
-		it('should set configuration correctly via constructor', function () {
+		test('should set configuration correctly via constructor', function () {
 			const transform = new Transform({level: 4})
 			equal(transform.getConfig().level, 4)
 		})
 
-		it('should pass configuration to the child via constructor', function () {
+		test('should pass configuration to the child via constructor', function () {
 			const transform = new Transform({level: 3})
 			const transform2 = new Transform()
 			transform.pipe(transform2)
 			equal(transform2.getConfig().level, 3)
 		})
 
-		it('should pass configuration to the child via set config after the fact', function () {
+		test('should pass configuration to the child via set config after the fact', function () {
 			const transform = new Transform()
 			const transform2 = new Transform()
 			transform.pipe(transform2)
@@ -50,7 +57,24 @@ joe.describe('caterpillar', function (describe) {
 		})
 	})
 
-	describe('logging', function (describe, it) {
+	suite('logger', function (suite, test) {
+		test('should instantiate correctly', function () {
+			const logger = new Logger()
+			ok(logger instanceof Logger, 'logger is instance')
+		})
+
+		test('should instantiate correctly, using Logger.create()', function () {
+			const logger = Logger.create()
+			ok(logger instanceof Logger, 'logger is instance')
+		})
+
+		test('should instantiate correctly, using require("caterpillar").create()', function () {
+			const logger = create()
+			ok(logger instanceof Logger, 'logger is instance')
+		})
+	})
+
+	suite('logging', function (suite, test) {
 		const logger = new Logger()
 		const output = new PassThrough()
 		const actual = []
@@ -76,11 +100,11 @@ joe.describe('caterpillar', function (describe) {
 			actual.push(chunk.toString())
 		})
 
-		it('should pipe correctly', function () {
+		test('should pipe correctly', function () {
 			logger.pipe(output)
 		})
 
-		it('should log messages', function () {
+		test('should log messages', function () {
 			const levels = logger.getConfig().levels
 			for ( const name in levels ) {
 				if ( levels.hasOwnProperty(name) ) {
@@ -92,7 +116,7 @@ joe.describe('caterpillar', function (describe) {
 			logger.log('this is unknown and is level 6')
 		})
 
-		it('should provide the expected output', function (done) {
+		test('should provide the expected output', function (done) {
 			output.on('end', function () {
 				const actualCleaned = actual.map(cleanChanging)
 				const expectedCleaned = expected.map(cleanChanging)

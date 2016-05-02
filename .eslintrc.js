@@ -1,4 +1,4 @@
-// 2016 March 9
+// 2016 March 20
 // https://github.com/bevry/base
 // http://eslint.org
 // This code must be able to run on Node 0.10
@@ -129,7 +129,10 @@ var config = {
 		'use-isnan': ERROR,
 
 		// We use JSDoc again
-		'valid-jsdoc': ERROR,
+		'valid-jsdoc': [ERROR, {
+			"requireParamDescription": false,
+			"requireReturnDescription": false
+		}],
 
 		// Seems like a good idea to error about this
 		'valid-typeof': ERROR,

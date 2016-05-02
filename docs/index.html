@@ -1,0 +1,972 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>  | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
+  <link href='assets/style.css' type='text/css' rel='stylesheet' />
+  <link href='assets/github.css' type='text/css' rel='stylesheet' />
+</head>
+<body class='documentation'>
+  <div class='container'>
+    <div class='clearfix md-mxn2'>
+      <div class='fixed md-show fix-3 overflow-auto max-height-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'></h3>
+          <div class='mb1'><code></code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block field'
+            type='text' />
+          <div id='toc'>
+              <a
+                href='#Transform'
+                class='block bold'>
+                Transform
+              </a>
+                <a
+                  href='#Transform.create'
+                  class='regular block'>
+                  .create
+                </a>
+                <a
+                  href='#Transform.constructor'
+                  class='regular block'>
+                  #constructor
+                </a>
+                <a
+                  href='#Transform.format'
+                  class='regular block'>
+                  #format
+                </a>
+                <a
+                  href='#Transform.getConfig'
+                  class='regular block'>
+                  #getConfig
+                </a>
+                <a
+                  href='#Transform.pipe'
+                  class='regular block'>
+                  #pipe
+                </a>
+                <a
+                  href='#Transform.setConfig'
+                  class='regular block'>
+                  #setConfig
+                </a>
+              <a
+                href='#Logger'
+                class='block bold'>
+                Logger
+              </a>
+                <a
+                  href='#Logger.create'
+                  class='regular block'>
+                  .create
+                </a>
+                <a
+                  href='#Logger.constructor'
+                  class='regular block'>
+                  #constructor
+                </a>
+                <a
+                  href='#Logger.getConfig'
+                  class='regular block'>
+                  #getConfig
+                </a>
+                <a
+                  href='#Logger.getLevelInfo'
+                  class='regular block'>
+                  #getLevelInfo
+                </a>
+                <a
+                  href='#Logger.getLevelName'
+                  class='regular block'>
+                  #getLevelName
+                </a>
+                <a
+                  href='#Logger.getLevelNumber'
+                  class='regular block'>
+                  #getLevelNumber
+                </a>
+                <a
+                  href='#Logger.getLineInfo'
+                  class='regular block'>
+                  #getLineInfo
+                </a>
+                <a
+                  href='#Logger.log'
+                  class='regular block'>
+                  #log
+                </a>
+                <a
+                  href='#Logger.pipe'
+                  class='regular block'>
+                  #pipe
+                </a>
+                <a
+                  href='#Logger.setConfig'
+                  class='regular block'>
+                  #setConfig
+                </a>
+          </div>
+        </div>
+      </div>
+      <div class='fix-margin-3'>
+        <div class='px2'>
+<div class='py1'><section class='py2 clearfix'>
+  <h2 id='Transform' class='mt0'>
+    Transform<span class='gray'></span>
+  </h2>
+    <p>
+      Extends
+        <a href="https://nodejs.org/api/stream.html#stream_class_stream_transform">stream.Transform</a>
+    </p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/transform.js#L23-L129'><code>./source/transform.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Transform.
+This is a helper for our transforms to be able to process the written log data more easily.
+All the need to do is extend this class and add their own <code>format</code> method.</p>
+
+    <h4>Examples</h4>
+
+    <pre class='overflow-auto'><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pretty</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">require</span>('<span class="hljs-title">caterpillar</span>').<span class="hljs-title">Transform</span> </span>{
+format (entry) {
+<span class="hljs-keyword">return</span> <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>).inspect(entry, {colors: <span class="hljs-literal">true</span>})
+}
+}
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'caterpillar'</span>).create()
+.pipe(Pretty.create())
+.pipe(process.stdout)
+.log(<span class="hljs-string">'note'</span>, <span class="hljs-string">'cool times'</span>, <span class="hljs-number">5</span>)</pre>
+      <h4>Static members</h4>
+        <div class='collapsible' id='Transform.create'>
+          <a href='#Transform.create'>
+            <code>
+              .create<span class='gray'>(args)</span>
+            </code>
+            <div class='force-inline'>
+              <p>Alternative constructor.
+Alternative way of creating an instance of the class without having to use the <code>new</code> keyword.
+Useful when creating the class directly from <code>require</code> statements.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2 m2'>
+<section class='py2 clearfix'>
+  <h2 id='Transform.create' class='mt0'>
+    create<span class='gray'>(args)</span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/transform.js#L56-L58'><code>./source/transform.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Alternative constructor.
+Alternative way of creating an instance of the class without having to use the <code>new</code> keyword.
+Useful when creating the class directly from <code>require</code> statements.</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li>...
+Any
+ <strong>args</strong>
+          :
+          <div class='force-inline'>
+            
+          </div>
+        </li>
+    </ul>
+      <h4>Returns</h4>
+      <code>Logger
+</code>
+      
+      <div class='force-inline'>
+        
+      </div>
+</section>
+          </div>
+        </div>
+      <h4>Instance members</h4>
+        <div class='collapsible' id='Transform.constructor'>
+          <a href='#Transform.constructor'>
+            <code>
+              #constructor<span class='gray'>([config])</span>
+            </code>
+            <div class='force-inline'>
+              <p>Construct our Logger with the specified configuration.
+Configuration is applied via <code>setConfig</code>.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Transform.constructor' class='mt0'>
+    constructor<span class='gray'>([config])</span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/transform.js#L30-L35'><code>./source/transform.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Construct our Logger with the specified configuration.
+Configuration is applied via <code>setConfig</code>.</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+=
+ <strong>config</strong>
+          :
+          <div class='force-inline'>
+            
+          </div>
+        </li>
+    </ul>
+</section>
+          </div>
+        </div>
+        <div class='collapsible' id='Transform.format'>
+          <a href='#Transform.format'>
+            <code>
+              #format<span class='gray'>(entry)</span>
+            </code>
+            <div class='force-inline'>
+              <p>Format the written data into whatever we want.
+Here is where our transformers work with the written data to enhance it.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Transform.format' class='mt0'>
+    format<span class='gray'>(entry)</span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/transform.js#L126-L128'><code>./source/transform.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Format the written data into whatever we want.
+Here is where our transformers work with the written data to enhance it.</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+ <strong>entry</strong>
+          :
+          <div class='force-inline'>
+            
+          </div>
+        </li>
+    </ul>
+      <h4>Returns</h4>
+      <code>Any
+</code>
+      
+      <div class='force-inline'>
+        
+      </div>
+</section>
+          </div>
+        </div>
+        <div class='collapsible' id='Transform.getConfig'>
+          <a href='#Transform.getConfig'>
+            <code>
+              #getConfig<span class='gray'></span>
+            </code>
+            <div class='force-inline'>
+              <p>Get the current configuration object for this instance.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Transform.getConfig' class='mt0'>
+    getConfig<span class='gray'></span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/transform.js#L64-L67'><code>./source/transform.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Get the current configuration object for this instance.</p>
+
+      <h4>Returns</h4>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+</code>
+      
+      <div class='force-inline'>
+        
+      </div>
+</section>
+          </div>
+        </div>
+        <div class='collapsible' id='Transform.pipe'>
+          <a href='#Transform.pipe'>
+            <code>
+              #pipe<span class='gray'>(child)</span>
+            </code>
+            <div class='force-inline'>
+              <p>Pipe this data to some other writable stream.
+If the child stream also has a <code>setConfig</code> method, we will ensure the childs configuration is kept consistent with parents.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Transform.pipe' class='mt0'>
+    pipe<span class='gray'>(child)</span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/transform.js#L89-L98'><code>./source/transform.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Pipe this data to some other writable stream.
+If the child stream also has a <code>setConfig</code> method, we will ensure the childs configuration is kept consistent with parents.</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li><a href="https://nodejs.org/api/stream.html#stream_class_stream_writable">stream.Writable</a>
+ <strong>child</strong>
+          :
+          <div class='force-inline'>
+            <p>stream to be piped to</p>
+
+          </div>
+        </li>
+    </ul>
+      <h4>Returns</h4>
+      <code><a href="https://nodejs.org/api/stream.html#stream_class_stream_writable">stream.Writable</a>
+</code>
+      :
+      <div class='force-inline'>
+        <p>the result of the pipe operation</p>
+
+      </div>
+</section>
+          </div>
+        </div>
+        <div class='collapsible' id='Transform.setConfig'>
+          <a href='#Transform.setConfig'>
+            <code>
+              #setConfig<span class='gray'>(configs)</span>
+            </code>
+            <div class='force-inline'>
+              <p>Apply the specified configurations to this instance's configuration via deep merging.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Transform.setConfig' class='mt0'>
+    setConfig<span class='gray'>(configs)</span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/transform.js#L77-L81'><code>./source/transform.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Apply the specified configurations to this instance's configuration via deep merging.</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li>...
+Any
+ <strong>configs</strong>
+          :
+          <div class='force-inline'>
+            <p>As many configuration objects as you wish to merge</p>
+
+          </div>
+        </li>
+    </ul>
+      <h4>Returns</h4>
+      <code>this
+</code>
+      
+      <div class='force-inline'>
+        
+      </div>
+    <h4>Examples</h4>
+
+    <pre class='overflow-auto'>setConfig({a: <span class="hljs-number">1</span>}, {b: <span class="hljs-number">2</span>})
+getConfig()  <span class="hljs-comment">// {a: 1, b: 2}</span></pre>
+</section>
+          </div>
+        </div>
+</section>
+</div><div class='py1'><section class='py2 clearfix'>
+  <h2 id='Logger' class='mt0'>
+    Logger<span class='gray'></span>
+  </h2>
+    <p>
+      Extends
+        stream.PassThrough
+    </p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L85-L384'><code>./source/logger.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Logger.
+This is what we write to.
+It extends the Transform stream so that we can pipe data to it (PassThrough with log isn't enough for this).
+The transformation pulls in debugging information and puts it into a useful JSON format.</p>
+
+    <h4>Examples</h4>
+<p><p>Default Configuration</p>
+</p>
+    <pre class='overflow-auto'>{
+lineOffset: <span class="hljs-number">0</span>,
+levels: {
+<span class="hljs-comment">// Compliant with http://www.faqs.org/rfcs/rfc3164.html</span>
+emergency: <span class="hljs-number">0</span>,
+alert: <span class="hljs-number">1</span>,
+critical: <span class="hljs-number">2</span>,
+error: <span class="hljs-number">3</span>,
+warning: <span class="hljs-number">4</span>,
+notice: <span class="hljs-number">5</span>,
+info: <span class="hljs-number">6</span>,
+debug: <span class="hljs-number">7</span>,
+
+emerg: <span class="hljs-number">0</span>,
+crit: <span class="hljs-number">2</span>,
+err: <span class="hljs-number">3</span>,
+warn: <span class="hljs-number">4</span>,
+note: <span class="hljs-number">5</span>,
+
+<span class="hljs-string">'default'</span>: <span class="hljs-number">6</span>
+}
+}</pre>
+<p><p>Creation</p>
+</p>
+    <pre class='overflow-auto'><span class="hljs-comment">// Via class</span>
+<span class="hljs-keyword">const</span> Logger = <span class="hljs-built_in">require</span>(<span class="hljs-string">'caterpillar'</span>).Logger
+<span class="hljs-keyword">const</span> logger = <span class="hljs-keyword">new</span> Logger()
+<span class="hljs-comment">// Via create helper</span>
+<span class="hljs-keyword">const</span> logger = Logger.create()
+<span class="hljs-comment">// Via create alias</span>
+<span class="hljs-keyword">const</span> logger = <span class="hljs-built_in">require</span>(<span class="hljs-string">'caterpillar'</span>).create()</pre>
+      <h4>Static members</h4>
+        <div class='collapsible' id='Logger.create'>
+          <a href='#Logger.create'>
+            <code>
+              .create<span class='gray'>(args)</span>
+            </code>
+            <div class='force-inline'>
+              <p>Alternative constructor.
+Alternative way of creating an instance of the class without having to use the <code>new</code> keyword.
+Useful when creating the class directly from <code>require</code> statements.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2 m2'>
+<section class='py2 clearfix'>
+  <h2 id='Logger.create' class='mt0'>
+    create<span class='gray'>(args)</span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L121-L123'><code>./source/logger.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Alternative constructor.
+Alternative way of creating an instance of the class without having to use the <code>new</code> keyword.
+Useful when creating the class directly from <code>require</code> statements.</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li>...
+Any
+ <strong>args</strong>
+          :
+          <div class='force-inline'>
+            
+          </div>
+        </li>
+    </ul>
+      <h4>Returns</h4>
+      <code>Logger
+</code>
+      
+      <div class='force-inline'>
+        
+      </div>
+</section>
+          </div>
+        </div>
+      <h4>Instance members</h4>
+        <div class='collapsible' id='Logger.constructor'>
+          <a href='#Logger.constructor'>
+            <code>
+              #constructor<span class='gray'>([config])</span>
+            </code>
+            <div class='force-inline'>
+              <p>Construct our Logger with the specified configuration.
+Configuration is applied via <code>setConfig</code>.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Logger.constructor' class='mt0'>
+    constructor<span class='gray'>([config])</span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L92-L100'><code>./source/logger.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Construct our Logger with the specified configuration.
+Configuration is applied via <code>setConfig</code>.</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+=
+ <strong>config</strong>
+          :
+          <div class='force-inline'>
+            
+          </div>
+        </li>
+    </ul>
+</section>
+          </div>
+        </div>
+        <div class='collapsible' id='Logger.getConfig'>
+          <a href='#Logger.getConfig'>
+            <code>
+              #getConfig<span class='gray'></span>
+            </code>
+            <div class='force-inline'>
+              <p>Get the current configuration object for this instance.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Logger.getConfig' class='mt0'>
+    getConfig<span class='gray'></span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L129-L132'><code>./source/logger.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Get the current configuration object for this instance.</p>
+
+      <h4>Returns</h4>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+</code>
+      
+      <div class='force-inline'>
+        
+      </div>
+</section>
+          </div>
+        </div>
+        <div class='collapsible' id='Logger.getLevelInfo'>
+          <a href='#Logger.getLevelInfo'>
+            <code>
+              #getLevelInfo<span class='gray'>(level)</span>
+            </code>
+            <div class='force-inline'>
+              <p>Receive either the level name or number and return the combination.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Logger.getLevelInfo' class='mt0'>
+    getLevelInfo<span class='gray'>(level)</span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L220-L233'><code>./source/logger.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Receive either the level name or number and return the combination.</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li>(
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+|
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+)
+ <strong>level</strong>
+          :
+          <div class='force-inline'>
+            
+          </div>
+        </li>
+    </ul>
+      <h4>Returns</h4>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+</code>
+      
+      <div class='force-inline'>
+        
+      </div>
+    <h4>Throws</h4>
+    <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
+: <div class='force-inline'><p>will throw an error if returned empty handed</p>
+</div></li>
+    </ul>
+    <h4>Examples</h4>
+<p><p>Input</p>
+</p>
+    <pre class='overflow-auto'>logger.getLevelInfo(<span class="hljs-string">'note'</span>)</pre>
+<p><p>Result</p>
+</p>
+    <pre class='overflow-auto'>{
+<span class="hljs-string">"levelNumber"</span>: <span class="hljs-number">5</span>,
+<span class="hljs-string">"levelName"</span>: <span class="hljs-string">"notice"</span>
+}</pre>
+</section>
+          </div>
+        </div>
+        <div class='collapsible' id='Logger.getLevelName'>
+          <a href='#Logger.getLevelName'>
+            <code>
+              #getLevelName<span class='gray'>(number)</span>
+            </code>
+            <div class='force-inline'>
+              <p>Receive a level number and return the level name</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Logger.getLevelName' class='mt0'>
+    getLevelName<span class='gray'>(number)</span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L190-L205'><code>./source/logger.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Receive a level number and return the level name</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+ <strong>number</strong>
+          :
+          <div class='force-inline'>
+            
+          </div>
+        </li>
+    </ul>
+      <h4>Returns</h4>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+</code>
+      
+      <div class='force-inline'>
+        
+      </div>
+    <h4>Throws</h4>
+    <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
+: <div class='force-inline'><p>will throw an error if returned empty handed</p>
+</div></li>
+    </ul>
+</section>
+          </div>
+        </div>
+        <div class='collapsible' id='Logger.getLevelNumber'>
+          <a href='#Logger.getLevelNumber'>
+            <code>
+              #getLevelNumber<span class='gray'>(name)</span>
+            </code>
+            <div class='force-inline'>
+              <p>Receive a level name and return the level number</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Logger.getLevelNumber' class='mt0'>
+    getLevelNumber<span class='gray'>(name)</span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L174-L182'><code>./source/logger.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Receive a level name and return the level number</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+ <strong>name</strong>
+          :
+          <div class='force-inline'>
+            
+          </div>
+        </li>
+    </ul>
+      <h4>Returns</h4>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+</code>
+      
+      <div class='force-inline'>
+        
+      </div>
+    <h4>Throws</h4>
+    <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
+: <div class='force-inline'><p>will throw an error if no result was found</p>
+</div></li>
+    </ul>
+</section>
+          </div>
+        </div>
+        <div class='collapsible' id='Logger.getLineInfo'>
+          <a href='#Logger.getLineInfo'>
+            <code>
+              #getLineInfo<span class='gray'></span>
+            </code>
+            <div class='force-inline'>
+              <p>The current line info of whatever called this.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Logger.getLineInfo' class='mt0'>
+    getLineInfo<span class='gray'></span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L248-L328'><code>./source/logger.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>The current line info of whatever called this.</p>
+
+      <h4>Returns</h4>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+</code>
+      
+      <div class='force-inline'>
+        
+      </div>
+    <h4>Throws</h4>
+    <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
+: <div class='force-inline'><p>will throw an error if returned empty handed</p>
+</div></li>
+    </ul>
+    <h4>Examples</h4>
+<p><p>Input</p>
+</p>
+    <pre class='overflow-auto'>logger.getLineInfo()</pre>
+<p><p>Result</p>
+</p>
+    <pre class='overflow-auto'>{
+<span class="hljs-string">"line"</span>: <span class="hljs-string">"60"</span>,
+<span class="hljs-string">"method"</span>: <span class="hljs-string">"Object.&lt;anonymous&gt;"</span>,
+<span class="hljs-string">"file"</span>: <span class="hljs-string">"/Users/balupton/some-project/calling-file.js"</span>
+}</pre>
+</section>
+          </div>
+        </div>
+        <div class='collapsible' id='Logger.log'>
+          <a href='#Logger.log'>
+            <code>
+              #log<span class='gray'>(args)</span>
+            </code>
+            <div class='force-inline'>
+              <p>Log the arguments into the logger stream as formatted data.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Logger.log' class='mt0'>
+    log<span class='gray'>(args)</span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L360-L383'><code>./source/logger.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Log the arguments into the logger stream as formatted data.</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li>...
+Any
+ <strong>args</strong>
+          :
+          <div class='force-inline'>
+            
+          </div>
+        </li>
+    </ul>
+      <h4>Returns</h4>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+</code>
+      
+      <div class='force-inline'>
+        
+      </div>
+    <h4>Examples</h4>
+<p><p>Inputs</p>
+</p>
+    <pre class='overflow-auto'>logger.log(<span class="hljs-string">'note'</span>, <span class="hljs-string">'this is working swell'</span>)
+logger.log(<span class="hljs-string">'this'</span>, <span class="hljs-string">'worked'</span>, <span class="hljs-string">'swell'</span>)</pre>
+<p><p>Results</p>
+</p>
+    <pre class='overflow-auto'>{
+<span class="hljs-string">"args"</span>: [<span class="hljs-string">"this is working swell"</span>],
+<span class="hljs-string">"date"</span>: <span class="hljs-string">"2013-04-25T10:18:25.722Z"</span>,
+<span class="hljs-string">"levelNumber"</span>: <span class="hljs-number">5</span>,
+<span class="hljs-string">"levelName"</span>: <span class="hljs-string">"notice"</span>,
+<span class="hljs-string">"line"</span>: <span class="hljs-string">"59"</span>,
+<span class="hljs-string">"method"</span>: <span class="hljs-string">"Object.&lt;anonymous&gt;"</span>,
+<span class="hljs-string">"file"</span>: <span class="hljs-string">"/Users/balupton/some-project/calling-file.js"</span>
+}
+{
+<span class="hljs-string">"args"</span>: [<span class="hljs-string">"this"</span>, <span class="hljs-string">"worked"</span>, <span class="hljs-string">"well"</span>],
+<span class="hljs-string">"date"</span>: <span class="hljs-string">"2013-04-25T10:18:26.539Z"</span>,
+<span class="hljs-string">"levelNumber"</span>: <span class="hljs-number">6</span>,
+<span class="hljs-string">"levelName"</span>: <span class="hljs-string">"info"</span>,
+<span class="hljs-string">"line"</span>: <span class="hljs-string">"60"</span>,
+<span class="hljs-string">"method"</span>: <span class="hljs-string">"Object.&lt;anonymous&gt;"</span>,
+<span class="hljs-string">"file"</span>: <span class="hljs-string">"/Users/balupton/some-project/calling-file.js"</span>
+}</pre>
+</section>
+          </div>
+        </div>
+        <div class='collapsible' id='Logger.pipe'>
+          <a href='#Logger.pipe'>
+            <code>
+              #pipe<span class='gray'>(child)</span>
+            </code>
+            <div class='force-inline'>
+              <p>Pipe this data to some other writable stream.
+If the child stream also has a <code>setConfig</code> method, we will ensure the childs configuration is kept consistent with parents.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Logger.pipe' class='mt0'>
+    pipe<span class='gray'>(child)</span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L154-L163'><code>./source/logger.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Pipe this data to some other writable stream.
+If the child stream also has a <code>setConfig</code> method, we will ensure the childs configuration is kept consistent with parents.</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li><a href="https://nodejs.org/api/stream.html#stream_class_stream_writable">stream.Writable</a>
+ <strong>child</strong>
+          :
+          <div class='force-inline'>
+            <p>stream to be piped to</p>
+
+          </div>
+        </li>
+    </ul>
+      <h4>Returns</h4>
+      <code><a href="https://nodejs.org/api/stream.html#stream_class_stream_writable">stream.Writable</a>
+</code>
+      :
+      <div class='force-inline'>
+        <p>the result of the pipe operation</p>
+
+      </div>
+</section>
+          </div>
+        </div>
+        <div class='collapsible' id='Logger.setConfig'>
+          <a href='#Logger.setConfig'>
+            <code>
+              #setConfig<span class='gray'>(configs)</span>
+            </code>
+            <div class='force-inline'>
+              <p>Apply the specified configurations to this instance's configuration via deep merging.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Logger.setConfig' class='mt0'>
+    setConfig<span class='gray'>(configs)</span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L142-L146'><code>./source/logger.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Apply the specified configurations to this instance's configuration via deep merging.</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li>...
+Any
+ <strong>configs</strong>
+          :
+          <div class='force-inline'>
+            <p>As many configuration objects as you wish to merge</p>
+
+          </div>
+        </li>
+    </ul>
+      <h4>Returns</h4>
+      <code>this
+</code>
+      
+      <div class='force-inline'>
+        
+      </div>
+    <h4>Examples</h4>
+
+    <pre class='overflow-auto'>setConfig({a: <span class="hljs-number">1</span>}, {b: <span class="hljs-number">2</span>})
+getConfig()  <span class="hljs-comment">// {a: 1, b: 2}</span></pre>
+</section>
+          </div>
+        </div>
+</section>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>
