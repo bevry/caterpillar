@@ -7,8 +7,9 @@ sudo: false
 # We use node
 language: node_js
 node_js:
-  - "0.12"
-  - "4"
+  #- "0.12"
+  #- "4"
+  # ^ disabled while flow is busted: https://github.com/facebook/flow/issues/1721#issuecomment-216077420
   - "5"
   - "6"
 cache:
