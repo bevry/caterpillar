@@ -72,6 +72,7 @@
         "spread",
         "const",
         "let",
+        "destructuring",
         "flow type comments"
       ]
     },
@@ -86,7 +87,6 @@
     }
   ],
   "main": "index.js",
-  "jsnext:main": "source/index.js",
   "browser": "es2015/index.js",
   "scripts": {
     "setup": "npm install",

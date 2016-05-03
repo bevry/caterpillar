@@ -1,11 +1,10 @@
 # History
 
-## v3.0.0 2016 May 3
+## v3.0.0 2016 May 4
 - Converted from CoffeeScript to JavaScript
 - `.createLogger()` and `.createTransform()` now removed in favour of `Logger.create()` and `Transform.create()`
-- Background implementation changes, however public API remains the same
-- Minimum supported node version now 0.12
-	- Node 0.10 may still work with [babel polyfill](https://babeljs.io/docs/usage/polyfill/)
+- `require('caterpillar').create()` alias added
+- Logger no longer inherits from Transform
 
 ## v2.0.9 2015 February 18
 - Fixed an issue when fetching `(new Error()).stack` would fail

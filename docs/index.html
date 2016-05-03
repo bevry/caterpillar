@@ -47,6 +47,11 @@
                   #getConfig
                 </a>
                 <a
+                  href='#Transform.getInitialConfig'
+                  class='regular block'>
+                  #getInitialConfig
+                </a>
+                <a
                   href='#Transform.pipe'
                   class='regular block'>
                   #pipe
@@ -75,6 +80,11 @@
                   href='#Logger.getConfig'
                   class='regular block'>
                   #getConfig
+                </a>
+                <a
+                  href='#Logger.getInitialConfig'
+                  class='regular block'>
+                  #getInitialConfig
                 </a>
                 <a
                   href='#Logger.getLevelInfo'
@@ -124,7 +134,7 @@
       Extends
         <a href="https://nodejs.org/api/stream.html#stream_class_stream_transform">stream.Transform</a>
     </p>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/transform.js#L23-L129'><code>./source/transform.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/transform.js#L23-L145'><code>./source/transform.js</code></a></p>
   
   
   
@@ -152,8 +162,7 @@ format (entry) {
               .create<span class='gray'>(args)</span>
             </code>
             <div class='force-inline'>
-              <p>Alternative constructor.
-Alternative way of creating an instance of the class without having to use the <code>new</code> keyword.
+              <p>Alternative way of creating an instance of the class without having to use the <code>new</code> keyword.
 Useful when creating the class directly from <code>require</code> statements.</p>
 
             </div>
@@ -163,14 +172,13 @@ Useful when creating the class directly from <code>require</code> statements.</p
   <h2 id='Transform.create' class='mt0'>
     create<span class='gray'>(args)</span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/transform.js#L56-L58'><code>./source/transform.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/transform.js#L45-L47'><code>./source/transform.js</code></a></p>
   
   
   
   
   
-  <p>Alternative constructor.
-Alternative way of creating an instance of the class without having to use the <code>new</code> keyword.
+  <p>Alternative way of creating an instance of the class without having to use the <code>new</code> keyword.
 Useful when creating the class directly from <code>require</code> statements.</p>
 
     <h4>Parameters</h4>
@@ -185,7 +193,7 @@ Any
         </li>
     </ul>
       <h4>Returns</h4>
-      <code>Logger
+      <code>Transform
 </code>
       
       <div class='force-inline'>
@@ -198,33 +206,30 @@ Any
         <div class='collapsible' id='Transform.constructor'>
           <a href='#Transform.constructor'>
             <code>
-              #constructor<span class='gray'>([config])</span>
+              #constructor<span class='gray'>(args)</span>
             </code>
             <div class='force-inline'>
-              <p>Construct our Logger with the specified configuration.
-Configuration is applied via <code>setConfig</code>.</p>
+              <p>Construct our class and pass the arguments over to <code>setConfig</code></p>
 
             </div>
           </a>
           <div class='collapser border px2'>
 <section class='py2 clearfix'>
   <h2 id='Transform.constructor' class='mt0'>
-    constructor<span class='gray'>([config])</span>
+    constructor<span class='gray'>(args)</span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/transform.js#L30-L35'><code>./source/transform.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/transform.js#L57-L61'><code>./source/transform.js</code></a></p>
   
   
   
   
   
-  <p>Construct our Logger with the specified configuration.
-Configuration is applied via <code>setConfig</code>.</p>
+  <p>Construct our class and pass the arguments over to <code>setConfig</code></p>
 
     <h4>Parameters</h4>
     <ul class='suppress-p-margin'>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
-=
- <strong>config</strong>
+        <li>...
+ <strong>args</strong>
           :
           <div class='force-inline'>
             
@@ -237,7 +242,7 @@ Configuration is applied via <code>setConfig</code>.</p>
         <div class='collapsible' id='Transform.format'>
           <a href='#Transform.format'>
             <code>
-              #format<span class='gray'>(entry)</span>
+              #format<span class='gray'>(message)</span>
             </code>
             <div class='force-inline'>
               <p>Format the written data into whatever we want.
@@ -248,9 +253,9 @@ Here is where our transformers work with the written data to enhance it.</p>
           <div class='collapser border px2'>
 <section class='py2 clearfix'>
   <h2 id='Transform.format' class='mt0'>
-    format<span class='gray'>(entry)</span>
+    format<span class='gray'>(message)</span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/transform.js#L126-L128'><code>./source/transform.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/transform.js#L142-L144'><code>./source/transform.js</code></a></p>
   
   
   
@@ -261,8 +266,8 @@ Here is where our transformers work with the written data to enhance it.</p>
 
     <h4>Parameters</h4>
     <ul class='suppress-p-margin'>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
- <strong>entry</strong>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+ <strong>message</strong>
           :
           <div class='force-inline'>
             
@@ -294,13 +299,48 @@ Here is where our transformers work with the written data to enhance it.</p>
   <h2 id='Transform.getConfig' class='mt0'>
     getConfig<span class='gray'></span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/transform.js#L64-L67'><code>./source/transform.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/transform.js#L74-L76'><code>./source/transform.js</code></a></p>
   
   
   
   
   
   <p>Get the current configuration object for this instance.</p>
+
+      <h4>Returns</h4>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+</code>
+      
+      <div class='force-inline'>
+        
+      </div>
+</section>
+          </div>
+        </div>
+        <div class='collapsible' id='Transform.getInitialConfig'>
+          <a href='#Transform.getInitialConfig'>
+            <code>
+              #getInitialConfig<span class='gray'></span>
+            </code>
+            <div class='force-inline'>
+              <p>Get the initial configuration option.
+Use this to add default/initial configuration to your class.</p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Transform.getInitialConfig' class='mt0'>
+    getInitialConfig<span class='gray'></span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/transform.js#L34-L36'><code>./source/transform.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Get the initial configuration option.
+Use this to add default/initial configuration to your class.</p>
 
       <h4>Returns</h4>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
@@ -328,7 +368,7 @@ If the child stream also has a <code>setConfig</code> method, we will ensure the
   <h2 id='Transform.pipe' class='mt0'>
     pipe<span class='gray'>(child)</span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/transform.js#L89-L98'><code>./source/transform.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/transform.js#L98-L106'><code>./source/transform.js</code></a></p>
   
   
   
@@ -374,7 +414,7 @@ If the child stream also has a <code>setConfig</code> method, we will ensure the
   <h2 id='Transform.setConfig' class='mt0'>
     setConfig<span class='gray'>(configs)</span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/transform.js#L77-L81'><code>./source/transform.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/transform.js#L86-L90'><code>./source/transform.js</code></a></p>
   
   
   
@@ -385,12 +425,14 @@ If the child stream also has a <code>setConfig</code> method, we will ensure the
     <h4>Parameters</h4>
     <ul class='suppress-p-margin'>
         <li>...
-Any
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>
+.<
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+>
  <strong>configs</strong>
           :
           <div class='force-inline'>
-            <p>As many configuration objects as you wish to merge</p>
-
+            
           </div>
         </li>
     </ul>
@@ -417,7 +459,7 @@ getConfig()  <span class="hljs-comment">// {a: 1, b: 2}</span></pre>
       Extends
         stream.PassThrough
     </p>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L85-L384'><code>./source/logger.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/logger.js#L38-L362'><code>./source/logger.js</code></a></p>
   
   
   
@@ -425,34 +467,10 @@ getConfig()  <span class="hljs-comment">// {a: 1, b: 2}</span></pre>
   
   <p>Logger.
 This is what we write to.
-It extends the Transform stream so that we can pipe data to it (PassThrough with log isn't enough for this).
-The transformation pulls in debugging information and puts it into a useful JSON format.</p>
+It extends from PassThrough and not transform.
+If you are piping / writing directly to the logger, make sure it corresponds to the correct entry format (as described in <code>log</code>).</p>
 
     <h4>Examples</h4>
-<p><p>Default Configuration</p>
-</p>
-    <pre class='overflow-auto'>{
-lineOffset: <span class="hljs-number">0</span>,
-levels: {
-<span class="hljs-comment">// Compliant with http://www.faqs.org/rfcs/rfc3164.html</span>
-emergency: <span class="hljs-number">0</span>,
-alert: <span class="hljs-number">1</span>,
-critical: <span class="hljs-number">2</span>,
-error: <span class="hljs-number">3</span>,
-warning: <span class="hljs-number">4</span>,
-notice: <span class="hljs-number">5</span>,
-info: <span class="hljs-number">6</span>,
-debug: <span class="hljs-number">7</span>,
-
-emerg: <span class="hljs-number">0</span>,
-crit: <span class="hljs-number">2</span>,
-err: <span class="hljs-number">3</span>,
-warn: <span class="hljs-number">4</span>,
-note: <span class="hljs-number">5</span>,
-
-<span class="hljs-string">'default'</span>: <span class="hljs-number">6</span>
-}
-}</pre>
 <p><p>Creation</p>
 </p>
     <pre class='overflow-auto'><span class="hljs-comment">// Via class</span>
@@ -469,8 +487,7 @@ note: <span class="hljs-number">5</span>,
               .create<span class='gray'>(args)</span>
             </code>
             <div class='force-inline'>
-              <p>Alternative constructor.
-Alternative way of creating an instance of the class without having to use the <code>new</code> keyword.
+              <p>Alternative way of creating an instance of the class without having to use the <code>new</code> keyword.
 Useful when creating the class directly from <code>require</code> statements.</p>
 
             </div>
@@ -480,14 +497,13 @@ Useful when creating the class directly from <code>require</code> statements.</p
   <h2 id='Logger.create' class='mt0'>
     create<span class='gray'>(args)</span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L121-L123'><code>./source/logger.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/logger.js#L80-L82'><code>./source/logger.js</code></a></p>
   
   
   
   
   
-  <p>Alternative constructor.
-Alternative way of creating an instance of the class without having to use the <code>new</code> keyword.
+  <p>Alternative way of creating an instance of the class without having to use the <code>new</code> keyword.
 Useful when creating the class directly from <code>require</code> statements.</p>
 
     <h4>Parameters</h4>
@@ -515,33 +531,30 @@ Any
         <div class='collapsible' id='Logger.constructor'>
           <a href='#Logger.constructor'>
             <code>
-              #constructor<span class='gray'>([config])</span>
+              #constructor<span class='gray'>(args)</span>
             </code>
             <div class='force-inline'>
-              <p>Construct our Logger with the specified configuration.
-Configuration is applied via <code>setConfig</code>.</p>
+              <p>Construct our class and pass the arguments over to <code>setConfig</code></p>
 
             </div>
           </a>
           <div class='collapser border px2'>
 <section class='py2 clearfix'>
   <h2 id='Logger.constructor' class='mt0'>
-    constructor<span class='gray'>([config])</span>
+    constructor<span class='gray'>(args)</span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L92-L100'><code>./source/logger.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/logger.js#L92-L96'><code>./source/logger.js</code></a></p>
   
   
   
   
   
-  <p>Construct our Logger with the specified configuration.
-Configuration is applied via <code>setConfig</code>.</p>
+  <p>Construct our class and pass the arguments over to <code>setConfig</code></p>
 
     <h4>Parameters</h4>
     <ul class='suppress-p-margin'>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
-=
- <strong>config</strong>
+        <li>...
+ <strong>args</strong>
           :
           <div class='force-inline'>
             
@@ -566,13 +579,48 @@ Configuration is applied via <code>setConfig</code>.</p>
   <h2 id='Logger.getConfig' class='mt0'>
     getConfig<span class='gray'></span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L129-L132'><code>./source/logger.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/logger.js#L109-L111'><code>./source/logger.js</code></a></p>
   
   
   
   
   
   <p>Get the current configuration object for this instance.</p>
+
+      <h4>Returns</h4>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+</code>
+      
+      <div class='force-inline'>
+        
+      </div>
+</section>
+          </div>
+        </div>
+        <div class='collapsible' id='Logger.getInitialConfig'>
+          <a href='#Logger.getInitialConfig'>
+            <code>
+              #getInitialConfig<span class='gray'></span>
+            </code>
+            <div class='force-inline'>
+              <p>Get the initial configuration option.
+Default log levels are compliant with <a href="http://www.faqs.org/rfcs/rfc3164.html">http://www.faqs.org/rfcs/rfc3164.html</a></p>
+
+            </div>
+          </a>
+          <div class='collapser border px2'>
+<section class='py2 clearfix'>
+  <h2 id='Logger.getInitialConfig' class='mt0'>
+    getInitialConfig<span class='gray'></span>
+  </h2>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/logger.js#L49-L71'><code>./source/logger.js</code></a></p>
+  
+  
+  
+  
+  
+  <p>Get the initial configuration option.
+Default log levels are compliant with <a href="http://www.faqs.org/rfcs/rfc3164.html">http://www.faqs.org/rfcs/rfc3164.html</a></p>
 
       <h4>Returns</h4>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
@@ -599,7 +647,7 @@ Configuration is applied via <code>setConfig</code>.</p>
   <h2 id='Logger.getLevelInfo' class='mt0'>
     getLevelInfo<span class='gray'>(level)</span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L220-L233'><code>./source/logger.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/logger.js#L198-L211'><code>./source/logger.js</code></a></p>
   
   
   
@@ -662,7 +710,7 @@ Configuration is applied via <code>setConfig</code>.</p>
   <h2 id='Logger.getLevelName' class='mt0'>
     getLevelName<span class='gray'>(number)</span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L190-L205'><code>./source/logger.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/logger.js#L168-L183'><code>./source/logger.js</code></a></p>
   
   
   
@@ -711,7 +759,7 @@ Configuration is applied via <code>setConfig</code>.</p>
   <h2 id='Logger.getLevelNumber' class='mt0'>
     getLevelNumber<span class='gray'>(name)</span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L174-L182'><code>./source/logger.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/logger.js#L152-L160'><code>./source/logger.js</code></a></p>
   
   
   
@@ -760,7 +808,7 @@ Configuration is applied via <code>setConfig</code>.</p>
   <h2 id='Logger.getLineInfo' class='mt0'>
     getLineInfo<span class='gray'></span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L248-L328'><code>./source/logger.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/logger.js#L226-L306'><code>./source/logger.js</code></a></p>
   
   
   
@@ -801,7 +849,7 @@ Configuration is applied via <code>setConfig</code>.</p>
               #log<span class='gray'>(args)</span>
             </code>
             <div class='force-inline'>
-              <p>Log the arguments into the logger stream as formatted data.</p>
+              <p>Log the arguments into the logger stream as formatted data with debugging information.</p>
 
             </div>
           </a>
@@ -810,13 +858,13 @@ Configuration is applied via <code>setConfig</code>.</p>
   <h2 id='Logger.log' class='mt0'>
     log<span class='gray'>(args)</span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L360-L383'><code>./source/logger.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/logger.js#L338-L361'><code>./source/logger.js</code></a></p>
   
   
   
   
   
-  <p>Log the arguments into the logger stream as formatted data.</p>
+  <p>Log the arguments into the logger stream as formatted data with debugging information.</p>
 
     <h4>Parameters</h4>
     <ul class='suppress-p-margin'>
@@ -880,7 +928,7 @@ If the child stream also has a <code>setConfig</code> method, we will ensure the
   <h2 id='Logger.pipe' class='mt0'>
     pipe<span class='gray'>(child)</span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L154-L163'><code>./source/logger.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/logger.js#L133-L141'><code>./source/logger.js</code></a></p>
   
   
   
@@ -926,7 +974,7 @@ If the child stream also has a <code>setConfig</code> method, we will ensure the
   <h2 id='Logger.setConfig' class='mt0'>
     setConfig<span class='gray'>(configs)</span>
   </h2>
-    <p><a href='https://github.com/bevry/caterpillar/blob/df0ad56d3264a88d695598b77c954203628ead8c/./source/logger.js#L142-L146'><code>./source/logger.js</code></a></p>
+    <p><a href='https://github.com/bevry/caterpillar/blob/135dc95a4ae38101916b84d0d0b5dd0d4ac6d874/./source/logger.js#L121-L125'><code>./source/logger.js</code></a></p>
   
   
   
@@ -937,12 +985,14 @@ If the child stream also has a <code>setConfig</code> method, we will ensure the
     <h4>Parameters</h4>
     <ul class='suppress-p-margin'>
         <li>...
-Any
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>
+.<
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+>
  <strong>configs</strong>
           :
           <div class='force-inline'>
-            <p>As many configuration objects as you wish to merge</p>
-
+            
           </div>
         </li>
     </ul>

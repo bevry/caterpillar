@@ -24,5 +24,9 @@ before_script: "npm run-script compile"
 script: "npm test"
 
 # Custom notifications
-# travis encrypt --org "$SLACK_SUBDOMAIN:$SLACK_TRAVIS_TOKEN#updates" --add notifications.slack
-# travis encrypt --org "$TRAVIS_NOTIFICATION_EMAIL" --add notifications.email.recipients
+notifications:
+  slack:
+    secure: JLbGLLnV1u0ChvUtFua3pVDLRg+hxhGjEBI/gtv5V5NQpT1EOmSnAUDLBpVFNOd2sJ741GFUWHu5OG/49Nrd4eptDygdFM6b9EF+lSYB1kk0PRgGTJjnvXIZRMVFE6sUoVGnVJ5T/XzPvXJ7mlxe3UQ1oE2kebyOo6Z/9cqTE4w=
+  email:
+    recipients:
+      secure: Xh2zYNgGcEYZYjRQUkCI0tY3I6tBpjeHfn8+iixosJfLjpbzrCIS8G+qgjft/qXwzTeNEQ1OYBMrCjlBTArZBGwBJMS2Rx/0vcO4l6UyngZhT0C8PjXrvd459yX2N3AzdzIrayrD4Eq0is8WzZN2NnXBlfyFrCAUh27JG7A1N4o=

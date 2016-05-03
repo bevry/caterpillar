@@ -22,16 +22,28 @@ require('caterpillar').create()
 */
 class Transform extends _Transform {
 
+	// ===================================
+	// Generic Differences
+	// This code is shared but different between Logger and Transform
+
 	/**
-	Construct our Logger with the specified configuration.
-	Configuration is applied via `setConfig`.
-	@param {Object} [config]
+	Get the initial configuration option.
+	Use this to add default/initial configuration to your class.
+	@returns {Object}
 	*/
-	constructor (config /* :?Object */) {
-		super(config)  // new stream.Transform([options])
-		if ( config ) {
-			this.setConfig(config)
-		}
+	getInitialConfig () /* :Object */ {
+		return {}
+	}
+
+	/**
+	Alternative way of creating an instance of the class without having to use the `new` keyword.
+	Useful when creating the class directly from `require` statements.
+	@static
+	@param {...*} args
+	@returns {Transform}
+	*/
+	static create (...args) {
+		return new this(...args)
 	}
 
 	// ===================================
@@ -39,31 +51,28 @@ class Transform extends _Transform {
 	// This code is shared between Logger and Transform
 
 	/**
-	Internal configuration object
-	@private
-	@property {Object} _config
+	Construct our class and pass the arguments over to `setConfig`
+	@params {...*} args
 	*/
-	/* :: _config:Object; */
+	constructor (...args /* :Array<any> */ ) {
+		super(...args)
+		this._config = this.getInitialConfig()
+		this.setConfig(...args)
+	}
 
 	/**
-	Alternative constructor.
-	Alternative way of creating an instance of the class without having to use the `new` keyword.
-	Useful when creating the class directly from `require` statements.
-	@static
-	@param {...*} args
-	@returns {Logger}
+	Internal configuration object
+	@property {Object} _config
+	@private
 	*/
-	static create (...args) {
-		return new this(...args)
-	}
+	/* :: _config:Object; */
 
 	/**
 	Get the current configuration object for this instance.
 	@returns {Object}
 	*/
 	getConfig () /* :Object */ {
-		// if ( this._parent ) return deep({}, this._parent.getConfig(), this._config)
-		return this._config || {}
+		return this._config
 	}
 
 	/**
@@ -71,11 +80,11 @@ class Transform extends _Transform {
 	@example
 	setConfig({a: 1}, {b: 2})
 	getConfig()  // {a: 1, b: 2}
-	@param {...*} configs - As many configuration objects as you wish to merge
+	@param {...Array<Object>} configs
 	@returns {this}
 	*/
 	setConfig (...configs /* :Array<Object> */ ) /* :this */ {
-		this._config = deep(this.getConfig(), ...configs)
+		deep(this._config, ...configs)
 		this.emit('config', ...configs)
 		return this
 	}
@@ -87,12 +96,11 @@ class Transform extends _Transform {
 	@returns {stream.Writable} the result of the pipe operation
 	*/
 	pipe (child /* :Object */ ) /* :any */ {
-		// child._parent = child
 		if ( child.setConfig ) {
 			child.setConfig(this.getConfig())
 			const listener = child.setConfig.bind(child)
 			this.on('config', listener)
-			child.on('close', () => this.removeListener('config', listener))
+			child.once('close', () => this.removeListener('config', listener))
 		}
 		return super.pipe(child)
 	}
@@ -109,22 +117,30 @@ class Transform extends _Transform {
 	@returns {undefined}
 	*/
 	_transform (chunk /* :Buffer|string */, encoding /* :string */, next /* :function */ ) /* :void */ {
-		const entry = JSON.parse(chunk.toString())
-		let message = this.format(entry)
-		if ( message ) {
+		let message = chunk.toString()
+
+		try {
+			message = this.format(message)
+		}
+		catch ( err ) {
+			return next(err)
+		}
+
+		if ( message && typeof message === 'object' ) {
 			message = JSON.stringify(message)
 		}
-		next(null, message)
+
+		return next(null, message)
 	}
 
 	/**
 	Format the written data into whatever we want.
 	Here is where our transformers work with the written data to enhance it.
-	@param {Object} entry
+	@param {string} message
 	@returns {*}
 	*/
-	format (entry /* :Object */ ) /* :mixed */ {
-		return entry
+	format (message /* :string */ ) /* :mixed */ {
+		return message
 	}
 }
 

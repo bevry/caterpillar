@@ -18,58 +18,11 @@ type logEntry = {
 };
 */
 
-// Default configuration reference for speed
-const loggerDefaultConfig = {
-	lineOffset: 0,
-	levels: {
-		emergency: 0,
-		alert: 1,
-		critical: 2,
-		error: 3,
-		warning: 4,
-		notice: 5,
-		info: 6,
-		debug: 7,
-
-		emerg: 0,
-		crit: 2,
-		err: 3,
-		warn: 4,
-		note: 5,
-
-		'default': 6
-	}
-}
-
 /**
 Logger.
 This is what we write to.
-It extends the Transform stream so that we can pipe data to it (PassThrough with log isn't enough for this).
-The transformation pulls in debugging information and puts it into a useful JSON format.
-
-@example <caption>Default Configuration</caption>
-{
-	lineOffset: 0,
-	levels: {
-		// Compliant with http://www.faqs.org/rfcs/rfc3164.html
-		emergency: 0,
-		alert: 1,
-		critical: 2,
-		error: 3,
-		warning: 4,
-		notice: 5,
-		info: 6,
-		debug: 7,
-
-		emerg: 0,
-		crit: 2,
-		err: 3,
-		warn: 4,
-		note: 5,
-
-		'default': 6
-	}
-}
+It extends from PassThrough and not transform.
+If you are piping / writing directly to the logger, make sure it corresponds to the correct entry format (as described in `log`).
 
 @example <caption>Creation</caption>
 // Via class
@@ -84,34 +37,40 @@ const logger = require('caterpillar').create()
 */
 class Logger extends PassThrough {
 
+	// ===================================
+	// Generic Differences
+	// This code is shared but different between Logger and Transform
+
 	/**
-	Construct our Logger with the specified configuration.
-	Configuration is applied via `setConfig`.
-	@param {Object} [config]
+	Get the initial configuration option.
+	Default log levels are compliant with http://www.faqs.org/rfcs/rfc3164.html
+	@returns {Object}
 	*/
-	constructor (config /* :?Object */) {
-		super(config)  // new stream.Transform([options])
-		if ( config ) {
-			this.setConfig(loggerDefaultConfig, config)
-		}
-		else {
-			this.setConfig(loggerDefaultConfig)
+	getInitialConfig () {
+		return {
+			lineOffset: 0,
+			levels: {
+				emergency: 0,
+				alert: 1,
+				critical: 2,
+				error: 3,
+				warning: 4,
+				notice: 5,
+				info: 6,
+				debug: 7,
+
+				emerg: 0,
+				crit: 2,
+				err: 3,
+				warn: 4,
+				note: 5,
+
+				'default': 6
+			}
 		}
 	}
 
-	// ===================================
-	// Generic
-	// This code is shared between Logger and Transform
-
 	/**
-	Internal configuration object
-	@private
-	@property {Object} _config
-	*/
-	/* :: _config:Object; */
-
-	/**
-	Alternative constructor.
 	Alternative way of creating an instance of the class without having to use the `new` keyword.
 	Useful when creating the class directly from `require` statements.
 	@static
@@ -122,13 +81,33 @@ class Logger extends PassThrough {
 		return new this(...args)
 	}
 
+	// ===================================
+	// Generic
+	// This code is shared between Logger and Transform
+
+	/**
+	Construct our class and pass the arguments over to `setConfig`
+	@params {...*} args
+	*/
+	constructor (...args /* :Array<any> */ ) {
+		super(...args)
+		this._config = this.getInitialConfig()
+		this.setConfig(...args)
+	}
+
+	/**
+	Internal configuration object
+	@property {Object} _config
+	@private
+	*/
+	/* :: _config:Object; */
+
 	/**
 	Get the current configuration object for this instance.
 	@returns {Object}
 	*/
 	getConfig () /* :Object */ {
-		// if ( this._parent ) return deep({}, this._parent.getConfig(), this._config)
-		return this._config || {}
+		return this._config
 	}
 
 	/**
@@ -136,11 +115,11 @@ class Logger extends PassThrough {
 	@example
 	setConfig({a: 1}, {b: 2})
 	getConfig()  // {a: 1, b: 2}
-	@param {...*} configs - As many configuration objects as you wish to merge
+	@param {...Array<Object>} configs
 	@returns {this}
 	*/
 	setConfig (...configs /* :Array<Object> */ ) /* :this */ {
-		this._config = deep(this.getConfig(), ...configs)
+		deep(this._config, ...configs)
 		this.emit('config', ...configs)
 		return this
 	}
@@ -152,18 +131,17 @@ class Logger extends PassThrough {
 	@returns {stream.Writable} the result of the pipe operation
 	*/
 	pipe (child /* :Object */ ) /* :any */ {
-		// child._parent = child
 		if ( child.setConfig ) {
 			child.setConfig(this.getConfig())
 			const listener = child.setConfig.bind(child)
 			this.on('config', listener)
-			child.on('close', () => this.removeListener('config', listener))
+			child.once('close', () => this.removeListener('config', listener))
 		}
 		return super.pipe(child)
 	}
 
 	// ===================================
-	// Transform
+	// Logger
 
 	/**
 	Receive a level name and return the level number
@@ -328,7 +306,7 @@ class Logger extends PassThrough {
 	}
 
 	/**
-	Log the arguments into the logger stream as formatted data.
+	Log the arguments into the logger stream as formatted data with debugging information.
 
 	@example <caption>Inputs</caption>
 	logger.log('note', 'this is working swell')
