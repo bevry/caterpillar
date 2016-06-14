@@ -1,4 +1,4 @@
-# 2015 March 8
+# 2016 June 6
 # https://github.com/bevry/base
 
 # Temp Files
@@ -17,7 +17,17 @@ node_modules/
 # Private Files
 .env
 
+# Documentation Files
+docs/
+guides/
+BACKERS.md
+CONTRIBUTING.md
+HISTORY.md
+
 # Development Files
+web/
+**/example*
+**/test*
 .editorconfig
 .eslintrc*
 .jshintrc
@@ -27,10 +37,6 @@ coffeelint*
 nakefile*
 Cakefile
 Makefile
-BACKERS.md
-CONTRIBUTING.md
-HISTORY.md
-**/test*
 
 # Other Package Definitions
 template.js
