@@ -3,18 +3,22 @@ const {extend, deep} = require('extendr')
 const {PassThrough} = require('stream')
 
 /* ::
+declare class LongError extends Error {
+  __previous: ?LongError;
+  __previous__: ?LongError;
+}
 type levelInfo = {
-	levelNumber:number,
-	levelName:string
+	levelNumber: number,
+	levelName: string
 };
 type lineInfo = {
-	line:number,
-	method:string,
-	file:string
+	line: number,
+	method: string,
+	file: string
 };
 type logEntry = {
-	date:string,
-	args:Array<any>
+	date: string,
+	args: Array<any>
 };
 */
 
@@ -234,7 +238,7 @@ class Logger extends PassThrough {
 
 		try {
 			// Create an error
-			const err = new Error()
+			const err /* :LongError */ = (new Error() /* :any */)
 			let stack, lines
 
 			// And attempt to retrieve it's stack
@@ -244,7 +248,8 @@ class Logger extends PassThrough {
 			}
 			catch (error1) {
 				try {
-					stack = err.__previous__ && err.__previous__.stack
+					const previous = err.__previous__ || err.__previous
+					stack = previous && previous.stack
 				}
 				catch (error2) {
 					stack = null
@@ -292,7 +297,7 @@ class Logger extends PassThrough {
 						result.method = parts[0].replace(/^.+?\s+at\s+/, '').replace(/\s+\(.+$/, '')
 						result.file = parts[0].replace(/^.+?\(/, '')
 					}
-					result.line = parts[1]
+					result.line = Number(parts[1])
 					break
 				}
 			}

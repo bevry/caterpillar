@@ -1,4 +1,4 @@
-// 2016 May 11
+// 2016 September 7
 // https://github.com/bevry/base
 // http://eslint.org
 // This code must be able to run on Node 0.10
@@ -755,20 +755,28 @@ var config = {
 // ------------------------------------
 // Enhancements
 
-var package = require('./package.json')
-var devDeps = Object.keys(package.devDependencies || {})
+// Load package.json file if it exists
 var rules = Object.keys(config.rules)
+var package = {}, devDeps = []
+try {
+	package = require('./package.json') || {}
+	devDeps = Object.keys(package.devDependencies || {})
+}
+catch ( err ) {}
 
+// Add babel parsing if installed
 if ( devDeps.indexOf('babel-eslint') !== -1 ) {
 	config.parser = 'babel-eslint'
 }
 
+// Add react linting if installed
 if ( devDeps.indexOf('eslint-plugin-react') !== -1 ) {
 	config.extends.push('plugin:react/recommended')
 	config.plugins.push('react')
 }
 
 if ( devDeps.indexOf('eslint-plugin-babel') !== -1 ) {
+	// Remove rules that babel rules replace
 	config.plugins.push('babel')
 	var replacements = [
 		'array-bracket-spacing',
@@ -786,6 +794,7 @@ if ( devDeps.indexOf('eslint-plugin-babel') !== -1 ) {
 	})
 }
 else {
+	// Remove babel rules if not using babel
 	rules.forEach(function (key) {
 		if ( key.indexOf('babel/') === 0 ) {
 			delete config.rules[key]
@@ -794,9 +803,11 @@ else {
 }
 
 if ( devDeps.indexOf('eslint-plugin-flow-vars') !== -1 ) {
+	// Add flow plugin if installed
 	config.plugins.push('flow-vars')
 }
 else {
+	// Remove flow rules if plugin not installed
 	rules.forEach(function (key) {
 		if ( key.indexOf('flow-vars/') === 0 ) {
 			delete config.rules[key]

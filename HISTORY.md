@@ -1,5 +1,8 @@
 # History
 
+## v3.0.1 2016 October 20
+- Fixed flow type errors with newer flow versions
+
 ## v3.0.0 2016 May 4
 - Converted from CoffeeScript to JavaScript
 - `.createLogger()` and `.createTransform()` now removed in favour of `Logger.create()` and `Transform.create()`

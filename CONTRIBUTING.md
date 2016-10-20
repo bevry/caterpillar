@@ -1,5 +1,5 @@
 <!--
-2016 June 15
+2016 October 4
 https://github.com/bevry/base
 -->
 
@@ -40,15 +40,15 @@ Our [Contributing Guide](https://learn.bevry.me/community/contribute) contains u
 
 1. Compile changes
 
-  ``` bash
-  npm run-script compile
-  ```
+	``` bash
+	npm run-script compile
+	```
 
 1. Run tests
 
-  ``` bash
-  npm test
-  ```
+	``` bash
+	npm test
+	```
 
 
 ### Publishing
@@ -85,7 +85,7 @@ To send your changes for the project owner to merge in:
 
 1. Submit your pull request
   1. When submitting, if the original project has a `dev` or `integrate` branch, use that as the target branch for your pull request instead of the default `master`
-  1. By submitting a pull request you agree for your changes to have the same license as the original work
+  1. By submitting a pull request you agree for your changes to have the same license as the original plugin
 
 
 #### Publish
@@ -133,4 +133,4 @@ To publish your changes as the project owner:
   npm run-script release
   ```
 
-  > A prompt will occur asking you for a git tag annotation, enter the changelog entry that we created earlier, save and exit the prompt.
+	> A prompt will occur asking you for a git tag annotation, enter the changelog entry that we created earlier, save and exit the prompt.

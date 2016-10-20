@@ -25,7 +25,7 @@
               
                 
                 <li><a
-                  href='#Transform'
+                  href='#transform'
                   class=" toggle-sibling">
                   Transform
                   <span class='icon'>▸</span>
@@ -34,7 +34,7 @@
                 <div class='toggle-target display-none'>
                   
                   <ul class='list-reset py1-ul pl1'>
-                    <li class='h5'>Static members</li>
+                    <li class='h5'><span>Static members</span></li>
                     
                       <li><a
                         href='#Transform.create'
@@ -46,7 +46,7 @@
                   
                   
                     <ul class='list-reset py1-ul pl1'>
-                      <li class='h5'>Instance members</li>
+                      <li class='h5'><span>Instance members</span></li>
                       
                       <li><a
                         href='#Transform#getInitialConfig'
@@ -93,7 +93,7 @@
               
                 
                 <li><a
-                  href='#Logger'
+                  href='#logger'
                   class=" toggle-sibling">
                   Logger
                   <span class='icon'>▸</span>
@@ -102,7 +102,7 @@
                 <div class='toggle-target display-none'>
                   
                   <ul class='list-reset py1-ul pl1'>
-                    <li class='h5'>Static members</li>
+                    <li class='h5'><span>Static members</span></li>
                     
                       <li><a
                         href='#Logger.create'
@@ -114,7 +114,7 @@
                   
                   
                     <ul class='list-reset py1-ul pl1'>
-                      <li class='h5'>Instance members</li>
+                      <li class='h5'><span>Instance members</span></li>
                       
                       <li><a
                         href='#Logger#getInitialConfig'
@@ -191,18 +191,17 @@
         </div>
       </div>
       <div class='fix-margin-3'>
-        <div class='px2'>
+        
           
-            
-              <section class='py2 clearfix'>
+            <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
-    <h2 class='fl' id='Transform'>
+    <h3 class='fl m0' id='transform'>
       Transform
-    </h2>
+    </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/caterpillar/blob/d4c72b1ebdb6af989c3f22231a87c91be07623af/./source/transform.js#L23-L145'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/caterpillar/blob/edc145be83cccfa245d5c2f96e58f5f59b67bc42/./source/transform.js#L23-L145'>
       <span>./source/transform.js</span>
       </a>
     
@@ -214,7 +213,7 @@ This is a helper for our transforms to be able to process the written log data m
 All the need to do is extend this class and add their own <code>format</code> method.</p>
 
 
-  <div class='pre p1 fill-light'>Transform()</div>
+  <div class='pre p1 fill-light mt0'>new Transform()</div>
 
   
     <p>
@@ -245,7 +244,7 @@ All the need to do is extend this class and add their own <code>format</code> me
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pretty</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">require</span>('<span class="hljs-title">caterpillar</span>').<span class="hljs-title">Transform</span> </span>{
 format (entry) {
-<span class="hljs-keyword">return</span> <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>).inspect(entry, {colors: <span class="hljs-literal">true</span>})
+<span class="hljs-keyword">return</span> <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>).inspect(entry, {<span class="hljs-attr">colors</span>: <span class="hljs-literal">true</span>})
 }
 }
 <span class="hljs-built_in">require</span>(<span class="hljs-string">'caterpillar'</span>).create()
@@ -259,16 +258,15 @@ format (entry) {
     <div class='py1 quiet mt1 prose-big'>Static Members</div>
     <div class="clearfix">
   
-    <div class='keyline-bottom' id='Transform.create'>
+    <div class='border-bottom' id='Transform.create'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>create</span>
-            <span class='quiet code space-right2'>(args)</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>create(args)</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
@@ -276,7 +274,7 @@ format (entry) {
 Useful when creating the class directly from <code>require</code> statements.</p>
 
 
-  <div class='pre p1 fill-light'>create(args: ...Any): <a href="#Transform">Transform</a></div>
+  <div class='pre p1 fill-light mt0'>create(args: ...Any): <a href="#transform">Transform</a></div>
 
   
 
@@ -305,7 +303,7 @@ Useful when creating the class directly from <code>require</code> statements.</p
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#Transform">Transform</a></code>:
+      <code><a href="#transform">Transform</a></code>:
         
       
     
@@ -333,16 +331,15 @@ Useful when creating the class directly from <code>require</code> statements.</p
     <div class='py1 quiet mt1 prose-big'>Instance Members</div>
     <div class="clearfix">
   
-    <div class='keyline-bottom' id='Transform#getInitialConfig'>
+    <div class='border-bottom' id='Transform#getInitialConfig'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>getInitialConfig</span>
-            <span class='quiet code space-right2'>()</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getInitialConfig()</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
@@ -350,7 +347,7 @@ Useful when creating the class directly from <code>require</code> statements.</p
 Use this to add default/initial configuration to your class.</p>
 
 
-  <div class='pre p1 fill-light'>getInitialConfig(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+  <div class='pre p1 fill-light mt0'>getInitialConfig(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
 
   
 
@@ -387,23 +384,22 @@ Use this to add default/initial configuration to your class.</p>
       </div>
     </div>
   
-    <div class='keyline-bottom' id='Transform#constructor'>
+    <div class='border-bottom' id='Transform#constructor'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>constructor</span>
-            <span class='quiet code space-right2'>(args)</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>constructor(args)</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
   <p>Construct our class and pass the arguments over to <code>setConfig</code></p>
 
 
-  <div class='pre p1 fill-light'>constructor(args: ...)</div>
+  <div class='pre p1 fill-light mt0'>constructor(args: ...Any)</div>
 
   
 
@@ -419,7 +415,7 @@ Use this to add default/initial configuration to your class.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>args</span> <code class='quiet'>(...)</code> 
+            <span class='code bold'>args</span> <code class='quiet'>(...Any)</code> 
           </div>
           
         </div>
@@ -445,23 +441,22 @@ Use this to add default/initial configuration to your class.</p>
       </div>
     </div>
   
-    <div class='keyline-bottom' id='Transform#getConfig'>
+    <div class='border-bottom' id='Transform#getConfig'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>getConfig</span>
-            <span class='quiet code space-right2'>()</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getConfig()</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
   <p>Get the current configuration object for this instance.</p>
 
 
-  <div class='pre p1 fill-light'>getConfig(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+  <div class='pre p1 fill-light mt0'>getConfig(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
 
   
 
@@ -498,23 +493,22 @@ Use this to add default/initial configuration to your class.</p>
       </div>
     </div>
   
-    <div class='keyline-bottom' id='Transform#setConfig'>
+    <div class='border-bottom' id='Transform#setConfig'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>setConfig</span>
-            <span class='quiet code space-right2'>(configs)</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>setConfig(configs)</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
   <p>Apply the specified configurations to this instance&#x27;s configuration via deep merging.</p>
 
 
-  <div class='pre p1 fill-light'>setConfig(configs: ...<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;): this</div>
+  <div class='pre p1 fill-light mt0'>setConfig(configs: ...<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;): this</div>
 
   
 
@@ -555,7 +549,7 @@ Use this to add default/initial configuration to your class.</p>
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>setConfig({a: <span class="hljs-number">1</span>}, {b: <span class="hljs-number">2</span>})
+      <pre class='p1 overflow-auto round fill-light'>setConfig({<span class="hljs-attr">a</span>: <span class="hljs-number">1</span>}, {<span class="hljs-attr">b</span>: <span class="hljs-number">2</span>})
 getConfig()  <span class="hljs-comment">// {a: 1, b: 2}</span></pre>
     
   
@@ -570,16 +564,15 @@ getConfig()  <span class="hljs-comment">// {a: 1, b: 2}</span></pre>
       </div>
     </div>
   
-    <div class='keyline-bottom' id='Transform#pipe'>
+    <div class='border-bottom' id='Transform#pipe'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>pipe</span>
-            <span class='quiet code space-right2'>(child)</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>pipe(child)</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
@@ -587,7 +580,7 @@ getConfig()  <span class="hljs-comment">// {a: 1, b: 2}</span></pre>
 If the child stream also has a <code>setConfig</code> method, we will ensure the childs configuration is kept consistent with parents.</p>
 
 
-  <div class='pre p1 fill-light'>pipe(child: <a href="https://nodejs.org/api/stream.html#stream_class_stream_writable">stream.Writable</a>): <a href="https://nodejs.org/api/stream.html#stream_class_stream_writable">stream.Writable</a></div>
+  <div class='pre p1 fill-light mt0'>pipe(child: <a href="https://nodejs.org/api/stream.html#stream_class_stream_writable">stream.Writable</a>): <a href="https://nodejs.org/api/stream.html#stream_class_stream_writable">stream.Writable</a></div>
 
   
 
@@ -638,16 +631,15 @@ If the child stream also has a <code>setConfig</code> method, we will ensure the
       </div>
     </div>
   
-    <div class='keyline-bottom' id='Transform#format'>
+    <div class='border-bottom' id='Transform#format'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>format</span>
-            <span class='quiet code space-right2'>(message)</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>format(message)</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
@@ -655,7 +647,7 @@ If the child stream also has a <code>setConfig</code> method, we will ensure the
 Here is where our transformers work with the written data to enhance it.</p>
 
 
-  <div class='pre p1 fill-light'>format(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): Any</div>
+  <div class='pre p1 fill-light mt0'>format(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): Any</div>
 
   
 
@@ -711,18 +703,18 @@ Here is where our transformers work with the written data to enhance it.</p>
   
 </section>
 
-            
           
-            
-              <section class='py2 clearfix'>
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
-    <h2 class='fl' id='Logger'>
+    <h3 class='fl m0' id='logger'>
       Logger
-    </h2>
+    </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/caterpillar/blob/d4c72b1ebdb6af989c3f22231a87c91be07623af/./source/logger.js#L38-L362'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/bevry/caterpillar/blob/edc145be83cccfa245d5c2f96e58f5f59b67bc42/./source/logger.js#L42-L367'>
       <span>./source/logger.js</span>
       </a>
     
@@ -735,7 +727,7 @@ It extends from PassThrough and not transform.
 If you are piping / writing directly to the logger, make sure it corresponds to the correct entry format (as described in <code>log</code>).</p>
 
 
-  <div class='pre p1 fill-light'>Logger()</div>
+  <div class='pre p1 fill-light mt0'>new Logger()</div>
 
   
     <p>
@@ -779,16 +771,15 @@ If you are piping / writing directly to the logger, make sure it corresponds to 
     <div class='py1 quiet mt1 prose-big'>Static Members</div>
     <div class="clearfix">
   
-    <div class='keyline-bottom' id='Logger.create'>
+    <div class='border-bottom' id='Logger.create'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>create</span>
-            <span class='quiet code space-right2'>(args)</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>create(args)</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
@@ -796,7 +787,7 @@ If you are piping / writing directly to the logger, make sure it corresponds to 
 Useful when creating the class directly from <code>require</code> statements.</p>
 
 
-  <div class='pre p1 fill-light'>create(args: ...Any): <a href="#Logger">Logger</a></div>
+  <div class='pre p1 fill-light mt0'>create(args: ...Any): <a href="#logger">Logger</a></div>
 
   
 
@@ -825,7 +816,7 @@ Useful when creating the class directly from <code>require</code> statements.</p
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#Logger">Logger</a></code>:
+      <code><a href="#logger">Logger</a></code>:
         
       
     
@@ -853,16 +844,15 @@ Useful when creating the class directly from <code>require</code> statements.</p
     <div class='py1 quiet mt1 prose-big'>Instance Members</div>
     <div class="clearfix">
   
-    <div class='keyline-bottom' id='Logger#getInitialConfig'>
+    <div class='border-bottom' id='Logger#getInitialConfig'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>getInitialConfig</span>
-            <span class='quiet code space-right2'>()</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getInitialConfig()</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
@@ -870,7 +860,7 @@ Useful when creating the class directly from <code>require</code> statements.</p
 Default log levels are compliant with <a href="http://www.faqs.org/rfcs/rfc3164.html">http://www.faqs.org/rfcs/rfc3164.html</a></p>
 
 
-  <div class='pre p1 fill-light'>getInitialConfig(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+  <div class='pre p1 fill-light mt0'>getInitialConfig(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
 
   
 
@@ -907,23 +897,22 @@ Default log levels are compliant with <a href="http://www.faqs.org/rfcs/rfc3164.
       </div>
     </div>
   
-    <div class='keyline-bottom' id='Logger#constructor'>
+    <div class='border-bottom' id='Logger#constructor'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>constructor</span>
-            <span class='quiet code space-right2'>(args)</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>constructor(args)</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
   <p>Construct our class and pass the arguments over to <code>setConfig</code></p>
 
 
-  <div class='pre p1 fill-light'>constructor(args: ...)</div>
+  <div class='pre p1 fill-light mt0'>constructor(args: ...Any)</div>
 
   
 
@@ -939,7 +928,7 @@ Default log levels are compliant with <a href="http://www.faqs.org/rfcs/rfc3164.
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>args</span> <code class='quiet'>(...)</code> 
+            <span class='code bold'>args</span> <code class='quiet'>(...Any)</code> 
           </div>
           
         </div>
@@ -965,23 +954,22 @@ Default log levels are compliant with <a href="http://www.faqs.org/rfcs/rfc3164.
       </div>
     </div>
   
-    <div class='keyline-bottom' id='Logger#getConfig'>
+    <div class='border-bottom' id='Logger#getConfig'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>getConfig</span>
-            <span class='quiet code space-right2'>()</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getConfig()</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
   <p>Get the current configuration object for this instance.</p>
 
 
-  <div class='pre p1 fill-light'>getConfig(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+  <div class='pre p1 fill-light mt0'>getConfig(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
 
   
 
@@ -1018,23 +1006,22 @@ Default log levels are compliant with <a href="http://www.faqs.org/rfcs/rfc3164.
       </div>
     </div>
   
-    <div class='keyline-bottom' id='Logger#setConfig'>
+    <div class='border-bottom' id='Logger#setConfig'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>setConfig</span>
-            <span class='quiet code space-right2'>(configs)</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>setConfig(configs)</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
   <p>Apply the specified configurations to this instance&#x27;s configuration via deep merging.</p>
 
 
-  <div class='pre p1 fill-light'>setConfig(configs: ...<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;): this</div>
+  <div class='pre p1 fill-light mt0'>setConfig(configs: ...<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&gt;): this</div>
 
   
 
@@ -1075,7 +1062,7 @@ Default log levels are compliant with <a href="http://www.faqs.org/rfcs/rfc3164.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>setConfig({a: <span class="hljs-number">1</span>}, {b: <span class="hljs-number">2</span>})
+      <pre class='p1 overflow-auto round fill-light'>setConfig({<span class="hljs-attr">a</span>: <span class="hljs-number">1</span>}, {<span class="hljs-attr">b</span>: <span class="hljs-number">2</span>})
 getConfig()  <span class="hljs-comment">// {a: 1, b: 2}</span></pre>
     
   
@@ -1090,16 +1077,15 @@ getConfig()  <span class="hljs-comment">// {a: 1, b: 2}</span></pre>
       </div>
     </div>
   
-    <div class='keyline-bottom' id='Logger#pipe'>
+    <div class='border-bottom' id='Logger#pipe'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>pipe</span>
-            <span class='quiet code space-right2'>(child)</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>pipe(child)</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
@@ -1107,7 +1093,7 @@ getConfig()  <span class="hljs-comment">// {a: 1, b: 2}</span></pre>
 If the child stream also has a <code>setConfig</code> method, we will ensure the childs configuration is kept consistent with parents.</p>
 
 
-  <div class='pre p1 fill-light'>pipe(child: <a href="https://nodejs.org/api/stream.html#stream_class_stream_writable">stream.Writable</a>): <a href="https://nodejs.org/api/stream.html#stream_class_stream_writable">stream.Writable</a></div>
+  <div class='pre p1 fill-light mt0'>pipe(child: <a href="https://nodejs.org/api/stream.html#stream_class_stream_writable">stream.Writable</a>): <a href="https://nodejs.org/api/stream.html#stream_class_stream_writable">stream.Writable</a></div>
 
   
 
@@ -1158,23 +1144,22 @@ If the child stream also has a <code>setConfig</code> method, we will ensure the
       </div>
     </div>
   
-    <div class='keyline-bottom' id='Logger#getLevelNumber'>
+    <div class='border-bottom' id='Logger#getLevelNumber'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>getLevelNumber</span>
-            <span class='quiet code space-right2'>(name)</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getLevelNumber(name)</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
   <p>Receive a level name and return the level number</p>
 
 
-  <div class='pre p1 fill-light'>getLevelNumber(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
+  <div class='pre p1 fill-light mt0'>getLevelNumber(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
 
   
 
@@ -1231,23 +1216,22 @@ If the child stream also has a <code>setConfig</code> method, we will ensure the
       </div>
     </div>
   
-    <div class='keyline-bottom' id='Logger#getLevelName'>
+    <div class='border-bottom' id='Logger#getLevelName'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>getLevelName</span>
-            <span class='quiet code space-right2'>(number)</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getLevelName(number)</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
   <p>Receive a level number and return the level name</p>
 
 
-  <div class='pre p1 fill-light'>getLevelName(number: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+  <div class='pre p1 fill-light mt0'>getLevelName(number: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
 
   
 
@@ -1304,23 +1288,22 @@ If the child stream also has a <code>setConfig</code> method, we will ensure the
       </div>
     </div>
   
-    <div class='keyline-bottom' id='Logger#getLevelInfo'>
+    <div class='border-bottom' id='Logger#getLevelInfo'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>getLevelInfo</span>
-            <span class='quiet code space-right2'>(level)</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getLevelInfo(level)</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
   <p>Receive either the level name or number and return the combination.</p>
 
 
-  <div class='pre p1 fill-light'>getLevelInfo(level: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+  <div class='pre p1 fill-light mt0'>getLevelInfo(level: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
 
   
 
@@ -1391,23 +1374,22 @@ If the child stream also has a <code>setConfig</code> method, we will ensure the
       </div>
     </div>
   
-    <div class='keyline-bottom' id='Logger#getLineInfo'>
+    <div class='border-bottom' id='Logger#getLineInfo'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>getLineInfo</span>
-            <span class='quiet code space-right2'>()</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getLineInfo()</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
   <p>The current line info of whatever called this.</p>
 
 
-  <div class='pre p1 fill-light'>getLineInfo(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+  <div class='pre p1 fill-light mt0'>getLineInfo(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
 
   
 
@@ -1467,23 +1449,22 @@ If the child stream also has a <code>setConfig</code> method, we will ensure the
       </div>
     </div>
   
-    <div class='keyline-bottom' id='Logger#log'>
+    <div class='border-bottom' id='Logger#log'>
       <div class="clearfix small pointer toggle-sibling">
-        <div class="pad1y contain">
-            <a class='icon pin-right pad1y dark-link caret-right'></a>
-            <span class='code strong strong truncate'>log</span>
-            <span class='quiet code space-right2'>(args)</span>
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>log(args)</span>
         </div>
       </div>
-      <div class="clearfix hidden toggle-target">
-        <section class='py2 clearfix'>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
 
   <p>Log the arguments into the logger stream as formatted data with debugging information.</p>
 
 
-  <div class='pre p1 fill-light'>log(args: ...Any): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+  <div class='pre p1 fill-light mt0'>log(args: ...Any): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
 
   
 
@@ -1568,9 +1549,8 @@ logger.log(<span class="hljs-string">'this'</span>, <span class="hljs-string">'w
   
 </section>
 
-            
           
-        </div>
+        
       </div>
     </div>
   </div>

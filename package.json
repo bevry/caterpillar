@@ -1,7 +1,7 @@
 {
   "title": "Caterpillar",
   "name": "caterpillar",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Caterpillar is the ultimate logging system for Node.js, based on transform streams you can log to it and pipe the output off to different locations, including some pre-made ones. Caterpillar also supports log levels according to the RFC standard, as well as line, method, and file fetching for messages. You can even use it in web browsers with caterpillar-browser.",
   "homepage": "https://github.com/bevry/caterpillar",
   "license": "MIT",
@@ -63,7 +63,8 @@
   "editions": [
     {
       "description": "Source + ESNext + Require + Flow Type Comments",
-      "entry": "source/index.js",
+      "directory": "source",
+      "entry": "index.js",
       "syntaxes": [
         "javascript",
         "esnext",
@@ -78,7 +79,8 @@
     },
     {
       "description": "Babel Compiled + ES2015 + Require",
-      "entry": "es2015/index.js",
+      "directory": "es2015",
+      "entry": "index.js",
       "syntaxes": [
         "javascript",
         "es2015",
@@ -104,7 +106,7 @@
     "pretest": "npm run test:eslint && npm run test:flow",
     "test:eslint": "eslint ./source",
     "test:flow": "flow check",
-    "test": "node --harmony ./es2015/test.js"
+    "test": "node --harmony -e \"require('editions').requirePackage(process.cwd(), require, 'test.js')\""
   },
   "dependencies": {
     "editions": "^1.1.1",
@@ -116,8 +118,7 @@
     "babel-preset-es2015": "^6.9.0",
     "documentation": "^4.0.0-beta5",
     "eslint": "^2.12.0",
-    "eslint-plugin-babel": "^3.2.0",
-    "flow-bin": "^0.27.0",
+    "flow-bin": "^0.33.0",
     "joe": "^1.8.0",
     "joe-reporter-console": "^1.2.1",
     "projectz": "^1.1.6"
