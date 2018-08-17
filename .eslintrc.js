@@ -1,27 +1,16 @@
-// 2016 September 7
+// 2018 January 26
 // https://github.com/bevry/base
 // http://eslint.org
-// This code must be able to run on Node 0.10
 /* eslint no-warning-comments: 0 */
-var IGNORE = 0, WARN = 1, ERROR = 2, MAX_PARAMS = 4
+'use strict'
 
-var config = {
+const IGNORE = 0, WARN = 1, ERROR = 2, MAX_PARAMS = 4
+
+const config = {
 	extends: ['eslint:recommended'],
 	plugins: [],
-	parserOptions: {
-		sourceType: 'module',
-		ecmaVersion: 6,
-		ecmaFeatures: {
-			jsx: true
-		}
-	},
-	env: {
-		browser: true,
-		node: true,
-		es6: true,
-		commonjs: true,
-		amd: true
-	},
+	parserOptions: { ecmaFeatures: {} },
+	env: {},
 	rules: {
 		// ----------------------------
 		// Problems with these rules
@@ -49,17 +38,15 @@ var config = {
 		// Possible Errors
 		// The following rules point out areas where you might have made mistakes.
 
-		// ES6 supports dangling commas
-		'comma-dangle': IGNORE,
-
 		// Don't allow assignments in conditional statements (if, while, etc.)
 		'no-cond-assign': [ERROR, 'always'],
 
 		// Warn but don't error about console statements
 		'no-console': WARN,
 
+		// Sometimes useful for debugging
 		// Allow while(true) loops
-		'no-constant-condition': IGNORE,
+		'no-constant-condition': WARN,
 
 		// Seems like a good idea to error about this
 		'no-control-regex': ERROR,
@@ -92,7 +79,7 @@ var config = {
 		'no-extra-parens': IGNORE,
 
 		// Disallow superflous semicolons, they offer no value
-		'no-extra-semi': IGNORE,
+		'no-extra-semi': ERROR,
 
 		// Seems like a good idea to error about this
 		'no-func-assign': ERROR,
@@ -107,10 +94,10 @@ var config = {
 		'no-irregular-whitespace': ERROR,
 
 		// Seems like a good idea to error about this
-		'no-negated-in-lhs': ERROR,
-
-		// Seems like a good idea to error about this
 		'no-obj-calls': ERROR,
+
+		// Not enough justification to change our existing use
+		'no-prototype-builtins': IGNORE,
 
 		// Seems like a good idea to error about this
 		// Instead of /  /  used / {ERROR}/ instead
@@ -119,6 +106,9 @@ var config = {
 		// Seems like a good idea to error about this
 		'no-sparse-arrays': ERROR,
 
+		// Probably an error on our part, so warn
+		'no-template-curly-in-string': WARN,
+
 		// Seems like a good idea to error about this
 		'no-unexpected-multiline': ERROR,
 
@@ -126,12 +116,18 @@ var config = {
 		'no-unreachable': ERROR,
 
 		// Seems like a good idea to error about this
+		'no-unsafe-finally': ERROR,
+
+		// Seems like a good idea to error about this
+		'no-unsafe-negation': ERROR,
+
+		// Seems like a good idea to error about this
 		'use-isnan': ERROR,
 
 		// We use JSDoc again
 		'valid-jsdoc': [ERROR, {
-			"requireParamDescription": false,
-			"requireReturnDescription": false
+			requireParamDescription: false,
+			requireReturnDescription: false
 		}],
 
 		// Seems like a good idea to error about this
@@ -142,7 +138,7 @@ var config = {
 		// Best Practices
 		// These are rules designed to prevent you from making mistakes. They either prescribe a better way of doing something or help you avoid footguns.
 
-		// Meh
+		// Often we only need one, setting both doesn't make sense
 		// Enforces getter/setter pairs in objects
 		'accessor-pairs': IGNORE,
 
@@ -153,10 +149,13 @@ var config = {
 		// This rule seems buggy
 		'block-scoped-var': IGNORE,
 
+		// Seems interesting, lets give it a go
+		'class-methods-use-this': WARN,
+
 		// Disable complexity checks, they are annoying and not that useful in detecting actual complexity
 		'complexity': IGNORE,
 
-		// We use blank returns for break statements
+		// We use blank returns for break statements and for returning void
 		'consistent-return': IGNORE,
 
 		// Always require curly braces unless the statement is all on a single line
@@ -202,9 +201,6 @@ var config = {
 		'no-empty-function': IGNORE,
 
 		// Seems sensible
-		'no-labels': ERROR,
-
-		// Seems sensible
 		'no-empty-pattern': ERROR,
 
 		// We know that == null is a null and undefined check
@@ -227,6 +223,9 @@ var config = {
 
 		// Use zero when doing decimals, otherwise it is confusing
 		'no-floating-decimal': ERROR,
+
+		// Seems sensible
+		'no-global-assign': ERROR,
 
 		// Cleverness is unclear
 		'no-implicit-coercion': ERROR,
@@ -266,9 +265,6 @@ var config = {
 		// Use ES6 template strings instead
 		'no-multi-str': ERROR,
 
-		// Would be silly to allow this
-		'no-native-reassign': ERROR,
-
 		// We never use this, it seems silly to allow this
 		'no-new-func': ERROR,
 
@@ -288,14 +284,14 @@ var config = {
 		// As such, take any usage as intentional and aware
 		'no-param-reassign': IGNORE,
 
-		// We use process.env wisely
-		'no-process-env': IGNORE,
-
 		// We never use this, it seems silly to allow this
 		'no-proto': ERROR,
 
 		// We never use this, it seems silly to allow this
 		'no-redeclare': ERROR,
+
+		// No defaults for this that are useful
+		'no-restricted-properties': IGNORE,
 
 		// We never use this, it seems silly to allow this
 		'no-return-assign': ERROR,
@@ -329,6 +325,9 @@ var config = {
 
 		// Seems sensible
 		'no-useless-concat': ERROR,
+
+		// Seems sensible
+		'no-useless-escape': ERROR,
 
 		// We never use this, it seems silly to allow this
 		'no-void': ERROR,
@@ -367,7 +366,7 @@ var config = {
 		// These rules have to do with variable declarations.
 
 		// We don't care
-		'init-declaration': IGNORE,
+		'init-declarations': IGNORE,
 
 		// Don't allow the catch method to shadow objects as browsers handle this differently
 		// Update: We don't care for IE8
@@ -378,6 +377,9 @@ var config = {
 
 		// We never use this, it seems silly to allow this
 		'no-label-var': ERROR,
+
+		// No useful defaults
+		'no-restricted-globals': IGNORE,
 
 		// We never use this, it seems silly to allow this
 		'no-shadow-restricted-names': ERROR,
@@ -423,11 +425,11 @@ var config = {
 		// Always use path.join for windows support
 		'no-path-concat': ERROR,
 
+		// We use process.env wisely
+		'no-process-env': IGNORE,
+
 		// We know what we are doing
 		'no-process-exit': IGNORE,
-
-		// No need to disallow any imports
-		'no-restricted-imports': IGNORE,
 
 		// No need to disallow any modules
 		'no-restricted-modules': IGNORE,
@@ -452,6 +454,9 @@ var config = {
 		// Use camel case
 		'camelcase': ERROR,
 
+		// ES6 supports dangling commas
+		'comma-dangle': [ERROR, 'never'],
+
 		// Require a comma after always
 		'comma-spacing': [ERROR, { before: false, after: true }],
 
@@ -466,6 +471,12 @@ var config = {
 
 		// Enable to make UNIX people's lives easier
 		'eol-last': ERROR,
+
+		// We never use this, it seems silly to allow this
+		'func-call-spacing': [ERROR, 'never'],
+
+		// This rule is not currently useful
+		'func-name-matching': IGNORE,
 
 		// We like anonymous functions
 		'func-names': IGNORE,
@@ -484,8 +495,21 @@ var config = {
 		'id-match': IGNORE,
 
 		// Use tabs and indent case blocks
-		// 'indent': [ERROR, 'tab', { SwitchCase: WARN }],
-		// ^ broken
+		'indent': [ERROR, 'tab', {
+			SwitchCase: 1,
+			VariableDeclarator: 0,
+			outerIIFEBody: 1,
+			MemberExpression: 1,
+			FunctionDeclaration: {
+				body: 1,
+				parameters: 0
+			},
+			FunctionExpression: {
+				body: 1,
+				parameters: 0
+			}
+		}],
+		// ^ broken before, let us try again
 
 		// Prefer double qoutes for JSX properties: <a b="c" />, <a b='"' />
 		'jsx-quotes': [ERROR, 'prefer-double'],
@@ -499,11 +523,23 @@ var config = {
 		// Always force a space before and after a keyword
 		'keyword-spacing': [ERROR],
 
+		// we use both
+		'line-comment-position': IGNORE,
+
 		// Enforce unix line breaks
 		'linebreak-style': [ERROR, 'unix'],
 
 		// Enforce new lines before block comments
-		'lines-around-comment': [ERROR, { beforeBlockComment: true, allowBlockStart: true }],
+		'lines-around-comment': [ERROR, {
+			beforeBlockComment: true,
+			allowBlockStart: true
+		}],
+
+		// Enforce directives with no line above but a line below
+		'lines-around-directive': [ERROR, {
+			before: 'never',
+			after: 'always'
+		}],
 
 		// Disabled to ensure consistency with complexity option
 		'max-depth': IGNORE,
@@ -511,14 +547,24 @@ var config = {
 		// We use soft wrap
 		'max-len': IGNORE,
 
+		// Perhaps in the future we can set this to 300 or so
+		// but for now it is not useful for the things we write and maintain
+		'max-lines': IGNORE,
+
 		// We are smart enough to know if this is bad or not
 		'max-nested-callbacks': IGNORE,
 
 		// Sometimes we have no control over this for compat reasons, so just warn
 		'max-params': [WARN, MAX_PARAMS],
 
+		// Let's give this a go and see what is appropriate for our usage
+		'max-statements-per-line': [WARN, { max: 1 }],
+
 		// We should be able to use whatever feels right
 		'max-statements': IGNORE,
+
+		// Current options are not useful
+		'multiline-ternary': IGNORE,
 
 		// Constructors should be CamelCase
 		'new-cap': ERROR,
@@ -549,8 +595,11 @@ var config = {
 		// The code could be optimised if this error occurs
 		'no-lonely-if': ERROR,
 
+		// Seems sensible, let's see how we go with this
+		'no-mixed-operators': ERROR,
+
 		// Don't mix spaces and tabs
-		// @TODO maybe [ERROR, 'smart-tabs'] will be better, we will see
+		// Maybe [ERROR, 'smart-tabs'] will be better, we will see
 		'no-mixed-spaces-and-tabs': ERROR,
 
 		// We use multiple empty lines for styling
@@ -571,8 +620,8 @@ var config = {
 		// Handled by other rules
 		'no-restricted-syntax': IGNORE,
 
-		// We never use this, it seems silly to allow this
-		'no-spaced-func': ERROR,
+		// We use tabs
+		'no-tabs': IGNORE,
 
 		// Sometimes ternaries are useful
 		'no-ternary': IGNORE,
@@ -588,6 +637,10 @@ var config = {
 
 		// Seems sensible
 		'no-whitespace-before-property': ERROR,
+
+		// Object indentation should be consistent within the object
+		// Ignore until https://github.com/eslint/eslint/issues/7434 is done
+		'object-curly-newline': [IGNORE, { multiline: true }],
 
 		// Desirable, but too many edge cases it turns out where it is actually preferred
 		'object-curly-spacing': IGNORE,
@@ -607,8 +660,8 @@ var config = {
 		'padded-blocks': IGNORE,
 
 		// Seems like a good idea to error about this
-		// 'quote-props': [ERROR, 'consistent-as-needed'],
-		// ^ broken
+		// was broken before, but lets give a go again
+		'quote-props': [ERROR, 'consistent-as-needed'],
 
 		// Use single quotes where escaping isn't needed
 		'quotes': [ERROR, 'single', 'avoid-escape'],
@@ -619,13 +672,13 @@ var config = {
 		// If semi's are used, then add spacing after
 		'semi-spacing': [ERROR, { before: false, after: true }],
 
-		// Up to dev
-		'sort-imports': IGNORE,
-
 		// Never use semicolons
 		'semi': [ERROR, 'never'],
 
-		// We don't care if our vars are alphabetical
+		// Importance makes more sense than alphabetical
+		'sort-keys': IGNORE,
+
+		// Importance makes more sense than alphabetical
 		'sort-vars': IGNORE,
 
 		// Always force a space before a {
@@ -633,9 +686,6 @@ var config = {
 
 		// function () {, get blah () {
 		'space-before-function-paren': [ERROR, 'always'],
-
-		// This is for spacing between [], so [ WARN, ERROR, 3 ] which we don't want
-		'space-in-brackets': IGNORE,
 
 		// This is for spacing between (), so doSomething( WARN, ERROR, 3 ) or if ( WARN === 3 )
 		// which we want for ifs, but don't want for calls
@@ -651,13 +701,15 @@ var config = {
 		// 'spaced-line-comment': ERROR,
 		'spaced-comment': ERROR,
 
-		// We use this
-		// @TODO revise this
+		// When would we ever do this? Makes no sense
+		'unicode-bom': [ERROR, 'never'],
+
+		// We do this, seems to work well
 		'wrap-regex': ERROR,
 
 
 		// --------------------------------------
-		// ECMAScript 6
+		// ECMAScript 6 / ES6
 
 		// Sensible to create more informed and clear code
 		'arrow-body-style': [ERROR, 'as-needed'],
@@ -674,37 +726,41 @@ var config = {
 		// Seems the most consistent location for it
 		'generator-star-spacing': [ERROR, 'before'],
 
-		// Seems sensible
-		'no-confusing-arrow': ERROR,
-
-		// Sometimes useful for debugging
-		'no-constant-condition': WARN,
-
-		// Seems sensible
+		// Makes sense
 		'no-class-assign': ERROR,
 
-		// Our developers should know the difference
-		// disallow arrow functions where they could be confused with comparisons
-		'no-confusing-arrow': IGNORE,
+		// Makes sense
+		'no-confusing-arrow': ERROR,
 
-		// Makes sense as otherwise runtime error will occur
+		// Of course
 		'no-const-assign': ERROR,
 
-		// Makes sense as otherwise runtime error will occur
+		// Of course
 		'no-dupe-class-members': ERROR,
+
+		// Seems sensible, may be times when we want this
+		'no-duplicate-imports': WARN,
 
 		// Seems sensible
 		'no-new-symbol': ERROR,
+
+		// No need to disallow any imports
+		'no-restricted-imports': IGNORE,
 
 		// Makes sense as otherwise runtime error will occur
 		'no-this-before-super': ERROR,
 
 		// Seems sensible
+		'no-useless-computed-key': ERROR,
+
+		// Seems sensible
 		'no-useless-constructor': ERROR,
 
-		// @TODO This probably should be an error
-		// however it is useful for: for ( var key in obj ) {
-		// which hopefully is more performant than let (@TODO check if it actually is more performant)
+		// Seems sensible
+		'no-useless-rename': ERROR,
+
+		// Of course
+		// However, would be good to have this adjusted per environment
 		'no-var': WARN,
 
 		// Enforce ES6 object shorthand
@@ -715,8 +771,11 @@ var config = {
 		// https://travis-ci.org/bevry/es6-benchmarks
 		'prefer-arrow-callback': IGNORE,
 
-		// Sure, why not
-		'prefer-const': WARN,
+		// Of course
+		'prefer-const': ERROR,
+
+		// Makes sense
+		'prefer-numeric-literals': ERROR,
 
 		// Controversial change, but makes sense to move towards to reduce the risk of bad people overwriting apply and call
 		// https://github.com/eslint/eslint/issues/ERROR939
@@ -736,6 +795,15 @@ var config = {
 		'require-yield': ERROR,
 
 		// Makes sense
+		'rest-spread-spacing': [ERROR, 'never'],
+
+		// Importance makes more sense than alphabetical
+		'sort-imports': IGNORE,
+
+		// Makes sense
+		'symbol-description': ERROR,
+
+		// Makes sense
 		'template-curly-spacing': [ERROR, 'never'],
 
 		// Our preference
@@ -746,48 +814,87 @@ var config = {
 		// Plugins
 
 		// Not sure why, but okay
-	    'babel/no-await-in-loop': WARN,
-    	'flow-vars/define-flow-type': WARN,
-    	'flow-vars/use-flow-type': WARN
+		'flow-vars/define-flow-type': WARN,
+		'flow-vars/use-flow-type': WARN
 	}
 }
 
 // ------------------------------------
 // Enhancements
 
-// Load package.json file if it exists
-var rules = Object.keys(config.rules)
-var package = {}, devDeps = []
+// Load data.json file if it exists
+const rules = Object.keys(config.rules)
+let data = {}, devDeps = []
 try {
-	package = require('./package.json') || {}
-	devDeps = Object.keys(package.devDependencies || {})
+	data = require('./package.json') || {}
+	devDeps = Object.keys(data.devDependencies || {})
 }
-catch ( err ) {}
+catch (err) { }
+
+// Set the parser options depending on our editions
+if (data.editions) {
+	const sourceEdition = data.editions[0]
+	for (let syntaxIndex = 0; syntaxIndex < sourceEdition.syntaxes.length; ++syntaxIndex) {
+		const syntax = sourceEdition.syntaxes[syntaxIndex]
+		if (syntax === 'esnext') {
+			config.parserOptions.ecmaVersion = 8
+			break
+		}
+		else if (syntax.indexOf('es') === 0) {
+			config.parserOptions.ecmaVersion = Number(syntax.substr(2))
+			break
+		}
+	}
+	config.parserOptions.sourceType = sourceEdition.syntaxes.indexOf('import') !== -1 ? 'module' : 'script'
+	config.parserOptions.ecmaFeatures.jsx = sourceEdition.syntaxes.indexOf('jsx') !== -1
+}
+
+// If editions failed to dtermine the ecmaVersion, try determining it from node, otherwise default to v5
+if (!config.parserOptions.ecmaVersion) {
+	const node = data.engines && data.engines.node && data.engines.node.replace('>=', '').replace(/ /g, '').replace(/\..+$/, '')
+	config.parserOptions.ecmaVersion = node >= 6 ? 6 : 5
+}
+
+// Set the environments depending on whether we need them or not
+config.env.es6 = Boolean(config.parserOptions.ecmaVersion && config.parserOptions.ecmaVersion >= 6)
+config.env.node = Boolean(data.engines && data.engines.node)
+config.env.browser = Boolean(data.browser)
+if (config.env.browser) {
+	config.env.commonjs = true
+	if (config.env.node) {
+		config.env['shared-node-browser'] = true
+	}
+}
+
+// If not on legacy javascript, disable esnext rules
+if (config.parserOptions.ecmaVersion && config.parserOptions.ecmaVersion <= 5) {
+	config.rules['no-var'] = IGNORE
+	config.rules['object-shorthand'] = [ERROR, 'never']
+	config.rules['prefer-rest-params'] = IGNORE
+	config.rules['prefer-spread'] = IGNORE
+	config.rules['prefer-const'] = IGNORE
+}
 
 // Add babel parsing if installed
-if ( devDeps.indexOf('babel-eslint') !== -1 ) {
+if (devDeps.indexOf('babel-eslint') !== -1) {
 	config.parser = 'babel-eslint'
 }
 
 // Add react linting if installed
-if ( devDeps.indexOf('eslint-plugin-react') !== -1 ) {
+if (devDeps.indexOf('eslint-plugin-react') !== -1) {
 	config.extends.push('plugin:react/recommended')
 	config.plugins.push('react')
 }
 
-if ( devDeps.indexOf('eslint-plugin-babel') !== -1 ) {
+if (devDeps.indexOf('eslint-plugin-babel') !== -1) {
 	// Remove rules that babel rules replace
 	config.plugins.push('babel')
-	var replacements = [
-		'array-bracket-spacing',
+	const replacements = [
 		'new-cap',
-		'object-curly-spacing',
-		'arrow-parens',
-		'generator-star-spacing',
-		'object-shorthand'
+		'object-curly-spacing'
 	]
 	replacements.forEach(function (key) {
-		if ( rules.indexOf(key) !== -1 ) {
+		if (rules.indexOf(key) !== -1) {
 			config.rules['babel/' + key] = config.rules[key]
 			config.rules[key] = IGNORE
 		}
@@ -796,20 +903,20 @@ if ( devDeps.indexOf('eslint-plugin-babel') !== -1 ) {
 else {
 	// Remove babel rules if not using babel
 	rules.forEach(function (key) {
-		if ( key.indexOf('babel/') === 0 ) {
+		if (key.indexOf('babel/') === 0) {
 			delete config.rules[key]
 		}
 	})
 }
 
-if ( devDeps.indexOf('eslint-plugin-flow-vars') !== -1 ) {
+if (devDeps.indexOf('eslint-plugin-flow-vars') !== -1) {
 	// Add flow plugin if installed
 	config.plugins.push('flow-vars')
 }
 else {
 	// Remove flow rules if plugin not installed
 	rules.forEach(function (key) {
-		if ( key.indexOf('flow-vars/') === 0 ) {
+		if (key.indexOf('flow-vars/') === 0) {
 			delete config.rules[key]
 		}
 	})

@@ -1,18 +1,19 @@
-/* @flow */
 /* eslint no-console:0 */
-const {Transform, Logger, create} = require('../')
-const {PassThrough} = require('stream')
-const {suite} = require('joe')
-const {equal, deepEqual} = require('assert-helpers')
-const {ok} = require('assert')
+'use strict'
+
+const { Transform, Logger, create } = require('../')
+const { PassThrough } = require('stream')
+const { suite } = require('joe')
+const { equal, deepEqual } = require('assert-helpers')
+const { ok } = require('assert')
 
 // Prepare
 function cleanChanging (item) {
 	item = JSON.parse(item)
 	item.date = item.date.replace(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/, 'date')
-	item.file = item.file.replace(/^[\/\\].+$/, 'file')
+	item.file = item.file.replace(/^[/\\].+$/, 'file')
 	item.line = item.file.replace(/^\d{1,}$/, 'line')
-	item.method = item.method.replace(/^[\d\w\.\_\-\<\>]+$/, 'method')
+	item.method = item.method.replace(/^[-\d\w._<>]+$/, 'method')
 	return item
 }
 
@@ -32,17 +33,17 @@ suite('caterpillar', function (suite) {
 
 		test('should set configuration correctly', function () {
 			const transform = new Transform()
-			transform.setConfig({level: 5})
+			transform.setConfig({ level: 5 })
 			equal(transform.getConfig().level, 5)
 		})
 
 		test('should set configuration correctly via constructor', function () {
-			const transform = new Transform({level: 4})
+			const transform = new Transform({ level: 4 })
 			equal(transform.getConfig().level, 4)
 		})
 
 		test('should pass configuration to the child via constructor', function () {
-			const transform = new Transform({level: 3})
+			const transform = new Transform({ level: 3 })
 			const transform2 = new Transform()
 			transform.pipe(transform2)
 			equal(transform2.getConfig().level, 3)
@@ -52,7 +53,7 @@ suite('caterpillar', function (suite) {
 			const transform = new Transform()
 			const transform2 = new Transform()
 			transform.pipe(transform2)
-			transform.setConfig({level: 2})
+			transform.setConfig({ level: 2 })
 			equal(transform2.getConfig().level, 2)
 		})
 	})
@@ -106,8 +107,8 @@ suite('caterpillar', function (suite) {
 
 		test('should log messages', function () {
 			const levels = logger.getConfig().levels
-			for ( const name in levels ) {
-				if ( levels.hasOwnProperty(name) ) {
+			for (const name in levels) {
+				if (levels.hasOwnProperty(name)) {
 					const number = levels[name]
 					const message = `this is ${name} and is level ${number}`
 					logger.log(name, message)

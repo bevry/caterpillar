@@ -1,5 +1,10 @@
 # History
 
+## v3.1.0 2018 August 17
+- Now uses [rfc-log-levels](https://github.com/bevry/log-levels) for the initial log levels
+- Moved type linting from flow to jsdoc & typescript, which also results in better documentation for you, and visual studio code intellisense
+- Updated base files and [editions](https://github.com/bevry/editions) using [boundation](https://github.com/bevry/boundation)
+
 ## v3.0.1 2016 October 20
 - Fixed flow type errors with newer flow versions
 
