@@ -267,7 +267,8 @@ class Logger extends PassThrough {
 				.filter((line) => line.length !== 0)
 
 			// Parse our lines
-			for (const line of lines) {
+			for (let index = 0; index < lines.length; index++) {
+				const line = lines[index]
 				if (line.indexOf(__dirname) !== -1 || line.indexOf(' at ') === -1) {
 					continue
 				}

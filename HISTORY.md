@@ -1,5 +1,8 @@
 # History
 
+## v3.1.1 2018 August 19
+- Readded support for node 0.10
+
 ## v3.1.0 2018 August 17
 - Now uses [rfc-log-levels](https://github.com/bevry/log-levels) for the initial log levels
 - Moved type linting from flow to jsdoc & typescript, which also results in better documentation for you, and visual studio code intellisense

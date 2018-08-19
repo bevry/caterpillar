@@ -12,7 +12,6 @@ matrix:
   fast_finish: true
   allow_failures:
   - node_js: '0.8'
-  - node_js: '0.10'
 cache:
   directories:
   - "$HOME/.npm"
@@ -27,4 +26,4 @@ after_success:
 notifications:
   email:
     recipients:
-      secure: I/HoGuhlDTmV5+94eBHfIZBbL5kXhgkloiAQh05qE+uPtZL9DYqksmYbjB7X/C/5YO1YwI5FAcLxYmviIsBrmIjfQLEE88PrkfeHyHVB5tzaz93zrjLYHKtkqb1bvsgeu2dFiULQqVmo3odQSjZzrJwQKzB8zhKF8UF6vYCzXLs=
+      secure: eCLJ7E1KtqAaS4uqgPHQp3wagYAtr5Da/btuJRD9JOnbDo/OZs1Al6e1vjeZDHcLL1jZQDWnGsIwnOeGE2DWtx6Zgnx3ThBpVFAfgjyhKHeZL1Tj/yA5xqyiw840h1w0do/CM63WNb/uhyu/MKtBj2eo78HXPo4UCJ82G4TUayM=

@@ -1,7 +1,7 @@
 {
   "title": "Caterpillar",
   "name": "caterpillar",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Caterpillar is the ultimate logging system for Node.js, based on transform streams you can log to it and pipe the output off to different locations, including some pre-made ones. Caterpillar also supports log levels according to the RFC standard, as well as line, method, and file fetching for messages. You can even use it in web browsers with caterpillar-browser.",
   "homepage": "https://github.com/bevry/caterpillar",
   "license": "MIT",
@@ -56,7 +56,7 @@
     "url": "https://github.com/bevry/caterpillar.git"
   },
   "engines": {
-    "node": ">=0.12"
+    "node": ">=0.10"
   },
   "editions": [
     {
@@ -87,15 +87,15 @@
       }
     },
     {
-      "description": "esnext compiled for node.js >=0.12 with require for modules",
-      "directory": "edition:node:0.12",
+      "description": "esnext compiled for node.js >=0.10 with require for modules",
+      "directory": "edition:node:0.10",
       "entry": "index.js",
       "syntaxes": [
         "javascript",
         "require"
       ],
       "engines": {
-        "node": ">=0.12",
+        "node": ">=0.10",
         "browsers": false
       }
     }
@@ -111,8 +111,8 @@
     "assert-helpers": "^4.5.1",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "documentation": "^8.1.0",
-    "eslint": "^5.3.0",
+    "documentation": "^8.1.1",
+    "eslint": "^5.4.0",
     "joe": "^2.0.2",
     "joe-reporter-console": "^2.0.2",
     "projectz": "^1.4.0",
@@ -123,8 +123,8 @@
     "our:compile": "npm run our:compile:edition",
     "our:compile:edition": "npm run our:compile:edition:browsers && npm run our:compile:edition:node",
     "our:compile:edition:browsers": "env BABEL_ENV=edition:browsers babel --out-dir ./edition:browsers ./source",
-    "our:compile:edition:node": "npm run our:compile:edition:node:0.12",
-    "our:compile:edition:node:0.12": "env BABEL_ENV=edition:node:0.12 babel --out-dir ./edition:node:0.12 ./source",
+    "our:compile:edition:node": "npm run our:compile:edition:node:0.10",
+    "our:compile:edition:node:0.10": "env BABEL_ENV=edition:node:0.10 babel --out-dir ./edition:node:0.10 ./source",
     "our:deploy": "echo no need for this project",
     "our:meta": "npm run our:meta:docs && npm run our:meta:projectz",
     "our:meta:docs": "documentation build -f html -o ./docs -g --shallow ./source/**.js",
@@ -156,13 +156,13 @@
           ]
         ]
       },
-      "edition:node:0.12": {
+      "edition:node:0.10": {
         "presets": [
           [
             "env",
             {
               "targets": {
-                "node": "0.12"
+                "node": "0.10"
               }
             }
           ]
