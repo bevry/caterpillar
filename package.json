@@ -75,7 +75,7 @@
     },
     {
       "description": "esnext compiled for browsers with require for modules",
-      "directory": "edition:browsers",
+      "directory": "edition-browsers",
       "entry": "index.js",
       "syntaxes": [
         "javascript",
@@ -88,22 +88,22 @@
     },
     {
       "description": "esnext compiled for node.js >=0.10 with require for modules",
-      "directory": "edition:node:0.10",
+      "directory": "edition-node-0.10",
       "entry": "index.js",
       "syntaxes": [
         "javascript",
         "require"
       ],
       "engines": {
-        "node": ">=0.10",
+        "node": "0.10 || 0.12 || 4 || 6 || 8 || 10",
         "browsers": false
       }
     }
   ],
   "main": "index.js",
-  "browser": "edition:browsers/index.js",
+  "browser": "edition-browsers/index.js",
   "dependencies": {
-    "editions": "^2.0.0",
+    "editions": "^2.0.2",
     "extendr": "^3.2.0",
     "rfc-log-levels": "^1.0.0"
   },
@@ -111,8 +111,8 @@
     "assert-helpers": "^4.5.1",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "documentation": "^8.1.1",
-    "eslint": "^5.4.0",
+    "documentation": "^8.1.2",
+    "eslint": "^5.5.0",
     "joe": "^2.0.2",
     "joe-reporter-console": "^2.0.2",
     "projectz": "^1.4.0",
@@ -120,11 +120,9 @@
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition:* ./es2015 ./es5 ./out",
-    "our:compile": "npm run our:compile:edition",
-    "our:compile:edition": "npm run our:compile:edition:browsers && npm run our:compile:edition:node",
-    "our:compile:edition:browsers": "env BABEL_ENV=edition:browsers babel --out-dir ./edition:browsers ./source",
-    "our:compile:edition:node": "npm run our:compile:edition:node:0.10",
-    "our:compile:edition:node:0.10": "env BABEL_ENV=edition:node:0.10 babel --out-dir ./edition:node:0.10 ./source",
+    "our:compile": "npm run our:compile:edition-browsers && npm run our:compile:edition-node-0.10",
+    "our:compile:edition-browsers": "env BABEL_ENV=edition-browsers babel --out-dir ./edition-browsers ./source",
+    "our:compile:edition-node-0.10": "env BABEL_ENV=edition-node-0.10 babel --out-dir ./edition-node-0.10 ./source",
     "our:deploy": "echo no need for this project",
     "our:meta": "npm run our:meta:docs && npm run our:meta:projectz",
     "our:meta:docs": "documentation build -f html -o ./docs -g --shallow ./source/**.js",
@@ -144,7 +142,7 @@
   },
   "babel": {
     "env": {
-      "edition:browsers": {
+      "edition-browsers": {
         "presets": [
           [
             "env",
@@ -156,7 +154,7 @@
           ]
         ]
       },
-      "edition:node:0.10": {
+      "edition-node-0.10": {
         "presets": [
           [
             "env",
