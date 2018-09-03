@@ -1,5 +1,8 @@
 # History
 
+## v3.1.2 2018 September 3
+- Updated base files and [editions](https://github.com/bevry/editions) using [boundation](https://github.com/bevry/boundation)
+
 ## v3.1.1 2018 August 19
 - Readded support for node 0.10
 
