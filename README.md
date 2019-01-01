@@ -29,7 +29,6 @@
 
 Caterpillar is the ultimate logging system for Node.js, based on [transform streams](http://nodejs.org/api/stream.html#stream_class_stream_transform) you can log to it and pipe the output off to different locations, including [some pre-made ones](http://npmjs.org/keyword/caterpillar-transform). Caterpillar also supports log levels according to the [RFC standard](http://www.faqs.org/rfcs/rfc3164.html), as well as line, method, and file fetching for messages. You can even use it in web browsers with the [Browser Transform](https://github.com/bevry/caterpillar-browser).
 
-
 <!-- INSTALL/ -->
 
 <h2>Install</h2>
@@ -74,12 +73,11 @@ This project provides its type information via inline <a href="http://usejsdoc.o
 
 ## Usage
 
+[API Documentation.](http://master.caterpillar.bevry.surge.sh/docs/)
+
 [Examples.](https://github.com/bevry/caterpillar-examples)
 
-[Documentation.](http://master.caterpillar.bevry.surge.sh/docs/)
-
 [Existing transforms.](https://www.npmjs.com/browse/keyword/caterpillar-transform)
-
 
 <!-- HISTORY/ -->
 
