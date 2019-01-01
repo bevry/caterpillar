@@ -1,4 +1,4 @@
-# 2018 September 3
+# 2018 December 18
 # https://github.com/bevry/base
 
 # System Files
@@ -22,9 +22,9 @@ yarn.lock
 
 # Build Caches
 build/
-components/
 bower_components/
 node_modules/
+.next/
 
 # Build Outputs
 **/out.*
@@ -38,7 +38,6 @@ es5/
 es2015/
 esnext/
 docs/
-
 
 # =====================================
 # CUSTOM

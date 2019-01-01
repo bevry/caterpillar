@@ -24,7 +24,7 @@ const _Transform = require('stream').Transform
  * 	.log('note', 'cool times', 5)
  */
 class Transform extends _Transform {
-	constructor (...args) {
+	constructor(...args) {
 		super(...args)
 
 		/**
@@ -46,7 +46,7 @@ class Transform extends _Transform {
 	 * Use this to add default/initial configuration to your class.
 	 * @returns {Object}
 	 */
-	getInitialConfig () {
+	getInitialConfig() {
 		return {}
 	}
 
@@ -57,7 +57,7 @@ class Transform extends _Transform {
 	 * @param {...*} args
 	 * @returns {Transform}
 	 */
-	static create (...args) {
+	static create(...args) {
 		return new this(...args)
 	}
 
@@ -69,7 +69,7 @@ class Transform extends _Transform {
 	 * Get the current configuration object for this instance.
 	 * @returns {Object}
 	 */
-	getConfig () {
+	getConfig() {
 		return this._config
 	}
 
@@ -82,7 +82,7 @@ class Transform extends _Transform {
 	 * setConfig({a: 1}, {b: 2})
 	 * getConfig()  // {a: 1, b: 2}
 	 */
-	setConfig (...configs) {
+	setConfig(...configs) {
 		deep(this._config, ...configs)
 		this.emit('config', ...configs)
 		return this
@@ -94,7 +94,7 @@ class Transform extends _Transform {
 	 * @param {stream.Writable} child stream to be piped to
 	 * @returns {stream.Writable} the result of the pipe operation
 	 */
-	pipe (child) {
+	pipe(child) {
 		if (child.setConfig) {
 			child.setConfig(this.getConfig())
 			const listener = child.setConfig.bind(child)
@@ -115,13 +115,12 @@ class Transform extends _Transform {
 	 * @param {function} next
 	 * @returns {void}
 	 */
-	_transform (chunk, encoding, next) {
+	_transform(chunk, encoding, next) {
 		let message = chunk.toString()
 
 		try {
 			message = this.format(message)
-		}
-		catch (err) {
+		} catch (err) {
 			return next(err)
 		}
 
@@ -139,7 +138,7 @@ class Transform extends _Transform {
 	 * @param {string} message
 	 * @returns {*}
 	 */
-	format (message) {
+	format(message) {
 		return message
 	}
 }

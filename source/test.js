@@ -3,14 +3,17 @@
 
 const { Transform, Logger, create } = require('../')
 const { PassThrough } = require('stream')
-const { suite } = require('joe')
+const { suite } = require('kava')
 const { equal, deepEqual } = require('assert-helpers')
 const { ok } = require('assert')
 
 // Prepare
-function cleanChanging (item) {
+function cleanChanging(item) {
 	item = JSON.parse(item)
-	item.date = item.date.replace(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/, 'date')
+	item.date = item.date.replace(
+		/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/,
+		'date'
+	)
 	item.file = item.file.replace(/^[/\\].+$/, 'file')
 	item.line = item.file.replace(/^\d{1,}$/, 'line')
 	item.method = item.method.replace(/^[-\d\w._<>]+$/, 'method')
@@ -18,38 +21,37 @@ function cleanChanging (item) {
 }
 
 // Test
-suite('caterpillar', function (suite) {
-
-	suite('transform', function (suite, test) {
-		test('should instantiate correctly', function () {
+suite('caterpillar', function(suite) {
+	suite('transform', function(suite, test) {
+		test('should instantiate correctly', function() {
 			const transform = new Transform()
 			ok(transform instanceof Transform, 'transform is instance')
 		})
 
-		test('should instantiate correctly, using Transform.create()', function () {
+		test('should instantiate correctly, using Transform.create()', function() {
 			const transform = Transform.create()
 			ok(transform instanceof Transform, 'transform is instance')
 		})
 
-		test('should set configuration correctly', function () {
+		test('should set configuration correctly', function() {
 			const transform = new Transform()
 			transform.setConfig({ level: 5 })
 			equal(transform.getConfig().level, 5)
 		})
 
-		test('should set configuration correctly via constructor', function () {
+		test('should set configuration correctly via constructor', function() {
 			const transform = new Transform({ level: 4 })
 			equal(transform.getConfig().level, 4)
 		})
 
-		test('should pass configuration to the child via constructor', function () {
+		test('should pass configuration to the child via constructor', function() {
 			const transform = new Transform({ level: 3 })
 			const transform2 = new Transform()
 			transform.pipe(transform2)
 			equal(transform2.getConfig().level, 3)
 		})
 
-		test('should pass configuration to the child via set config after the fact', function () {
+		test('should pass configuration to the child via set config after the fact', function() {
 			const transform = new Transform()
 			const transform2 = new Transform()
 			transform.pipe(transform2)
@@ -58,24 +60,24 @@ suite('caterpillar', function (suite) {
 		})
 	})
 
-	suite('logger', function (suite, test) {
-		test('should instantiate correctly', function () {
+	suite('logger', function(suite, test) {
+		test('should instantiate correctly', function() {
 			const logger = new Logger()
 			ok(logger instanceof Logger, 'logger is instance')
 		})
 
-		test('should instantiate correctly, using Logger.create()', function () {
+		test('should instantiate correctly, using Logger.create()', function() {
 			const logger = Logger.create()
 			ok(logger instanceof Logger, 'logger is instance')
 		})
 
-		test('should instantiate correctly, using require("caterpillar").create()', function () {
+		test('should instantiate correctly, using require("caterpillar").create()', function() {
 			const logger = create()
 			ok(logger instanceof Logger, 'logger is instance')
 		})
 	})
 
-	suite('logging', function (suite, test) {
+	suite('logging', function(suite, test) {
 		const logger = new Logger()
 		const output = new PassThrough()
 		const actual = []
@@ -97,15 +99,15 @@ suite('caterpillar', function (suite) {
 			'{"date":"2013-05-07T11:12:43.995Z","args":["this is unknown and is level 6"],"levelNumber":6,"levelName":"info","line":"91","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}'
 		]
 
-		output.on('data', function (chunk) {
+		output.on('data', function(chunk) {
 			actual.push(chunk.toString())
 		})
 
-		test('should pipe correctly', function () {
+		test('should pipe correctly', function() {
 			logger.pipe(output)
 		})
 
-		test('should log messages', function () {
+		test('should log messages', function() {
 			const levels = logger.getConfig().levels
 			for (const name in levels) {
 				if (levels.hasOwnProperty(name)) {
@@ -117,14 +119,14 @@ suite('caterpillar', function (suite) {
 			logger.log('this is unknown and is level 6')
 		})
 
-		test('should provide the expected output', function (done) {
-			output.on('end', function () {
+		test('should provide the expected output', function(done) {
+			output.on('end', function() {
 				const actualCleaned = actual.map(cleanChanging)
 				const expectedCleaned = expected.map(cleanChanging)
 				console.dir(actualCleaned)
 				console.dir(expectedCleaned)
 				equal(actualCleaned.length, expectedCleaned.length, 'lengths')
-				actualCleaned.forEach(function (result, index) {
+				actualCleaned.forEach(function(result, index) {
 					deepEqual(result, expectedCleaned[index], 'results')
 				})
 				done()

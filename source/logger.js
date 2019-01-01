@@ -45,7 +45,7 @@ const rfcLogLevels = require('rfc-log-levels')
  * const logger = require('caterpillar').create()
  */
 class Logger extends PassThrough {
-	constructor (...args) {
+	constructor(...args) {
 		super(...args)
 
 		/**
@@ -67,7 +67,7 @@ class Logger extends PassThrough {
 	 * Initial log levels are fetched from: https://github.com/bevry/log-levels
 	 * @returns {Object}
 	 */
-	getInitialConfig () {
+	getInitialConfig() {
 		return {
 			lineOffset: 0,
 			levels: extend({}, rfcLogLevels, {
@@ -83,7 +83,7 @@ class Logger extends PassThrough {
 	 * @param {...*} args
 	 * @returns {Logger}
 	 */
-	static create (...args) {
+	static create(...args) {
 		return new this(...args)
 	}
 
@@ -95,7 +95,7 @@ class Logger extends PassThrough {
 	 * Get the current configuration object for this instance.
 	 * @returns {Object}
 	 */
-	getConfig () {
+	getConfig() {
 		return this._config
 	}
 
@@ -108,7 +108,7 @@ class Logger extends PassThrough {
 	 * setConfig({a: 1}, {b: 2})
 	 * getConfig()  // {a: 1, b: 2}
 	 */
-	setConfig (...configs) {
+	setConfig(...configs) {
 		deep(this._config, ...configs)
 		this.emit('config', ...configs)
 		return this
@@ -120,7 +120,7 @@ class Logger extends PassThrough {
 	 * @param {stream.Writable} child stream to be piped to
 	 * @returns {stream.Writable} the result of the pipe operation
 	 */
-	pipe (child) {
+	pipe(child) {
 		if (child.setConfig) {
 			child.setConfig(this.getConfig())
 			const listener = child.setConfig.bind(child)
@@ -139,12 +139,11 @@ class Logger extends PassThrough {
 	 * @returns {number}
 	 * @throws {Error} will throw an error if no result was found
 	 */
-	getLevelNumber (name) {
+	getLevelNumber(name) {
 		const { levels } = this.getConfig()
 		if (levels[name] == null) {
 			throw new Error(`No level number was found for the level name: ${name}`)
-		}
-		else {
+		} else {
 			return levels[name]
 		}
 	}
@@ -155,7 +154,7 @@ class Logger extends PassThrough {
 	 * @returns {string}
 	 * @throws {Error} will throw an error if returned empty handed
 	 */
-	getLevelName (number) {
+	getLevelName(number) {
 		const { levels } = this.getConfig()
 
 		// Try to return the levelName
@@ -187,17 +186,15 @@ class Logger extends PassThrough {
 	 * 	"levelName": "notice"
 	 * }
 	 */
-	getLevelInfo (level) {
+	getLevelInfo(level) {
 		if (typeof level === 'string') {
-			const levelNumber = this.getLevelNumber(level)  // will throw if not found
-			const levelName = this.getLevelName(levelNumber)  // name could be shortened, so get the expanded name
+			const levelNumber = this.getLevelNumber(level) // will throw if not found
+			const levelName = this.getLevelName(levelNumber) // name could be shortened, so get the expanded name
 			return { levelNumber, levelName }
-		}
-		else if (typeof level === 'number') {
-			const levelName = this.getLevelName(level)  // will throw if not found
+		} else if (typeof level === 'number') {
+			const levelName = this.getLevelName(level) // will throw if not found
 			return { levelNumber: level, levelName }
-		}
-		else {
+		} else {
 			throw new Error(`Unknown level type: ${typeof level} for ${level}`)
 		}
 	}
@@ -217,7 +214,7 @@ class Logger extends PassThrough {
 	 * 	"file": "/Users/balupton/some-project/calling-file.js"
 	 * }
 	 */
-	getLineInfo () {
+	getLineInfo() {
 		// Prepare
 		let offset = this.getConfig().lineOffset
 		const result = {
@@ -235,13 +232,11 @@ class Logger extends PassThrough {
 			// https://github.com/winstonjs/winston/issues/401#issuecomment-61913086
 			try {
 				stack = err.stack
-			}
-			catch (error1) {
+			} catch (error1) {
 				try {
 					const previous = err.__previous__ || err.__previous
 					stack = previous && previous.stack
-				}
-				catch (error2) {
+				} catch (error2) {
 					stack = null
 				}
 			}
@@ -250,21 +245,19 @@ class Logger extends PassThrough {
 			if (stack) {
 				if (Array.isArray(stack)) {
 					lines = Array(stack)
-				}
-				else {
+				} else {
 					lines = stack.toString().split('\n')
 				}
-			}
-			else {
+			} else {
 				lines = []
 			}
 
 			// Handle different line formats
 			lines = lines
 				// Ensure each line item is a string
-				.map((line) => (line || '').toString())
+				.map(line => (line || '').toString())
 				// Filter out empty line items
-				.filter((line) => line.length !== 0)
+				.filter(line => line.length !== 0)
 
 			// Parse our lines
 			for (let index = 0; index < lines.length; index++) {
@@ -283,18 +276,20 @@ class Logger extends PassThrough {
 					if (parts[0].indexOf('(') === -1) {
 						result.method = 'unknown'
 						result.file = parts[0].replace(/^.+?\s+at\s+/, '')
-					}
-					else {
-						result.method = parts[0].replace(/^.+?\s+at\s+/, '').replace(/\s+\(.+$/, '')
+					} else {
+						result.method = parts[0]
+							.replace(/^.+?\s+at\s+/, '')
+							.replace(/\s+\(.+$/, '')
 						result.file = parts[0].replace(/^.+?\(/, '')
 					}
 					result.line = Number(parts[1])
 					break
 				}
 			}
-		}
-		catch (err) {
-			throw new Error(`Caterpillar.getLineInfo: Failed to parse the error stack: ${err}`)
+		} catch (err) {
+			throw new Error(
+				`Caterpillar.getLineInfo: Failed to parse the error stack: ${err}`
+			)
 		}
 
 		// Return
@@ -306,7 +301,7 @@ class Logger extends PassThrough {
 	 * @param {Array<*>} args
 	 * @returns {LogEntry}
 	 */
-	getLogEntry (args) {
+	getLogEntry(args) {
 		const date = new Date().toISOString()
 		const lineInfo = this.getLineInfo()
 
@@ -314,8 +309,7 @@ class Logger extends PassThrough {
 		let levelInfo
 		try {
 			levelInfo = this.getLevelInfo(level)
-		}
-		catch (err) {
+		} catch (err) {
 			// if it threw (level was not a valid name or number), then use the default level
 			levelInfo = this.getLevelInfo('default')
 			args.unshift(level)
@@ -355,7 +349,7 @@ class Logger extends PassThrough {
 	 *		"file": "/Users/balupton/some-project/calling-file.js"
 	 * }
 	 */
-	log (...args) {
+	log(...args) {
 		// Fetch the log entry
 		const entry = this.getLogEntry(args)
 
