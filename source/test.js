@@ -1,7 +1,7 @@
 /* eslint no-console:0 */
 'use strict'
 
-const { Transform, Logger, create } = require('../')
+const { Transform, Logger, create } = require('./')
 const { PassThrough } = require('stream')
 const { suite } = require('kava')
 const { equal, deepEqual } = require('assert-helpers')
