@@ -113,7 +113,7 @@
   "browser": "edition-browsers/index.js",
   "dependencies": {
     "editions": "^2.2.0",
-    "extendr": "^3.5.0",
+    "extendr": "^4.0.0",
     "rfc-log-levels": "^2.0.0"
   },
   "devDependencies": {
