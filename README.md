@@ -49,10 +49,9 @@ Caterpillar is the ultimate logging system for Node.js, based on [transform stre
 
 <p>This package is published with the following editions:</p>
 
-<ul><li><code>caterpillar</code> aliases <code>caterpillar/index.js</code> which uses <a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a> to automatically select the correct edition for the consumers environment</li>
+<ul><li><code>caterpillar</code> aliases <code>caterpillar/source/index.js</code></li>
 <li><code>caterpillar/source/index.js</code> is esnext source code with require for modules</li>
-<li><code>caterpillar/edition-browsers/index.js</code> is esnext compiled for browsers with require for modules</li>
-<li><code>caterpillar/edition-node-0.10/index.js</code> is esnext compiled for node.js 0.10 with require for modules</li></ul>
+<li><code>caterpillar/edition-browsers/index.js</code> is esnext compiled for browsers with require for modules</li></ul>
 
 <h3><a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a></h3>
 
@@ -115,7 +114,8 @@ These amazing people have contributed code to this project:
 
 <ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/caterpillar/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/caterpillar">view contributions</a></li>
 <li><a href="https://github.com/t-visualappeal">t-visualappeal</a> — <a href="https://github.com/bevry/caterpillar/commits?author=t-visualappeal" title="View the GitHub contributions of t-visualappeal on repository bevry/caterpillar">view contributions</a></li>
-<li><a href="http://thelfensdrfer.de">Tim Helfensdörfer</a> — <a href="https://github.com/bevry/caterpillar/commits?author=thelfensdrfer" title="View the GitHub contributions of Tim Helfensdörfer on repository bevry/caterpillar">view contributions</a></li></ul>
+<li><a href="http://thelfensdrfer.de">Tim Helfensdörfer</a> — <a href="https://github.com/bevry/caterpillar/commits?author=thelfensdrfer" title="View the GitHub contributions of Tim Helfensdörfer on repository bevry/caterpillar">view contributions</a></li>
+<li><a href="http://github.com/apps/dependabot-preview">dependabot-preview[bot]</a> — <a href="https://github.com/bevry/caterpillar/commits?author=dependabot-preview[bot]" title="View the GitHub contributions of dependabot-preview[bot] on repository bevry/caterpillar">view contributions</a></li></ul>
 
 <a href="https://github.com/bevry/caterpillar/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 

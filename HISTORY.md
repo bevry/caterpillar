@@ -1,5 +1,10 @@
 # History
 
+## v4.0.0 2019 December 1
+
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+-   Minimum required node version changed from `node: >=0.10` to `node: >=8` to keep up with mandatory ecosystem changes
+
 ## v3.3.0 2019 November 13
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
