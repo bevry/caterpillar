@@ -97,7 +97,7 @@
   "main": "source/index.js",
   "browser": "edition-browsers/index.js",
   "dependencies": {
-    "extendr": "^4.1.0",
+    "extendr": "^4.3.0",
     "rfc-log-levels": "^2.3.0"
   },
   "devDependencies": {
