@@ -98,7 +98,7 @@
   "browser": "edition-browsers/index.js",
   "dependencies": {
     "extendr": "^4.1.0",
-    "rfc-log-levels": "^2.1.0"
+    "rfc-log-levels": "^2.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
