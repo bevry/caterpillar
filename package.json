@@ -102,7 +102,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.4",
+    "@babel/core": "^7.7.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
     "@babel/preset-env": "^7.7.6",
     "assert-helpers": "^5.7.0",
