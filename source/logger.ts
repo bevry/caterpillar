@@ -71,8 +71,8 @@ class Logger extends PassThrough {
 		return {
 			lineOffset: 0,
 			levels: extend({}, rfcLogLevels, {
-				default: 6
-			})
+				default: 6,
+			}),
 		}
 	}
 
@@ -220,7 +220,7 @@ class Logger extends PassThrough {
 		const result = {
 			line: -1,
 			method: 'unknown',
-			file: 'unknown'
+			file: 'unknown',
 		}
 
 		try {
@@ -255,9 +255,9 @@ class Logger extends PassThrough {
 			// Handle different line formats
 			lines = lines
 				// Ensure each line item is a string
-				.map(line => (line || '').toString())
+				.map((line) => (line || '').toString())
 				// Filter out empty line items
-				.filter(line => line.length !== 0)
+				.filter((line) => line.length !== 0)
 
 			// Parse our lines
 			for (let index = 0; index < lines.length; index++) {
