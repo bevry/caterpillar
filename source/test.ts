@@ -1,4 +1,4 @@
-import { Transform, Logger, create } from './'
+import { Transform, Logger, create } from './index.js'
 import { PassThrough } from 'stream'
 import { suite } from 'kava'
 import { equal, deepEqual } from 'assert-helpers'

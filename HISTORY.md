@@ -1,5 +1,9 @@
 # History
 
+## v5.1.0 2020 May 8
+
+-   Merge source code into a single file, and export the various types
+
 ## v5.0.0 2020 May 8
 
 -   Converted from JavaScript to TypeScript, no functionality changes here
