@@ -1,14 +1,12 @@
-/* eslint no-console:0 */
-'use strict'
-
-const { Transform, Logger, create } = require('./')
-const { PassThrough } = require('stream')
-const { suite } = require('kava')
-const { equal, deepEqual } = require('assert-helpers')
-const { ok } = require('assert')
+import { Transform, Logger, create } from './'
+import { PassThrough } from 'stream'
+import { suite } from 'kava'
+import { equal, deepEqual } from 'assert-helpers'
+import { ok } from 'assert'
 
 // Prepare
-function cleanChanging(item) {
+// testing workarounds
+function cleanChanging(item: any) {
 	item = JSON.parse(item)
 	item.date = item.date.replace(
 		/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/,
@@ -16,7 +14,7 @@ function cleanChanging(item) {
 	)
 	item.file = item.file.replace(/^[/\\].+$/, 'file')
 	item.line = item.file.replace(/^\d{1,}$/, 'line')
-	item.method = item.method.replace(/^[-\d\w._<>]+$/, 'method')
+	item.method = item.method.replace('EventEmitterGrouped.', '')
 	return item
 }
 
@@ -80,23 +78,23 @@ suite('caterpillar', function (suite) {
 	suite('logging', function (suite, test) {
 		const logger = new Logger()
 		const output = new PassThrough()
-		const actual = []
-		const expected = [
-			'{"date":"2013-05-07T11:12:43.982Z","args":["this is emergency and is level 0"],"levelNumber":0,"levelName":"emergency","line":"89","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
-			'{"date":"2013-05-07T11:12:43.986Z","args":["this is alert and is level 1"],"levelNumber":1,"levelName":"alert","line":"89","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
-			'{"date":"2013-05-07T11:12:43.987Z","args":["this is critical and is level 2"],"levelNumber":2,"levelName":"critical","line":"89","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
-			'{"date":"2013-05-07T11:12:43.987Z","args":["this is error and is level 3"],"levelNumber":3,"levelName":"error","line":"89","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
-			'{"date":"2013-05-07T11:12:43.988Z","args":["this is warning and is level 4"],"levelNumber":4,"levelName":"warning","line":"89","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
-			'{"date":"2013-05-07T11:12:43.988Z","args":["this is notice and is level 5"],"levelNumber":5,"levelName":"notice","line":"89","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
-			'{"date":"2013-05-07T11:12:43.989Z","args":["this is info and is level 6"],"levelNumber":6,"levelName":"info","line":"89","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
-			'{"date":"2013-05-07T11:12:43.990Z","args":["this is debug and is level 7"],"levelNumber":7,"levelName":"debug","line":"89","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
-			'{"date":"2013-05-07T11:12:43.991Z","args":["this is emerg and is level 0"],"levelNumber":0,"levelName":"emergency","line":"89","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
-			'{"date":"2013-05-07T11:12:43.991Z","args":["this is crit and is level 2"],"levelNumber":2,"levelName":"critical","line":"89","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
-			'{"date":"2013-05-07T11:12:43.992Z","args":["this is err and is level 3"],"levelNumber":3,"levelName":"error","line":"89","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
-			'{"date":"2013-05-07T11:12:43.992Z","args":["this is warn and is level 4"],"levelNumber":4,"levelName":"warning","line":"89","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
-			'{"date":"2013-05-07T11:12:43.992Z","args":["this is note and is level 5"],"levelNumber":5,"levelName":"notice","line":"89","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
-			'{"date":"2013-05-07T11:12:43.993Z","args":["this is default and is level 6"],"levelNumber":6,"levelName":"info","line":"89","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
-			'{"date":"2013-05-07T11:12:43.995Z","args":["this is unknown and is level 6"],"levelNumber":6,"levelName":"info","line":"91","method":"Task.fn","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+		const actual: string[] = []
+		const expected: string[] = [
+			'{"date":"2013-05-07T11:12:43.982Z","args":["this is emergency and is level 0"],"levelNumber":0,"levelName":"emergency","line":"89","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+			'{"date":"2013-05-07T11:12:43.986Z","args":["this is alert and is level 1"],"levelNumber":1,"levelName":"alert","line":"89","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+			'{"date":"2013-05-07T11:12:43.987Z","args":["this is critical and is level 2"],"levelNumber":2,"levelName":"critical","line":"89","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+			'{"date":"2013-05-07T11:12:43.987Z","args":["this is error and is level 3"],"levelNumber":3,"levelName":"error","line":"89","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+			'{"date":"2013-05-07T11:12:43.988Z","args":["this is warning and is level 4"],"levelNumber":4,"levelName":"warning","line":"89","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+			'{"date":"2013-05-07T11:12:43.988Z","args":["this is notice and is level 5"],"levelNumber":5,"levelName":"notice","line":"89","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+			'{"date":"2013-05-07T11:12:43.989Z","args":["this is info and is level 6"],"levelNumber":6,"levelName":"info","line":"89","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+			'{"date":"2013-05-07T11:12:43.990Z","args":["this is debug and is level 7"],"levelNumber":7,"levelName":"debug","line":"89","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+			'{"date":"2013-05-07T11:12:43.991Z","args":["this is emerg and is level 0"],"levelNumber":0,"levelName":"emergency","line":"89","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+			'{"date":"2013-05-07T11:12:43.991Z","args":["this is crit and is level 2"],"levelNumber":2,"levelName":"critical","line":"89","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+			'{"date":"2013-05-07T11:12:43.992Z","args":["this is err and is level 3"],"levelNumber":3,"levelName":"error","line":"89","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+			'{"date":"2013-05-07T11:12:43.992Z","args":["this is warn and is level 4"],"levelNumber":4,"levelName":"warning","line":"89","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+			'{"date":"2013-05-07T11:12:43.992Z","args":["this is note and is level 5"],"levelNumber":5,"levelName":"notice","line":"89","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+			'{"date":"2013-05-07T11:12:43.993Z","args":["this is default and is level 6"],"levelNumber":6,"levelName":"info","line":"89","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
+			'{"date":"2013-05-07T11:12:43.995Z","args":["this is unknown and is level 6"],"levelNumber":6,"levelName":"info","line":"91","method":"caller","file":"/Users/balupton/Projects/caterpillar/out/test/caterpillar-test.js"}',
 		]
 
 		output.on('data', function (chunk) {
@@ -107,7 +105,7 @@ suite('caterpillar', function (suite) {
 			logger.pipe(output)
 		})
 
-		test('should log messages', function () {
+		test('should log messages', function caller() {
 			const levels = logger.getConfig().levels
 			for (const name in levels) {
 				if (levels.hasOwnProperty(name)) {

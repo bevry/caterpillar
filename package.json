@@ -1,7 +1,7 @@
 {
   "title": "Caterpillar",
   "name": "caterpillar",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Caterpillar is the ultimate logging system for Node.js, based on transform streams you can log to it and pipe the output off to different locations, including some pre-made ones. Caterpillar also supports log levels according to the RFC standard, as well as line, method, and file fetching for messages. You can even use it in web browsers with caterpillar-browser.",
   "homepage": "https://github.com/bevry/caterpillar",
   "license": "MIT",
@@ -60,8 +60,7 @@
   "contributors": [
     "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
     "t-visualappeal (https://github.com/t-visualappeal)",
-    "Tim Helfensdörfer <tim@visualappeal.de> (http://thelfensdrfer.de)",
-    "dependabot-preview[bot] (http://github.com/apps/dependabot-preview)"
+    "Tim Helfensdörfer <tim@visualappeal.de> (http://thelfensdrfer.de)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/caterpillar/issues"
@@ -119,7 +118,8 @@
   "module": "edition-browsers/index.js",
   "dependencies": {
     "extendr": "^5.1.0",
-    "rfc-log-levels": "^2.3.0"
+    "get-current-line": "^5.1.0",
+    "rfc-log-levels": "^3.0.0"
   },
   "devDependencies": {
     "@bevry/update-contributors": "^1.0.1",
@@ -170,7 +170,10 @@
   "eslintConfig": {
     "extends": [
       "bevry"
-    ]
+    ],
+    "rules": {
+      "class-methods-use-this": "off"
+    }
   },
   "prettier": {
     "semi": false,

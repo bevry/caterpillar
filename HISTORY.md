@@ -1,5 +1,13 @@
 # History
 
+## v5.0.0 2020 May 8
+
+-   Converted from JavaScript to TypeScript, no functionality changes here
+-   Extracted the current line functionality into [get-current-line](https://github.com/bevry/get-current-line), which uses [a different means of calculating the offset](https://github.com/bevry/get-current-line/blob/master/HISTORY.md#v500-2020-may-8) which **you should refer to if you ever used custom offsets**
+-   Extracted the log level functionality into [rfc-log-levels](https://github.com/bevry/rfc-log-levels), existing functionality is retained
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+-   Minimum required node version changed from `node: >=8` to `node: >=10` to keep up with mandatory ecosystem changes
+
 ## v4.0.0 2019 December 1
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
@@ -24,7 +32,7 @@
 ## v3.1.0 2018 August 17
 
 -   Now uses [rfc-log-levels](https://github.com/bevry/log-levels) for the initial log levels
--   Moved type linting from flow to jsdoc & typescript, which also results in better documentation for you, and visual studio code intellisense
+-   Moved type linting from flow to jsdoc & typescript, which also results in better documentation for you, and visual studio code intellisense`
 -   Updated base files and [editions](https://github.com/bevry/editions) using [boundation](https://github.com/bevry/boundation)
 
 ## v3.0.1 2016 October 20

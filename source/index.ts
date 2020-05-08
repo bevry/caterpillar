@@ -1,6 +1,4 @@
-'use strict'
-
-const Transform = require('./transform')
-const Logger = require('./logger')
+import Transform from './transform.js'
+import Logger from './logger.js'
 const create = Logger.create.bind(Logger)
-module.exports = { Transform, Logger, create }
+export { create, Logger, Transform }
