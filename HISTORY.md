@@ -1,5 +1,9 @@
 # History
 
+## v5.1.1 2020 May 8
+
+-   Fix some types on the Transform class
+
 ## v5.1.0 2020 May 8
 
 -   Merge source code into a single file, and export the various types

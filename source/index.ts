@@ -45,17 +45,11 @@ export interface ConfigurableStream extends NodeJS.WritableStream {
  * ```
  */
 export class Logger extends PassThrough {
-	constructor(...args: any) {
-		super(...args)
-		this._config = this.getInitialConfig()
-		this.setConfig(...args)
-	}
-
-	protected _config: CaterpillarConfiguration
-
 	// ===================================
 	// Generic Differences
 	// This code is shared but different between Logger and Transform
+
+	protected _config: CaterpillarConfiguration
 
 	/**
 	 * Get the initial configuration.
@@ -73,17 +67,22 @@ export class Logger extends PassThrough {
 		}
 	}
 
+	// ===================================
+	// Generic
+	// This code is shared between Logger and Transform
+
+	constructor(...args: any) {
+		super(...args)
+		this._config = this.getInitialConfig()
+		this.setConfig(...args)
+	}
+
 	/**
 	 * Alternative way of creating an instance of the class without having to use the `new` keyword.
-	 * Useful when creating the class directly from `require` statements.
 	 */
 	static create(...args: any) {
 		return new this(...args)
 	}
-
-	// ===================================
-	// Generic
-	// This code is shared between Logger and Transform
 
 	/**
 	 * Get the current configuration object for this instance.
@@ -221,25 +220,28 @@ export class Logger extends PassThrough {
  * ```
  */
 export class Transform extends _Transform {
-	constructor(...args: any) {
-		super(...args)
-		this._config = this.getInitialConfig()
-		this.setConfig(...args)
-	}
-
-	_config: Configuration
-
 	// ===================================
 	// Generic Differences
 	// This code is shared but different between Logger and Transform
 
+	protected _config: Configuration
+
 	/**
 	 * Get the initial configuration option.
 	 * Use this to add default/initial configuration to your class.
-	 * @returns {Configuration}
 	 */
-	getInitialConfig() {
+	getInitialConfig(): Configuration {
 		return {}
+	}
+
+	// ===================================
+	// Generic
+	// This code is shared between Logger and Transform
+
+	constructor(...args: any) {
+		super(...args)
+		this._config = this.getInitialConfig()
+		this.setConfig(...args)
 	}
 
 	/**
@@ -248,10 +250,6 @@ export class Transform extends _Transform {
 	static create(...args: any) {
 		return new this(...args)
 	}
-
-	// ===================================
-	// Generic
-	// This code is shared between Logger and Transform
 
 	/**
 	 * Get the current configuration object for this instance.
@@ -262,10 +260,11 @@ export class Transform extends _Transform {
 
 	/**
 	 * Apply the specified configurations to this instance's configuration via deep merging.
-	 * @param configs
 	 * @example
+	 * ``` javascript
 	 * setConfig({a: 1}, {b: 2})
 	 * getConfig()  // {a: 1, b: 2}
+	 * ```
 	 */
 	setConfig(...configs: Configuration[]) {
 		deep(this._config, ...configs)
