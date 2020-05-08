@@ -331,3 +331,4 @@ export class Transform extends _Transform {
 
 // Aliases
 export const create = Logger.create.bind(Logger)
+export default Logger

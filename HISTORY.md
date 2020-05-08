@@ -1,5 +1,9 @@
 # History
 
+## v5.1.2 2020 May 8
+
+-   Added Logger as a default export, for better compat with the filters
+
 ## v5.1.1 2020 May 8
 
 -   Fix some types on the Transform class

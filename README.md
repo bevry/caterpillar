@@ -51,7 +51,7 @@ Caterpillar is the ultimate logging system for Node.js, based on [transform stre
 
 ``` html
 <script type="module">
-    import * as pkg from '//cdn.pika.dev/caterpillar/^5.1.1'
+    import * as pkg from '//cdn.pika.dev/caterpillar/^5.1.2'
 </script>
 ```
 
@@ -59,7 +59,7 @@ Caterpillar is the ultimate logging system for Node.js, based on [transform stre
 
 ``` html
 <script type="module">
-    import * as pkg from '//unpkg.com/caterpillar@^5.1.1'
+    import * as pkg from '//unpkg.com/caterpillar@^5.1.2'
 </script>
 ```
 
@@ -67,7 +67,7 @@ Caterpillar is the ultimate logging system for Node.js, based on [transform stre
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/caterpillar@5.1.1'
+    import * as pkg from '//dev.jspm.io/caterpillar@5.1.2'
 </script>
 ```
 
