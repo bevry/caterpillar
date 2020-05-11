@@ -1,7 +1,7 @@
 {
   "title": "Caterpillar",
   "name": "caterpillar",
-  "version": "5.1.2",
+  "version": "5.2.0",
   "description": "Caterpillar is the ultimate logging system for Node.js, based on transform streams you can log to it and pipe the output off to different locations, including some pre-made ones. Caterpillar also supports log levels according to the RFC standard, as well as line, method, and file fetching for messages. You can even use it in web browsers with caterpillar-browser.",
   "homepage": "https://github.com/bevry/caterpillar",
   "license": "MIT",
@@ -10,6 +10,7 @@
     "caterpillar",
     "console",
     "debug",
+    "export-default",
     "log",
     "logger",
     "logging",
@@ -49,18 +50,22 @@
       "patreonUsername": "bevry",
       "paypalURL": "https://bevry.me/paypal",
       "wishlistURL": "https://bevry.me/wishlist",
-      "travisTLD": "com"
+      "travisTLD": "com",
+      "githubUsername": "bevry",
+      "githubRepository": "caterpillar",
+      "githubSlug": "bevry/caterpillar",
+      "npmPackageName": "caterpillar"
     }
   },
   "funding": "https://bevry.me/fund",
-  "author": "2012+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me), 2011 Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
+  "author": "2012+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me), 2011 Benjamin Lupton <b@lupton.cc> (https://balupton.com)",
   "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
-    "t-visualappeal (https://github.com/t-visualappeal)",
-    "Tim Helfensdörfer <tim@visualappeal.de> (http://thelfensdrfer.de)"
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
+    "Tim Helfensdörfer <tim@visualappeal.de> (https://github.com/thelfensdrfer)",
+    "t-visualappeal (https://github.com/t-visualappeal)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/caterpillar/issues"
@@ -84,19 +89,6 @@
       "engines": false
     },
     {
-      "description": "TypeScript compiled against ES2019 for web browsers with Import for modules",
-      "directory": "edition-browsers",
-      "entry": "index.js",
-      "tags": [
-        "javascript",
-        "import"
-      ],
-      "engines": {
-        "node": false,
-        "browsers": "defaults"
-      }
-    },
-    {
       "description": "TypeScript compiled against ESNext for Node.js with Require for modules",
       "directory": "edition-esnext",
       "entry": "index.js",
@@ -109,6 +101,19 @@
         "node": "10 || 12 || 13 || 14",
         "browsers": false
       }
+    },
+    {
+      "description": "TypeScript compiled against ES2019 for web browsers with Import for modules",
+      "directory": "edition-browsers",
+      "entry": "index.js",
+      "tags": [
+        "javascript",
+        "import"
+      ],
+      "engines": {
+        "node": false,
+        "browsers": "defaults"
+      }
     }
   ],
   "types": "source/index.ts",
@@ -119,20 +124,20 @@
   "dependencies": {
     "extendr": "^5.1.0",
     "get-current-line": "^5.1.0",
-    "rfc-log-levels": "^3.0.0"
+    "rfc-log-levels": "^3.1.0"
   },
   "devDependencies": {
-    "@bevry/update-contributors": "^1.0.1",
+    "@bevry/update-contributors": "^1.5.0",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
-    "assert-helpers": "^6.2.0",
-    "eslint": "^6.8.0",
+    "assert-helpers": "^6.3.0",
+    "eslint": "^7.0.0",
     "eslint-config-bevry": "^3.4.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
-    "kava": "^4.4.0",
+    "kava": "^5.0.0",
     "prettier": "^2.0.5",
-    "projectz": "^1.19.1",
+    "projectz": "^2.1.0",
     "surge": "^0.21.3",
     "typedoc": "^0.17.6",
     "typescript": "^3.8.3",
@@ -163,8 +168,8 @@
     "our:verify:directory": "npx valid-directory",
     "our:verify:eslint": "npx eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx ./source",
     "our:verify:module": "npx valid-module",
-    "our:verify:prettier": "prettier --write .",
-    "our:verify:typescript": "tsc --noEmit --project tsconfig.json",
+    "our:verify:prettier": "npx prettier --write .",
+    "our:verify:typescript": "npx typescript --noEmit --project tsconfig.json",
     "test": "node ./edition-esnext/test.js"
   },
   "eslintConfig": {
