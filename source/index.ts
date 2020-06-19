@@ -1,3 +1,5 @@
+import type Buffer from 'buffer'
+
 import { deep } from 'extendr'
 import { PassThrough, Transform as _Transform } from 'stream'
 import getLogLevel, { rfcLogLevels, LevelInfo, LevelsMap } from 'rfc-log-levels'
