@@ -122,7 +122,7 @@
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "dependencies": {
-    "extendr": "5.5.0",
+    "extendr": "5.9.0",
     "get-current-line": "5.5.0",
     "rfc-log-levels": "3.5.0"
   },

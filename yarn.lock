@@ -844,12 +844,11 @@ extendr@5.5.0:
   dependencies:
     typechecker "^7.4.0"
 
-extendr@^5.5.0, extendr@^5.7.0:
-  version "5.8.0"
-  resolved "https://registry.yarnpkg.com/extendr/-/extendr-5.8.0.tgz#d05bea5a78c777ea3020154dc66c88c749a7e02a"
-  integrity sha512-ZbTYxxQPb3chPHDhz043hq7CO6gTIqaep0+ZBEES6C9zt5idJpsByYEfMzavi184XTXjSmMsW/nJ12hRj97Ffg==
+extendr@5.9.0, extendr@^5.5.0, extendr@^5.7.0:
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/extendr/-/extendr-5.9.0.tgz#8cfebe4870bc0197e990d5d1416375534dbdc673"
+  integrity sha512-eDmfkqSRXPrTguRZpDHYptEphgl67qlq3FOO+zWmI1q8CqOeJulYdTVIp9pNGZ6KQfTo4Mm61H2B0fB66Ej1hQ==
   dependencies:
-    editions "3.5.0"
     typechecker "7.5.0"
 
 external-editor@^3.0.3:
