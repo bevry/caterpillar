@@ -143,7 +143,7 @@
     "typedoc": "^0.17.7",
     "typescript": "^3.9.5",
     "valid-directory": "^2.5.0",
-    "valid-module": "^1.6.0"
+    "valid-module": "^1.7.0"
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
