@@ -133,7 +133,7 @@
     "assert-helpers": "^6.8.0",
     "eslint": "^7.3.0",
     "eslint-config-bevry": "^3.8.0",
-    "eslint-config-prettier": "^6.7.0",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "kava": "^5.7.0",
     "make-deno-edition": "^0.9.1",
