@@ -127,7 +127,7 @@
     "rfc-log-levels": "3.9.0"
   },
   "devDependencies": {
-    "@bevry/update-contributors": "^1.12.0",
+    "@bevry/update-contributors": "^1.13.0",
     "@typescript-eslint/eslint-plugin": "^3.4.0",
     "@typescript-eslint/parser": "^3.4.0",
     "assert-helpers": "^6.13.0",
