@@ -963,15 +963,15 @@ get-cli-arg@^6.0.0:
   dependencies:
     normalify "2.15.0"
 
+get-current-line@5.10.0:
+  version "5.10.0"
+  resolved "https://registry.yarnpkg.com/get-current-line/-/get-current-line-5.10.0.tgz#c4e1320e920dc06133dd90fa070324ab1b1cd006"
+  integrity sha512-+FymDiYf9lAhkkTE3SMyYQLBfInBwLm9Dq4KHDbpHOweZSJ25o1bD/KN/5Sip+PY//36wln71fD6F1tD9gmUHA==
+
 get-current-line@5.5.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/get-current-line/-/get-current-line-5.5.0.tgz#4db3a73152262488387c1bce69c46c5380de8cac"
   integrity sha512-STCaXFXNC8bqwLCAnvV98v2jXQW4pzZxeB44BVAparggfI+kkZ8rwKJaU+TBg7PpK6ZEo3srcv2mZ8/8p6/psA==
-
-get-current-line@5.9.0:
-  version "5.9.0"
-  resolved "https://registry.yarnpkg.com/get-current-line/-/get-current-line-5.9.0.tgz#8fa63dd7dc0804d8080630f4ef5e74c13f669d8e"
-  integrity sha512-tzrk1f5k4Zw+YkKZ4EqvtA7XWziDMll4EAytL9EEXkkKJaD7iXaJJzXpRLfitmgDVq8b5hM14rpZwHcUfuK5HQ==
 
 get-stdin@^6.0.0:
   version "6.0.0"

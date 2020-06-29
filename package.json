@@ -123,7 +123,7 @@
   "module": "edition-browsers/index.js",
   "dependencies": {
     "extendr": "5.9.0",
-    "get-current-line": "5.9.0",
+    "get-current-line": "5.10.0",
     "rfc-log-levels": "3.9.0"
   },
   "devDependencies": {
