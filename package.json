@@ -142,7 +142,7 @@
     "surge": "^0.21.3",
     "typedoc": "^0.17.7",
     "typescript": "^3.9.5",
-    "valid-directory": "^2.5.0",
+    "valid-directory": "^2.6.0",
     "valid-module": "^1.7.0"
   },
   "scripts": {
