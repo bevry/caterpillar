@@ -651,10 +651,10 @@ escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
-eslint-config-bevry@^3.12.0:
-  version "3.12.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-bevry/-/eslint-config-bevry-3.12.0.tgz#3b91d122260b108cc6cb840b3ba04a089d15b73c"
-  integrity sha512-jFyC5I3yXhrurrRU8vWuvw/g8DHO3vc+yrh/Hv+buAC13oN4mmTFW/zmvorNb2p1hogmm2AvSDdtSzVQaLNUhw==
+eslint-config-bevry@^3.13.0:
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-bevry/-/eslint-config-bevry-3.13.0.tgz#974bc8f102abac4902e45be9f9cdf428095de6f3"
+  integrity sha512-/F2Mq5JuYfijBUYUtwA1lux2xyQoorplNIQviepHAXzTuT4fTw1jLSnYbQS6r7RDkRb+tfnIQfv2MB7pbYAmEA==
   dependencies:
     semver "^7.3.2"
 
