@@ -136,7 +136,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "kava": "^5.7.0",
-    "make-deno-edition": "^0.13.0",
+    "make-deno-edition": "^0.14.0",
     "prettier": "^2.0.5",
     "projectz": "^2.10.1",
     "surge": "^0.21.3",
