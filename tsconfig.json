@@ -6,7 +6,8 @@
     "maxNodeModuleJsDepth": 5,
     "moduleResolution": "Node",
     "strict": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "module": "ESNext"
   },
   "include": ["source"]
 }
