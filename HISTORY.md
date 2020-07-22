@@ -1,5 +1,27 @@
 # History
 
+## v6.0.0 2020 July 24
+
+-   Breaking Changes: Caterpillar has been rewritten for performance, ease of use, and deno compatibility (now it is compatible with Node.js, Deno, and Web Browsers)
+-   The Caterpillar Transforms by Bevry, are now embedded into the `caterpillar` package:
+    -   `caterpillar-filter` is now `import { Filter } from 'caterpillar'`
+    -   `caterpillar-human` is now `import { Human } from 'caterpillar'`
+    -   `caterpillar-browser` is now `import { Browser } from 'caterpillar'`
+-   `*.create()` aliases for `new *()` are now removed, please just use `new *(config)`
+-   Each Caterpillar Transform now maintains its own configuration, which is specified via their constructor
+    -   As such, instead of doing `new *().setConfig(opts)` now jsut do `new *(opts)`
+-   the default log level is now a configuration option, rather than an entry in the levels map
+-   `level` configuration option has been renamed to `filterLevel`, which must now be specified directly on the filter transform
+-   the logger transform now accepts a new `lineLevel` configuration option, which will limit fetching line info for only log levels equal to or below that the `lineLevel` value, by default it is `-1` which disables fetching line info
+    -   This is a dramatic performance improvement for large applications, as fetching line levels for every log entry, even ones filtered out, was not performant
+    -   Closes [issue #16](https://github.com/bevry/caterpillar/issues/16)
+-   Caterpillar Transforms are no longer Node.js Streams, as using them was a major performance overhead
+    -   We can still pipe to Caterpillar Transforms as well as to Node.js streams and WHATWG/Deno streams
+    -   Closes [issue #17](https://github.com/bevry/caterpillar/issues/17)
+-   Add `error`, `warn`, `info`, `debug` aliases to the logger
+    -   Thanks to [Kirill Chernyshov](https://github.com/DeLaGuardo) for [issue #12](https://github.com/bevry/caterpillar/issues/12)
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v5.15.0 2020 July 22
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

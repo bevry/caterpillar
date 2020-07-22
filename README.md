@@ -26,15 +26,22 @@
 <!-- /BADGES -->
 
 
-Caterpillar is the ultimate logging system for Node.js, based on [transform streams](http://nodejs.org/api/stream.html#stream_class_stream_transform) you can log to it and pipe the output off to different locations, including [some pre-made ones](http://npmjs.org/keyword/caterpillar-transform). Caterpillar also supports log levels according to the [RFC standard](http://www.faqs.org/rfcs/rfc3164.html), as well as line, method, and file fetching for messages. You can even use it in web browsers with the [Browser Transform](https://github.com/bevry/caterpillar-browser).
+<!-- DESCRIPTION/ -->
+
+Caterpillar is the ultimate logging system for Deno, Node.js, and Web Browsers. Log levels are implemented to the RFC standard. Log entries can be filtered and piped to various streams, including coloured output to the terminal, the browser's console, and debug files. You can even write your own transforms.
+
+<!-- /DESCRIPTION -->
+
 
 ## Usage
 
 [Complete API Documentation.](http://master.caterpillar.bevry.surge.sh/docs/globals.html)
 
-[Examples.](https://github.com/bevry/caterpillar-examples)
+### Examples
 
-[Existing transforms.](https://www.npmjs.com/browse/keyword/caterpillar-transform)
+-   [Deno Example](https://repl.it/@balupton/caterpillar-deno)
+-   [Node.js Example](https://repl.it/@balupton/caterpillar-node)
+-   [Web Browser Example](https://repl.it/@balupton/caterpillar-browser)
 
 <!-- INSTALL/ -->
 
@@ -43,15 +50,21 @@ Caterpillar is the ultimate logging system for Node.js, based on [transform stre
 <a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
 <ul>
 <li>Install: <code>npm install --save caterpillar</code></li>
-<li>Import: <code>import pkg from ('caterpillar')</code></li>
-<li>Require: <code>const pkg = require('caterpillar').default</code></li>
+<li>Import: <code>import * as pkg from ('caterpillar')</code></li>
+<li>Require: <code>const pkg = require('caterpillar')</code></li>
 </ul>
+
+<a href="https://deno.land" title="Deno is a secure runtime for JavaScript and TypeScript, it is an alternative for Node.js"><h3>Deno</h3></a>
+
+``` typescript
+import * as pkg from 'https://unpkg.com/caterpillar@^6.0.0/edition-deno/index.ts'
+```
 
 <a href="https://www.pika.dev/cdn" title="100% Native ES Modules CDN"><h3>pika</h3></a>
 
 ``` html
 <script type="module">
-    import pkg from '//cdn.pika.dev/caterpillar/^5.15.0'
+    import * as pkg from '//cdn.pika.dev/caterpillar/^6.0.0'
 </script>
 ```
 
@@ -59,7 +72,7 @@ Caterpillar is the ultimate logging system for Node.js, based on [transform stre
 
 ``` html
 <script type="module">
-    import pkg from '//unpkg.com/caterpillar@^5.15.0'
+    import * as pkg from '//unpkg.com/caterpillar@^6.0.0'
 </script>
 ```
 
@@ -67,7 +80,7 @@ Caterpillar is the ultimate logging system for Node.js, based on [transform stre
 
 ``` html
 <script type="module">
-    import pkg from '//dev.jspm.io/caterpillar@5.15.0'
+    import * as pkg from '//dev.jspm.io/caterpillar@6.0.0'
 </script>
 ```
 
@@ -75,11 +88,13 @@ Caterpillar is the ultimate logging system for Node.js, based on [transform stre
 
 <p>This package is published with the following editions:</p>
 
-<ul><li><code>caterpillar/source/index.ts</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> source code with <a href="https://babeljs.io/docs/learn-es2015/#modules" title="ECMAScript Modules">Import</a> for modules</li>
-<li><code>caterpillar</code> aliases <code>caterpillar/edition-esnext/index.js</code></li>
-<li><code>caterpillar/edition-esnext/index.js</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled against <a href="https://en.wikipedia.org/wiki/ECMAScript#ES.Next" title="ECMAScript Next">ESNext</a> for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> 10 || 12 || 13 || 14 with <a href="https://nodejs.org/dist/latest-v5.x/docs/api/modules.html" title="Node/CJS Modules">Require</a> for modules</li>
+<ul><li><code>caterpillar</code> aliases <code>caterpillar/index.cjs</code> which uses the <a href="https://github.com/bevry/editions" title="You can use the Editions Autoloader to autoload the appropriate edition for your consumers environment">Editions Autoloader</a> to automatically select the correct edition for the consumer's environment</li>
+<li><code>caterpillar/source/index.ts</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> source code with <a href="https://babeljs.io/docs/learn-es2015/#modules" title="ECMAScript Modules">Import</a> for modules</li>
+<li><code>caterpillar/edition-esnext/index.js</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled against <a href="https://en.wikipedia.org/wiki/ECMAScript#ES.Next" title="ECMAScript Next">ESNext</a> for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> 14 with <a href="https://nodejs.org/dist/latest-v5.x/docs/api/modules.html" title="Node/CJS Modules">Require</a> for modules</li>
+<li><code>caterpillar/edition-es2019/index.js</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled against <a href="https://en.wikipedia.org/wiki/ECMAScript#10th_Edition_-_ECMAScript_2019" title="ECMAScript ES2019">ES2019</a> for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> 10 || 12 || 13 || 14 with <a href="https://nodejs.org/dist/latest-v5.x/docs/api/modules.html" title="Node/CJS Modules">Require</a> for modules</li>
 <li><code>caterpillar/edition-browsers/index.js</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled against <a href="https://en.wikipedia.org/wiki/ECMAScript#10th_Edition_-_ECMAScript_2019" title="ECMAScript ES2019">ES2019</a> for web browsers with <a href="https://babeljs.io/docs/learn-es2015/#modules" title="ECMAScript Modules">Import</a> for modules</li>
-<li><code>caterpillar/edition-node-esm/index.js</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled against <a href="https://en.wikipedia.org/wiki/ECMAScript#ES.Next" title="ECMAScript Next">ESNext</a> for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> with <a href="https://babeljs.io/docs/learn-es2015/#modules" title="ECMAScript Modules">Import</a> for modules</li></ul>
+<li><code>caterpillar/edition-node-esm/index.js</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled against <a href="https://en.wikipedia.org/wiki/ECMAScript#ES.Next" title="ECMAScript Next">ESNext</a> for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> with <a href="https://babeljs.io/docs/learn-es2015/#modules" title="ECMAScript Modules">Import</a> for modules</li>
+<li><code>caterpillar/edition-deno/index.ts</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> source code made to be compatible with <a href="https://deno.land" title="Deno is a secure runtime for JavaScript and TypeScript, it is an alternative to Node.js">Deno</a></li></ul>
 
 <!-- /INSTALL -->
 
