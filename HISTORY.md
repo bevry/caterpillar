@@ -1,5 +1,10 @@
 # History
 
+## v6.0.1 2020 July 22
+
+-   Updated dependencies, fixes Node.js due to missing `semver` dependency under `editions`
+    -   Closes [issue #80](https://github.com/bevry/caterpillar/issues/80)
+
 ## v6.0.0 2020 July 24
 
 -   Breaking Changes: Caterpillar has been rewritten for performance, ease of use, and deno compatibility (now it is compatible with Node.js, Deno, and Web Browsers)

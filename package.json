@@ -1,7 +1,7 @@
 {
   "title": "Caterpillar",
   "name": "caterpillar",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Caterpillar is the ultimate logging system for Deno, Node.js, and Web Browsers. Log levels are implemented to the RFC standard. Log entries can be filtered and piped to various streams, including coloured output to the terminal, the browser's console, and debug files. You can even write your own transforms.",
   "homepage": "https://github.com/bevry/caterpillar",
   "license": "MIT",
@@ -178,12 +178,12 @@
   "module": "edition-browsers/index.js",
   "dependencies": {
     "@bevry/ansi": "^1.1.0",
-    "editions": "^3.14.0",
+    "editions": "^3.15.0",
     "get-current-line": "^5.13.0",
-    "rfc-log-levels": "^3.10.0"
+    "rfc-log-levels": "^3.11.0"
   },
   "devDependencies": {
-    "@bevry/update-contributors": "^1.13.0",
+    "@bevry/update-contributors": "^1.14.0",
     "@typescript-eslint/eslint-plugin": "^3.7.0",
     "@typescript-eslint/parser": "^3.7.0",
     "assert-helpers": "^6.18.0",
@@ -194,12 +194,12 @@
     "kava": "^5.9.0",
     "make-deno-edition": "^0.15.0",
     "prettier": "^2.0.5",
-    "projectz": "^2.11.0",
+    "projectz": "^2.12.0",
     "surge": "^0.21.6",
     "typedoc": "^0.17.8",
     "typescript": "^3.9.7",
-    "valid-directory": "^2.6.0",
-    "valid-module": "^1.10.0"
+    "valid-directory": "^2.7.0",
+    "valid-module": "^1.11.0"
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
