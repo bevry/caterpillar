@@ -1,7 +1,7 @@
 {
   "title": "Caterpillar",
   "name": "caterpillar",
-  "version": "6.0.1",
+  "version": "6.0.2",
   "description": "Caterpillar is the ultimate logging system for Deno, Node.js, and Web Browsers. Log levels are implemented to the RFC standard. Log entries can be filtered and piped to various streams, including coloured output to the terminal, the browser's console, and debug files. You can even write your own transforms.",
   "homepage": "https://github.com/bevry/caterpillar",
   "license": "MIT",

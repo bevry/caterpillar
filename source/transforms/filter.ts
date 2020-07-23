@@ -18,7 +18,7 @@ export interface FilterOptions {
  * logger.pipe(filter).pipe(process.stdout)
  * logger.log('info', 'this will be outputted')
  * logger.log('debug', 'this will be ignored')
- * filter.config.filterLevel = 5
+ * filter.filterLevel = 5
  * logger.log('info', 'now even this will be ignored')
  * logger.log('note', 'but not this')
  * ```

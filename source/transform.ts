@@ -1,36 +1,33 @@
-/** Something that we can write to. */
-type Writable = {
+/**
+ * Caterpillar supports piping to anything that supports this interface.
+ * Which includes:
+ * - {@link Transform Caterpillar Transforms}
+ * - [Deno Writer Streams](https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts#Deno.Writer), e.g.
+ * 	- [Deno.stdout](https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts#Deno.stdout)
+ * - [Node.js Writable Streams](https://nodejs.org/dist/latest-v14.x/docs/api/stream.html#stream_writable_streams), e.g.
+ * 	- [process.stdout](https://nodejs.org/dist/latest-v14.x/docs/api/process.html#process_process_stdout)
+ * 	- [fs.createWriteStream](https://nodejs.org/dist/latest-v14.x/docs/api/fs.html#fs_fs_createwritestream_path_options)
+ * - [WhatWG Writable Streams](https://developer.mozilla.org/en-US/docs/Web/API/WritableStream)
+ */
+export interface Pipeable {
 	write(chunk: any): any
 	end?(cb?: () => void): void
 	close?(): Promise<void> | void
 }
 
 /**
- * Transform.
- * This is a helper for our transforms to be able to process the written log data more easily.
- * All the need to do is extend this class and add their own `format` method.
- * @param args forwarded to {@link Logger#setConfig}
- * @example
- * ``` javascript
- * import {inspect} from 'util'
- * import {Logger, Transform} from 'caterpillar'
- * class Pretty extends Transform {
- * 	format (entry) {
- * 		return inspect(entry, {colors: true})
- * 	}
- * }
- * new Logger()
- * 	.pipe(new Pretty())
- * 	.pipe(process.stdout)
- * 	.log('note', 'cool times', 5)
- * ```
+ * Caterpillar Transform Class.
+ * Provides the methods needed to provide a pipable Caterpillar Transform.
+ * Such that all you need to do is write your {@link Transform.format} method.
+ * It can pipe to anything that provides a {@link Pipeable.write} method.
+ * @example [Writing a Custom Transform](https://repl.it/@balupton/caterpillar-custom-transform)
  */
-export class Transform implements Writable {
+export class Transform implements Pipeable {
 	/** Where is this Transform piping to? */
-	private pipes: Array<Writable> = []
+	private pipes: Array<Pipeable> = []
 
 	/**
-	 * Format the current entry representation.
+	 * Format the received log entry representation.
 	 * Your transformer should extend this.
 	 */
 	format(message: any): any {
@@ -38,7 +35,7 @@ export class Transform implements Writable {
 	}
 
 	/** Pipe future log entries into a caterpillar transform or a stream. */
-	pipe<T extends Writable>(to: T) {
+	pipe<T extends Pipeable>(to: T) {
 		this.pipes.push(to)
 		return to
 	}

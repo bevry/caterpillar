@@ -1,5 +1,9 @@
 # History
 
+## v6.0.2 2020 July 22
+
+-   Updated Transform documentation and renamed `Writeable` internal type to `Pipeable` to reflect its purpose better
+
 ## v6.0.1 2020 July 22
 
 -   Updated dependencies, fixes Node.js due to missing `semver` dependency under `editions`

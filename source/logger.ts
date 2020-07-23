@@ -96,10 +96,7 @@ export class Logger extends Transform {
 		return getLogLevel(value, this.levels)
 	}
 
-	/**
-	 * Takes an arguments array and tranforms it into a log entry
-	 * @param args
-	 */
+	/** Takes an arguments array and tranforms it into a log entry. */
 	format(args: any): LogEntry {
 		// fetch the level
 		const level = args.shift()
