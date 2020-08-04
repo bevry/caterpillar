@@ -1,5 +1,9 @@
 # History
 
+## v6.1.0 2020 August 4
+
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v6.0.2 2020 July 22
 
 -   Updated Transform documentation and renamed `Writeable` internal type to `Pipeable` to reflect its purpose better

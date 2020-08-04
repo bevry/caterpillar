@@ -1,7 +1,7 @@
 {
   "title": "Caterpillar",
   "name": "caterpillar",
-  "version": "6.0.2",
+  "version": "6.1.0",
   "description": "Caterpillar is the ultimate logging system for Deno, Node.js, and Web Browsers. Log levels are implemented to the RFC standard. Log entries can be filtered and piped to various streams, including coloured output to the terminal, the browser's console, and debug files. You can even write your own transforms.",
   "homepage": "https://github.com/bevry/caterpillar",
   "license": "MIT",
@@ -174,20 +174,21 @@
       "import": "./edition-browsers/index.js"
     }
   },
+  "deno": "edition-deno/index.ts",
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "dependencies": {
-    "@bevry/ansi": "^1.1.0",
+    "@bevry/ansi": "^1.2.0",
     "editions": "^3.15.0",
     "get-current-line": "^5.13.0",
     "rfc-log-levels": "^3.11.0"
   },
   "devDependencies": {
     "@bevry/update-contributors": "^1.14.0",
-    "@typescript-eslint/eslint-plugin": "^3.7.0",
-    "@typescript-eslint/parser": "^3.7.0",
-    "assert-helpers": "^6.18.0",
-    "eslint": "^7.5.0",
+    "@typescript-eslint/eslint-plugin": "^3.8.0",
+    "@typescript-eslint/parser": "^3.8.0",
+    "assert-helpers": "^6.19.0",
+    "eslint": "^7.6.0",
     "eslint-config-bevry": "^3.17.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
@@ -243,6 +244,5 @@
   "prettier": {
     "semi": false,
     "singleQuote": true
-  },
-  "deno": "edition-deno/index.ts"
+  }
 }

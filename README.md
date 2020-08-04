@@ -58,14 +58,14 @@ Caterpillar is the ultimate logging system for Deno, Node.js, and Web Browsers. 
 <a href="https://deno.land" title="Deno is a secure runtime for JavaScript and TypeScript, it is an alternative for Node.js"><h3>Deno</h3></a>
 
 ``` typescript
-import * as pkg from 'https://unpkg.com/caterpillar@^6.0.2/edition-deno/index.ts'
+import * as pkg from 'https://unpkg.com/caterpillar@^6.1.0/edition-deno/index.ts'
 ```
 
 <a href="https://www.pika.dev/cdn" title="100% Native ES Modules CDN"><h3>pika</h3></a>
 
 ``` html
 <script type="module">
-    import * as pkg from '//cdn.pika.dev/caterpillar/^6.0.2'
+    import * as pkg from '//cdn.pika.dev/caterpillar/^6.1.0'
 </script>
 ```
 
@@ -73,7 +73,7 @@ import * as pkg from 'https://unpkg.com/caterpillar@^6.0.2/edition-deno/index.ts
 
 ``` html
 <script type="module">
-    import * as pkg from '//unpkg.com/caterpillar@^6.0.2'
+    import * as pkg from '//unpkg.com/caterpillar@^6.1.0'
 </script>
 ```
 
@@ -81,7 +81,7 @@ import * as pkg from 'https://unpkg.com/caterpillar@^6.0.2/edition-deno/index.ts
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/caterpillar@6.0.2'
+    import * as pkg from '//dev.jspm.io/caterpillar@6.1.0'
 </script>
 ```
 
