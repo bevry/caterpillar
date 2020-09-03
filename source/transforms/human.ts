@@ -154,7 +154,7 @@ export class Human extends Transform {
 				// Line Information
 				const seperator = '\n    '
 				const debugString = lineFormatter(
-					`→ [${format.timestamp}] [${entry.file}:${entry.line}] [${entry.method}]`
+					`→ [${format.timestamp}] [${entry.file}:${entry.line}:${entry.char}] [${entry.method}]`
 				)
 
 				// Result

@@ -1,9 +1,9 @@
 import getLogLevel, { rfcLogLevels, LevelInfo, LevelsMap } from 'rfc-log-levels'
-import getCurrentLine, { LineOffset, LineInfo } from 'get-current-line'
+import getCurrentLine, { Offset, Location } from 'get-current-line'
 import { Transform } from './transform.js'
 
 /** The log entry that Caterpillar creates and forwards to its transforms */
-export interface LogEntry extends LevelInfo, LineInfo {
+export interface LogEntry extends LevelInfo, Location {
 	/** the iso string of when the log occured */
 	date: string
 	/** all the arguments that were after the log level */
@@ -13,7 +13,7 @@ export interface LogEntry extends LevelInfo, LineInfo {
 /** Configuration for the Caterpillar Logger */
 export interface LoggerOptions {
 	/** Use to override the default value of {@link Logger.lineOffset} */
-	lineOffset?: LineOffset
+	lineOffset?: Offset
 
 	/** Use to override the default value of {@link Logger.levels} */
 	levels?: LevelsMap
@@ -40,7 +40,7 @@ export class Logger extends Transform {
 	 * The configuration to use for the line offset.
 	 * This defaults to the caterpillar filename, and any method that includes the word `log`.
 	 */
-	public lineOffset: LineOffset = {
+	public lineOffset: Offset = {
 		file: __filename,
 		method: /log/i,
 	}
@@ -118,8 +118,9 @@ export class Logger extends Transform {
 				? getCurrentLine(this.lineOffset)
 				: {
 						line: -1,
-						method: 'unknown',
-						file: 'unknown',
+						char: -1,
+						method: '',
+						file: '',
 				  }
 
 		// put it all together

@@ -17,19 +17,21 @@ function cleanChangingLogger(item: any) {
 		if (item.method.includes('testCaller') === false)
 			ok(false, 'method info was not as expected')
 		if (item.line === -1) ok(false, 'line info was not found')
+		if (item.char === -1) ok(false, 'char info was not found')
 	} catch (err) {
 		console.error(item)
 		throw err
 	}
 	item.file = 'file'
 	item.line = 'line'
+	item.char = 'char'
 	item.method = 'method'
 	return item
 }
 function cleanChangingHuman(item: string) {
 	item = item
 		.replace(/\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{3}Z\]/, 'date')
-		.replace(/\[.+?:-?\d{1,}\]/, 'file:line')
+		.replace(/\[.+?:\d+:\d+\]/, 'file:line:char')
 		.replace(/\[.+?\]/, 'method')
 	return item
 }
@@ -41,20 +43,20 @@ suite('caterpillar', function (suite) {
 		const output = new PassThrough()
 		const actual: string[] = []
 		const expected: string[] = [
-			'{"date":"2013-05-07T11:12:43.982Z","args":["this is emergency and is level 0"],"levelNumber":0,"levelName":"emergency","line":"89","method":"testCaller","file":"my/test.js"}',
-			'{"date":"2013-05-07T11:12:43.986Z","args":["this is alert and is level 1"],"levelNumber":1,"levelName":"alert","line":"89","method":"testCaller","file":"my/test.js"}',
-			'{"date":"2013-05-07T11:12:43.987Z","args":["this is critical and is level 2"],"levelNumber":2,"levelName":"critical","line":"89","method":"testCaller","file":"my/test.js"}',
-			'{"date":"2013-05-07T11:12:43.987Z","args":["this is error and is level 3"],"levelNumber":3,"levelName":"error","line":"89","method":"testCaller","file":"my/test.js"}',
-			'{"date":"2013-05-07T11:12:43.988Z","args":["this is warning and is level 4"],"levelNumber":4,"levelName":"warning","line":"89","method":"testCaller","file":"my/test.js"}',
-			'{"date":"2013-05-07T11:12:43.988Z","args":["this is notice and is level 5"],"levelNumber":5,"levelName":"notice","line":"89","method":"testCaller","file":"my/test.js"}',
-			'{"date":"2013-05-07T11:12:43.989Z","args":["this is info and is level 6"],"levelNumber":6,"levelName":"info","line":"89","method":"testCaller","file":"my/test.js"}',
-			'{"date":"2013-05-07T11:12:43.990Z","args":["this is debug and is level 7"],"levelNumber":7,"levelName":"debug","line":"89","method":"testCaller","file":"my/test.js"}',
-			'{"date":"2013-05-07T11:12:43.991Z","args":["this is emerg and is level 0"],"levelNumber":0,"levelName":"emergency","line":"89","method":"testCaller","file":"my/test.js"}',
-			'{"date":"2013-05-07T11:12:43.991Z","args":["this is crit and is level 2"],"levelNumber":2,"levelName":"critical","line":"89","method":"testCaller","file":"my/test.js"}',
-			'{"date":"2013-05-07T11:12:43.992Z","args":["this is err and is level 3"],"levelNumber":3,"levelName":"error","line":"89","method":"testCaller","file":"my/test.js"}',
-			'{"date":"2013-05-07T11:12:43.992Z","args":["this is warn and is level 4"],"levelNumber":4,"levelName":"warning","line":"89","method":"testCaller","file":"my/test.js"}',
-			'{"date":"2013-05-07T11:12:43.992Z","args":["this is note and is level 5"],"levelNumber":5,"levelName":"notice","line":"89","method":"testCaller","file":"my/test.js"}',
-			'{"date":"2013-05-07T11:12:43.995Z","args":["this is unknown and is level 6"],"levelNumber":6,"levelName":"info","line":"91","method":"testCaller","file":"my/test.js"}',
+			'{"date":"2013-05-07T11:12:43.982Z","args":["this is emergency and is level 0"],"levelNumber":0,"levelName":"emergency","line":"1","char":"20","method":"testCaller","file":"my/test.js"}',
+			'{"date":"2013-05-07T11:12:43.986Z","args":["this is alert and is level 1"],"levelNumber":1,"levelName":"alert","line":"1","char":"20","method":"testCaller","file":"my/test.js"}',
+			'{"date":"2013-05-07T11:12:43.987Z","args":["this is critical and is level 2"],"levelNumber":2,"levelName":"critical","line":"1","char":"20","method":"testCaller","file":"my/test.js"}',
+			'{"date":"2013-05-07T11:12:43.987Z","args":["this is error and is level 3"],"levelNumber":3,"levelName":"error","line":"1","char":"20","method":"testCaller","file":"my/test.js"}',
+			'{"date":"2013-05-07T11:12:43.988Z","args":["this is warning and is level 4"],"levelNumber":4,"levelName":"warning","line":"1","char":"20","method":"testCaller","file":"my/test.js"}',
+			'{"date":"2013-05-07T11:12:43.988Z","args":["this is notice and is level 5"],"levelNumber":5,"levelName":"notice","line":"1","char":"20","method":"testCaller","file":"my/test.js"}',
+			'{"date":"2013-05-07T11:12:43.989Z","args":["this is info and is level 6"],"levelNumber":6,"levelName":"info","line":"1","char":"20","method":"testCaller","file":"my/test.js"}',
+			'{"date":"2013-05-07T11:12:43.990Z","args":["this is debug and is level 7"],"levelNumber":7,"levelName":"debug","line":"1","char":"20","method":"testCaller","file":"my/test.js"}',
+			'{"date":"2013-05-07T11:12:43.991Z","args":["this is emerg and is level 0"],"levelNumber":0,"levelName":"emergency","line":"1","char":"20","method":"testCaller","file":"my/test.js"}',
+			'{"date":"2013-05-07T11:12:43.991Z","args":["this is crit and is level 2"],"levelNumber":2,"levelName":"critical","line":"1","char":"20","method":"testCaller","file":"my/test.js"}',
+			'{"date":"2013-05-07T11:12:43.992Z","args":["this is err and is level 3"],"levelNumber":3,"levelName":"error","line":"1","char":"20","method":"testCaller","file":"my/test.js"}',
+			'{"date":"2013-05-07T11:12:43.992Z","args":["this is warn and is level 4"],"levelNumber":4,"levelName":"warning","line":"1","char":"20","method":"testCaller","file":"my/test.js"}',
+			'{"date":"2013-05-07T11:12:43.992Z","args":["this is note and is level 5"],"levelNumber":5,"levelName":"notice","line":"1","char":"20","method":"testCaller","file":"my/test.js"}',
+			'{"date":"2013-05-07T11:12:43.995Z","args":["this is unknown and is level 6"],"levelNumber":6,"levelName":"info","line":"1","char":"20","method":"testCaller","file":"my/test.js"}',
 		]
 
 		output.on('data', function (chunk) {
@@ -216,19 +218,19 @@ suite('caterpillar', function (suite) {
 			'logging with colors',
 			{ lineLevel: 7 },
 			[
-				'\u001b[31memergency:\u001b[39m this is emergency and is level 0\n    \u001b[2m→ [2013-05-06 20:39:46.119] [my/test.js:138] [testCaller]\u001b[22m\n',
-				'\u001b[31malert:\u001b[39m this is alert and is level 1\n    \u001b[2m→ [2013-05-06 20:39:46.120] [my/test.js:138] [testCaller]\u001b[22m\n',
-				'\u001b[31mcritical:\u001b[39m this is critical and is level 2\n    \u001b[2m→ [2013-05-06 20:39:46.120] [my/test.js:138] [testCaller]\u001b[22m\n',
-				'\u001b[31merror:\u001b[39m this is error and is level 3\n    \u001b[2m→ [2013-05-06 20:39:46.121] [my/test.js:138] [testCaller]\u001b[22m\n',
-				'\u001b[33mwarning:\u001b[39m this is warning and is level 4\n    \u001b[2m→ [2013-05-06 20:39:46.121] [my/test.js:138] [testCaller]\u001b[22m\n',
-				'\u001b[33mnotice:\u001b[39m this is notice and is level 5\n    \u001b[2m→ [2013-05-06 20:39:46.122] [my/test.js:138] [testCaller]\u001b[22m\n',
-				'\u001b[32minfo:\u001b[39m this is info and is level 6\n    \u001b[2m→ [2013-05-06 20:39:46.122] [my/test.js:138] [testCaller]\u001b[22m\n',
-				'\u001b[32mdebug:\u001b[39m this is debug and is level 7\n    \u001b[2m→ [2013-05-06 20:39:46.123] [my/test.js:138] [testCaller]\u001b[22m\n',
-				'\u001b[31memergency:\u001b[39m this is emerg and is level 0\n    \u001b[2m→ [2013-05-06 20:39:46.123] [my/test.js:138] [testCaller]\u001b[22m\n',
-				'\u001b[31mcritical:\u001b[39m this is crit and is level 2\n    \u001b[2m→ [2013-05-06 20:39:46.124] [my/test.js:138] [testCaller]\u001b[22m\n',
-				'\u001b[31merror:\u001b[39m this is err and is level 3\n    \u001b[2m→ [2013-05-06 20:39:46.124] [my/test.js:138] [testCaller]\u001b[22m\n',
-				'\u001b[33mwarning:\u001b[39m this is warn and is level 4\n    \u001b[2m→ [2013-05-06 20:39:46.125] [my/test.js:138] [testCaller]\u001b[22m\n',
-				'\u001b[33mnotice:\u001b[39m this is note and is level 5\n    \u001b[2m→ [2013-05-06 20:39:46.126] [my/test.js:138] [testCaller]\u001b[22m\n',
+				'\u001b[31memergency:\u001b[39m this is emergency and is level 0\n    \u001b[2m→ [2013-05-06 20:39:46.119] [my/test.js:1:20] [testCaller]\u001b[22m\n',
+				'\u001b[31malert:\u001b[39m this is alert and is level 1\n    \u001b[2m→ [2013-05-06 20:39:46.120] [my/test.js:1:20] [testCaller]\u001b[22m\n',
+				'\u001b[31mcritical:\u001b[39m this is critical and is level 2\n    \u001b[2m→ [2013-05-06 20:39:46.120] [my/test.js:1:20] [testCaller]\u001b[22m\n',
+				'\u001b[31merror:\u001b[39m this is error and is level 3\n    \u001b[2m→ [2013-05-06 20:39:46.121] [my/test.js:1:20] [testCaller]\u001b[22m\n',
+				'\u001b[33mwarning:\u001b[39m this is warning and is level 4\n    \u001b[2m→ [2013-05-06 20:39:46.121] [my/test.js:1:20] [testCaller]\u001b[22m\n',
+				'\u001b[33mnotice:\u001b[39m this is notice and is level 5\n    \u001b[2m→ [2013-05-06 20:39:46.122] [my/test.js:1:20] [testCaller]\u001b[22m\n',
+				'\u001b[32minfo:\u001b[39m this is info and is level 6\n    \u001b[2m→ [2013-05-06 20:39:46.122] [my/test.js:1:20] [testCaller]\u001b[22m\n',
+				'\u001b[32mdebug:\u001b[39m this is debug and is level 7\n    \u001b[2m→ [2013-05-06 20:39:46.123] [my/test.js:1:20] [testCaller]\u001b[22m\n',
+				'\u001b[31memergency:\u001b[39m this is emerg and is level 0\n    \u001b[2m→ [2013-05-06 20:39:46.123] [my/test.js:1:20] [testCaller]\u001b[22m\n',
+				'\u001b[31mcritical:\u001b[39m this is crit and is level 2\n    \u001b[2m→ [2013-05-06 20:39:46.124] [my/test.js:1:20] [testCaller]\u001b[22m\n',
+				'\u001b[31merror:\u001b[39m this is err and is level 3\n    \u001b[2m→ [2013-05-06 20:39:46.124] [my/test.js:1:20] [testCaller]\u001b[22m\n',
+				'\u001b[33mwarning:\u001b[39m this is warn and is level 4\n    \u001b[2m→ [2013-05-06 20:39:46.125] [my/test.js:1:20] [testCaller]\u001b[22m\n',
+				'\u001b[33mnotice:\u001b[39m this is note and is level 5\n    \u001b[2m→ [2013-05-06 20:39:46.126] [my/test.js:1:20] [testCaller]\u001b[22m\n',
 			],
 			cleanChangingHuman
 		)
@@ -297,19 +299,19 @@ suite('caterpillar', function (suite) {
 			'logging without colors in debug mode',
 			{ color: false, lineLevel: 7 },
 			[
-				'["emergency: this is emergency and is level 0\\n    → [2013-05-06 20:41:13.973] [my/test.js:61] [testCaller]"]',
-				'["alert: this is alert and is level 1\\n    → [2013-05-06 20:41:13.978] [my/test.js:61] [testCaller]"]',
-				'["critical: this is critical and is level 2\\n    → [2013-05-06 20:41:13.978] [my/test.js:61] [testCaller]"]',
-				'["error: this is error and is level 3\\n    → [2013-05-06 20:41:13.979] [my/test.js:61] [testCaller]"]',
-				'["warning: this is warning and is level 4\\n    → [2013-05-06 20:41:13.979] [my/test.js:61] [testCaller]"]',
-				'["notice: this is notice and is level 5\\n    → [2013-05-06 20:41:13.980] [my/test.js:61] [testCaller]"]',
-				'["info: this is info and is level 6\\n    → [2013-05-06 20:41:13.980] [my/test.js:61] [testCaller]"]',
-				'["debug: this is debug and is level 7\\n    → [2013-05-06 20:41:13.981] [my/test.js:61] [testCaller]"]',
-				'["emergency: this is emerg and is level 0\\n    → [2013-05-06 20:41:13.982] [my/test.js:61] [testCaller]"]',
-				'["critical: this is crit and is level 2\\n    → [2013-05-06 20:41:13.982] [my/test.js:61] [testCaller]"]',
-				'["error: this is err and is level 3\\n    → [2013-05-06 20:41:13.982] [my/test.js:61] [testCaller]"]',
-				'["warning: this is warn and is level 4\\n    → [2013-05-06 20:41:13.983] [my/test.js:61] [testCaller]"]',
-				'["notice: this is note and is level 5\\n    → [2013-05-06 20:41:13.983] [my/test.js:61] [testCaller]"]',
+				'["emergency: this is emergency and is level 0\\n    → [2013-05-06 20:41:13.973] [my/test.js:1:20] [testCaller]"]',
+				'["alert: this is alert and is level 1\\n    → [2013-05-06 20:41:13.978] [my/test.js:1:20] [testCaller]"]',
+				'["critical: this is critical and is level 2\\n    → [2013-05-06 20:41:13.978] [my/test.js:1:20] [testCaller]"]',
+				'["error: this is error and is level 3\\n    → [2013-05-06 20:41:13.979] [my/test.js:1:20] [testCaller]"]',
+				'["warning: this is warning and is level 4\\n    → [2013-05-06 20:41:13.979] [my/test.js:1:20] [testCaller]"]',
+				'["notice: this is notice and is level 5\\n    → [2013-05-06 20:41:13.980] [my/test.js:1:20] [testCaller]"]',
+				'["info: this is info and is level 6\\n    → [2013-05-06 20:41:13.980] [my/test.js:1:20] [testCaller]"]',
+				'["debug: this is debug and is level 7\\n    → [2013-05-06 20:41:13.981] [my/test.js:1:20] [testCaller]"]',
+				'["emergency: this is emerg and is level 0\\n    → [2013-05-06 20:41:13.982] [my/test.js:1:20] [testCaller]"]',
+				'["critical: this is crit and is level 2\\n    → [2013-05-06 20:41:13.982] [my/test.js:1:20] [testCaller]"]',
+				'["error: this is err and is level 3\\n    → [2013-05-06 20:41:13.982] [my/test.js:1:20] [testCaller]"]',
+				'["warning: this is warn and is level 4\\n    → [2013-05-06 20:41:13.983] [my/test.js:1:20] [testCaller]"]',
+				'["notice: this is note and is level 5\\n    → [2013-05-06 20:41:13.983] [my/test.js:1:20] [testCaller]"]',
 			],
 			cleanChangingHuman
 		)
@@ -318,19 +320,19 @@ suite('caterpillar', function (suite) {
 			'logging with colors in debug mode',
 			{ lineLevel: 7 },
 			[
-				'["%c%s%c this is emergency and is level 0\\n    %c%s%c","color:red","emergency:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.550] [my/test.js:110] [testCaller]","color:default; font:default; text-decoration:default"]',
-				'["%c%s%c this is alert and is level 1\\n    %c%s%c","color:red","alert:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.551] [my/test.js:110] [testCaller]","color:default; font:default; text-decoration:default"]',
-				'["%c%s%c this is critical and is level 2\\n    %c%s%c","color:red","critical:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.551] [my/test.js:110] [testCaller]","color:default; font:default; text-decoration:default"]',
-				'["%c%s%c this is error and is level 3\\n    %c%s%c","color:red","error:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.552] [my/test.js:110] [testCaller]","color:default; font:default; text-decoration:default"]',
-				'["%c%s%c this is warning and is level 4\\n    %c%s%c","color:orange","warning:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.552] [my/test.js:110] [testCaller]","color:default; font:default; text-decoration:default"]',
-				'["%c%s%c this is notice and is level 5\\n    %c%s%c","color:orange","notice:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.553] [my/test.js:110] [testCaller]","color:default; font:default; text-decoration:default"]',
-				'["%c%s%c this is info and is level 6\\n    %c%s%c","color:green","info:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.553] [my/test.js:110] [testCaller]","color:default; font:default; text-decoration:default"]',
-				'["%c%s%c this is debug and is level 7\\n    %c%s%c","color:green","debug:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.554] [my/test.js:110] [testCaller]","color:default; font:default; text-decoration:default"]',
-				'["%c%s%c this is emerg and is level 0\\n    %c%s%c","color:red","emergency:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.554] [my/test.js:110] [testCaller]","color:default; font:default; text-decoration:default"]',
-				'["%c%s%c this is crit and is level 2\\n    %c%s%c","color:red","critical:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.555] [my/test.js:110] [testCaller]","color:default; font:default; text-decoration:default"]',
-				'["%c%s%c this is err and is level 3\\n    %c%s%c","color:red","error:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.555] [my/test.js:110] [testCaller]","color:default; font:default; text-decoration:default"]',
-				'["%c%s%c this is warn and is level 4\\n    %c%s%c","color:orange","warning:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.556] [my/test.js:110] [testCaller]","color:default; font:default; text-decoration:default"]',
-				'["%c%s%c this is note and is level 5\\n    %c%s%c","color:orange","notice:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.556] [my/test.js:110] [testCaller]","color:default; font:default; text-decoration:default"]',
+				'["%c%s%c this is emergency and is level 0\\n    %c%s%c","color:red","emergency:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.550] [my/test.js:1:20] [testCaller]","color:default; font:default; text-decoration:default"]',
+				'["%c%s%c this is alert and is level 1\\n    %c%s%c","color:red","alert:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.551] [my/test.js:1:20] [testCaller]","color:default; font:default; text-decoration:default"]',
+				'["%c%s%c this is critical and is level 2\\n    %c%s%c","color:red","critical:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.551] [my/test.js:1:20] [testCaller]","color:default; font:default; text-decoration:default"]',
+				'["%c%s%c this is error and is level 3\\n    %c%s%c","color:red","error:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.552] [my/test.js:1:20] [testCaller]","color:default; font:default; text-decoration:default"]',
+				'["%c%s%c this is warning and is level 4\\n    %c%s%c","color:orange","warning:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.552] [my/test.js:1:20] [testCaller]","color:default; font:default; text-decoration:default"]',
+				'["%c%s%c this is notice and is level 5\\n    %c%s%c","color:orange","notice:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.553] [my/test.js:1:20] [testCaller]","color:default; font:default; text-decoration:default"]',
+				'["%c%s%c this is info and is level 6\\n    %c%s%c","color:green","info:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.553] [my/test.js:1:20] [testCaller]","color:default; font:default; text-decoration:default"]',
+				'["%c%s%c this is debug and is level 7\\n    %c%s%c","color:green","debug:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.554] [my/test.js:1:20] [testCaller]","color:default; font:default; text-decoration:default"]',
+				'["%c%s%c this is emerg and is level 0\\n    %c%s%c","color:red","emergency:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.554] [my/test.js:1:20] [testCaller]","color:default; font:default; text-decoration:default"]',
+				'["%c%s%c this is crit and is level 2\\n    %c%s%c","color:red","critical:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.555] [my/test.js:1:20] [testCaller]","color:default; font:default; text-decoration:default"]',
+				'["%c%s%c this is err and is level 3\\n    %c%s%c","color:red","error:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.555] [my/test.js:1:20] [testCaller]","color:default; font:default; text-decoration:default"]',
+				'["%c%s%c this is warn and is level 4\\n    %c%s%c","color:orange","warning:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.556] [my/test.js:1:20] [testCaller]","color:default; font:default; text-decoration:default"]',
+				'["%c%s%c this is note and is level 5\\n    %c%s%c","color:orange","notice:","color:default; font:default; text-decoration:default","color:lightGray","→ [2013-05-06 21:17:14.556] [my/test.js:1:20] [testCaller]","color:default; font:default; text-decoration:default"]',
 			],
 			cleanChangingHuman
 		)
