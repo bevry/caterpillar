@@ -1,6 +1,6 @@
 import { Logger, Filter, Human, Browser, LogEntry } from './index.js'
 import { PassThrough } from 'stream'
-kava.import kava from 'kava'
+import kava from 'kava'
 import { equal, deepEqual } from 'assert-helpers'
 import { ok } from 'assert'
 

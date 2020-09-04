@@ -1,5 +1,9 @@
 # History
 
+## v6.5.0 2020 September 4
+
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v6.4.0 2020 August 18
 
 -   Updated for [`get-current-line` v6](https://github.com/bevry/get-current-line), which also returns the character position of the line

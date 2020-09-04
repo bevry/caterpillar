@@ -58,6 +58,7 @@ export class Transform implements Pipeable {
 					await pipe.write(data)
 				} else {
 					const str = typeof data === 'string' ? data : JSON.stringify(data)
+					// requires typescript dom lib to define TextEncoder global
 					if (typeof TextEncoder !== 'undefined') {
 						// compatibility with deno and later node streams
 						await pipe.write(new TextEncoder().encode(str))

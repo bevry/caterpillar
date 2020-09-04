@@ -38,10 +38,10 @@ export interface LoggerOptions {
 export class Logger extends Transform {
 	/**
 	 * The configuration to use for the line offset.
-	 * This defaults to the caterpillar filename, and any method that includes the word `log`.
+	 * This defaults to any file path that includes `logger`, and any method that includes the word `log`.
 	 */
 	public lineOffset: Offset = {
-		file: __filename,
+		file: /logger/i,
 		method: /log/i,
 	}
 
