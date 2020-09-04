@@ -1,6 +1,6 @@
 import { Logger, Filter, Human, Browser, LogEntry } from './index.js'
 import { PassThrough } from 'stream'
-import { suite } from 'kava'
+kava.import kava from 'kava'
 import { equal, deepEqual } from 'assert-helpers'
 import { ok } from 'assert'
 
@@ -37,7 +37,7 @@ function cleanChangingHuman(item: string) {
 }
 
 // Test
-suite('caterpillar', function (suite) {
+kava.suite('caterpillar', function (suite) {
 	suite('logger', function (suite, test) {
 		const logger = new Logger({ lineLevel: 7 })
 		const output = new PassThrough()
