@@ -32,6 +32,7 @@ Caterpillar is the ultimate logging system for Deno, Node.js, and Web Browsers. 
 
 <!-- /DESCRIPTION -->
 
+The RFC Log Levels are provided by the [`rfc-log-levels` package](https://github.com/bevry/rfc-log-levels) which follows [RFC 3164 - The BSD Syslog Protocol](http://www.faqs.org/rfcs/rfc3164.html).
 
 ## Usage
 
