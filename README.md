@@ -32,8 +32,6 @@ Caterpillar is the ultimate logging system for Deno, Node.js, and Web Browsers. 
 
 <!-- /DESCRIPTION -->
 
-The RFC Log Levels are provided by the [`rfc-log-levels` package](https://github.com/bevry/rfc-log-levels) which follows [RFC 3164 - The BSD Syslog Protocol](http://www.faqs.org/rfcs/rfc3164.html).
-
 ## Usage
 
 [Complete API Documentation.](http://master.caterpillar.bevry.surge.sh/docs/globals.html)
@@ -44,6 +42,200 @@ The RFC Log Levels are provided by the [`rfc-log-levels` package](https://github
 -   [Node.js Example](https://repl.it/@balupton/caterpillar-node)
 -   [Web Browser Example](https://repl.it/@balupton/caterpillar-browser)
 -   [Writing a Custom Transform](https://repl.it/@balupton/caterpillar-custom-transform)
+
+### Overview
+
+The RFC Log Levels are provided by the [`rfc-log-levels` package](https://github.com/bevry/rfc-log-levels) which follows [RFC 3164 - The BSD Syslog Protocol](http://www.faqs.org/rfcs/rfc3164.html).
+
+[Log Entries](http://master.caterpillar.bevry.surge.sh/docs/interfaces/logentry.html) that are within the [lineLevel](http://master.caterpillar.bevry.surge.sh/docs/classes/logger.html#linelevel) range, will have their line information fetched using the [`get-current-line` package](https://github.com/bevry/get-current-lines).
+
+The [`Logger`](http://master.caterpillar.bevry.surge.sh/docs/classes/logger.html) is what you write your log messages to, which you then pipe to destinations and transforms.
+
+The [`Filter` transport](http://master.caterpillar.bevry.surge.sh/docs/classes/filter.html) is used to filter out log levels that we do not want to pass onto the next destination.
+
+The [`Human` transport](http://master.caterpillar.bevry.surge.sh/docs/classes/human.html) is used to convert the Log Entries into a human readable and colourful output.
+
+The [`Browser` transport](https://github.com/bevry/caterpillar/blob/master/source/transforms/browser.ts) is used to send the human output, including colours, to the Web Browser console.
+
+The [`Transform`](http://master.caterpillar.bevry.surge.sh/docs/classes/transform.html) is used to write your own transforms, and is what all the others are based from.
+
+
+### Node.js Guide
+
+To get started for Node.js, setup a new Node.js project for this guide and install Caterpillar.
+
+``` bash
+mkdir caterpillar-guide
+cd caterpillar-guide
+npm init
+npm install --save caterpillar
+touch index.js
+```
+
+Then edit our `index.js` file with the following, that will output all the log messages in JSON format to stdout, and can be run via `node index.js`:
+
+``` javascript
+const { Logger } = require('caterpillar');
+const logger = new Logger();
+
+logger.pipe(process.stdout);
+
+logger.log('warn', 'this is a warning, which is level', 4);
+logger.warn('this is a warning, which is level', 4);
+logger.log('debug', 'this is a debug message, which is level', 7);
+logger.warn('this is a debug message, which is level', 7);
+```
+
+Outputting in JSON format is not a nice experience, instead we can do better by using the [`Human` transport](http://master.caterpillar.bevry.surge.sh/docs/classes/human.html) such that it is human readable.
+
+``` javascript
+const { Logger, Human } = require('caterpillar');
+const logger = new Logger();
+
+logger.pipe(new Human()).pipe(process.stdout);
+
+logger.log('warn', 'this is a warning, which is level', 4);
+logger.warn('this is a warning, which is level', 4);
+logger.log('debug', 'this is a debug message, which is level', 7);
+logger.warn('this is a debug message, which is level', 7);
+```
+
+However, perhaps we want to still store the JSON format for querying later. We can pipe the human format to stdout as before, but we can pipe the raw output to a debug file.
+
+``` javascript
+const { Logger, Human } = require('caterpillar');
+const logger = new Logger();
+
+const { createWriteStream } = require('fs');
+logger.pipe(createWriteStream('./debug.log'));
+
+logger.pipe(new Human()).pipe(process.stdout);
+
+logger.log('warn', 'this is a warning, which is level', 4);
+logger.warn('this is a warning, which is level', 4);
+logger.log('debug', 'this is a debug message, which is level', 7);
+logger.warn('this is a debug message, which is level', 7);
+```
+
+Now let's stay for some reason, we want to capitalise all the log messages that are warning levels and higher, we can do this by making our own transport by extending the [`Transform`](http://master.caterpillar.bevry.surge.sh/docs/classes/transform.html).
+
+``` javascript
+const { Logger, Transform, Human } = require("caterpillar");
+const logger = new Logger();
+
+const { createWriteStream } = require("fs");
+logger.pipe(createWriteStream("./debug.log"));
+
+class Uppercase extends Transform {
+  format(entry) {
+    if (entry.levelNumber <= 4) {
+      entry.args.forEach(function (value, index) {
+        if (typeof value === "string") {
+          entry.args[index] = value.toUpperCase();
+        }
+      });
+    }
+    return entry;
+  }
+}
+
+logger
+  .pipe(new Uppercase())
+  .pipe(new Human())
+  .pipe(process.stdout);
+
+logger.log("warn", "this is a warning, which is level", 4);
+logger.warn("this is a warning, which is level", 4);
+logger.log("debug", "this is a debug message, which is level", 7);
+logger.warn("this is a debug message, which is level", 7);
+```
+
+Futhermore, the user probably doesn't need to see debug messages, even though they are useful for debugging. We can filter out the debug messages for the user, but maintain them for the `debug.log` file by applying the [`Filter` transport](http://master.caterpillar.bevry.surge.sh/docs/classes/filter.html) to the pipe that goes to stdout.
+
+``` javascript
+const { Logger, Transform, Filter, Human } = require('caterpillar');
+const logger = new Logger();
+
+const { createWriteStream } = require('fs');
+logger.pipe(createWriteStream('./debug.log'));
+
+class Uppercase extends Transform {
+  format(entry) {
+    if (entry.levelNumber <= 4) {
+      entry.args.forEach(function (value, index) {
+        if (typeof value === "string") {
+          entry.args[index] = value.toUpperCase();
+        }
+      });
+    }
+    return entry;
+  }
+}
+
+logger
+  .pipe(new Uppercase())
+  .pipe(new Filter({ filterLevel: 5 }))
+  .pipe(new Human()).pipe(process.stdout)
+
+logger.log('warn', 'this is a warning, which is level', 4)
+logger.warn('this is a warning, which is level', 4)
+logger.log('debug', 'this is a debug message, which is level', 7)
+logger.warn('this is a debug message, which is level', 7)
+```
+
+As fetching line information is computationally expensive process, for large applications for performance we probably only want to fetch the line information for messages that we actually show to the user. As such, we should make the [`filterLevel`](http://master.caterpillar.bevry.surge.sh/docs/classes/filter.html#filterlevel) and the [`lineLevel`](http://master.caterpillar.bevry.surge.sh/docs/classes/logger.html#linelevel) the same.
+
+``` javascript
+const { Logger, Transform, Filter, Human } = require('caterpillar');
+const level = 5
+const logger = new Logger({ lineLevel: level });
+
+const { createWriteStream } = require('fs');
+logger.pipe(createWriteStream('./debug.log'));
+
+class Uppercase extends Transform {
+  format(entry) {
+    if (entry.levelNumber <= 4) {
+      entry.args.forEach(function (value, index) {
+        if (typeof value === "string") {
+          entry.args[index] = value.toUpperCase();
+        }
+      });
+    }
+    return entry;
+  }
+}
+
+logger
+  .pipe(new Uppercase())
+  .pipe(new Filter({ filterLevel: level }))
+  .pipe(new Human()).pipe(process.stdout)
+
+logger.log('warn', 'this is a warning, which is level', 4)
+logger.warn('this is a warning, which is level', 4)
+logger.log('debug', 'this is a debug message, which is level', 7)
+logger.warn('this is a debug message, which is level', 7)
+```
+
+Finally, if we are using Caterpillar in web browser environments, instead of Node.js, instead of doing:
+
+``` javascript
+const { Logger, Transform, Filter, Human } = require('caterpillar');
+// ...
+logger.pipe(new Human()).pipe(process.stdout)
+// ...
+```
+
+We would pipe to the Browser transform instead of to stdout.
+
+``` javascript
+const { Logger, Transform, Filter, Human, Browser } = require('caterpillar');
+// ...
+logger.pipe(new Human()).pipe(new Browser())
+// ...
+```
+
+With this, you now have enough information to leverage the cross-platform power of Caterpillar for most purposes, and the power to write your own custom transforms which can be published as their own packages and shared.
 
 <!-- INSTALL/ -->
 
