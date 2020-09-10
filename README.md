@@ -170,8 +170,8 @@ class Uppercase extends Transform {
 }
 
 logger
-    .pipe(new Uppercase())
     .pipe(new Filter({ filterLevel: 5 }))
+    .pipe(new Uppercase())
     .pipe(new Human())
     .pipe(process.stdout)
 
@@ -205,8 +205,8 @@ class Uppercase extends Transform {
 }
 
 logger
+    .pipe(new Filter({ filterLevel: 5 }))
     .pipe(new Uppercase())
-    .pipe(new Filter({ filterLevel: level }))
     .pipe(new Human())
     .pipe(process.stdout)
 
