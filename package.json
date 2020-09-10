@@ -10,10 +10,6 @@
     "caterpillar",
     "console",
     "debug",
-    "deno",
-    "deno-edition",
-    "deno-entry",
-    "denoland",
     "dom",
     "es2019",
     "esnext",
@@ -153,20 +149,6 @@
         "node": "12 || 13 || 14",
         "browsers": false
       }
-    },
-    {
-      "description": "TypeScript source code made to be compatible with Deno",
-      "directory": "edition-deno",
-      "entry": "index.ts",
-      "tags": [
-        "typescript",
-        "import",
-        "deno"
-      ],
-      "engines": {
-        "deno": true,
-        "browsers": true
-      }
     }
   ],
   "types": "./compiled-types/",
@@ -182,7 +164,6 @@
       "import": "./edition-browsers/index.js"
     }
   },
-  "deno": "edition-deno/index.ts",
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "dependencies": {

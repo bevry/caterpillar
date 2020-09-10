@@ -32,6 +32,7 @@ Caterpillar is the ultimate logging system for Deno, Node.js, and Web Browsers. 
 
 <!-- /DESCRIPTION -->
 
+
 ## Usage
 
 [Complete API Documentation.](http://master.caterpillar.bevry.surge.sh/docs/globals.html)
@@ -59,12 +60,11 @@ The [`Browser` transport](https://github.com/bevry/caterpillar/blob/master/sourc
 
 The [`Transform`](http://master.caterpillar.bevry.surge.sh/docs/classes/transform.html) is used to write your own transforms, and is what all the others are based from.
 
-
 ### Node.js Guide
 
 To get started for Node.js, setup a new Node.js project for this guide and install Caterpillar.
 
-``` bash
+```bash
 mkdir caterpillar-guide
 cd caterpillar-guide
 npm init
@@ -74,108 +74,106 @@ touch index.js
 
 Then edit our `index.js` file with the following, that will output all the log messages in JSON format to stdout, and can be run via `node index.js`:
 
-``` javascript
-const { Logger } = require('caterpillar');
-const logger = new Logger();
+```javascript
+const { Logger } = require('caterpillar')
+const logger = new Logger()
 
-logger.pipe(process.stdout);
+logger.pipe(process.stdout)
 
-logger.log('warn', 'this is a warning, which is level', 4);
-logger.warn('this is a warning, which is level', 4);
-logger.log('debug', 'this is a debug message, which is level', 7);
-logger.warn('this is a debug message, which is level', 7);
+logger.log('warn', 'this is a warning, which is level', 4)
+logger.warn('this is a warning, which is level', 4)
+logger.log('debug', 'this is a debug message, which is level', 7)
+logger.warn('this is a debug message, which is level', 7)
 ```
 
 Outputting in JSON format is not a nice experience, instead we can do better by using the [`Human` transport](http://master.caterpillar.bevry.surge.sh/docs/classes/human.html) such that it is human readable.
 
-``` javascript
-const { Logger, Human } = require('caterpillar');
-const logger = new Logger();
+```javascript
+const { Logger, Human } = require('caterpillar')
+const logger = new Logger()
 
-logger.pipe(new Human()).pipe(process.stdout);
+logger.pipe(new Human()).pipe(process.stdout)
 
-logger.log('warn', 'this is a warning, which is level', 4);
-logger.warn('this is a warning, which is level', 4);
-logger.log('debug', 'this is a debug message, which is level', 7);
-logger.warn('this is a debug message, which is level', 7);
+logger.log('warn', 'this is a warning, which is level', 4)
+logger.warn('this is a warning, which is level', 4)
+logger.log('debug', 'this is a debug message, which is level', 7)
+logger.warn('this is a debug message, which is level', 7)
 ```
 
 However, perhaps we want to still store the JSON format for querying later. We can pipe the human format to stdout as before, but we can pipe the raw output to a debug file.
 
-``` javascript
-const { Logger, Human } = require('caterpillar');
-const logger = new Logger();
+```javascript
+const { Logger, Human } = require('caterpillar')
+const logger = new Logger()
 
-const { createWriteStream } = require('fs');
-logger.pipe(createWriteStream('./debug.log'));
+const { createWriteStream } = require('fs')
+logger.pipe(createWriteStream('./debug.log'))
 
-logger.pipe(new Human()).pipe(process.stdout);
+logger.pipe(new Human()).pipe(process.stdout)
 
-logger.log('warn', 'this is a warning, which is level', 4);
-logger.warn('this is a warning, which is level', 4);
-logger.log('debug', 'this is a debug message, which is level', 7);
-logger.warn('this is a debug message, which is level', 7);
+logger.log('warn', 'this is a warning, which is level', 4)
+logger.warn('this is a warning, which is level', 4)
+logger.log('debug', 'this is a debug message, which is level', 7)
+logger.warn('this is a debug message, which is level', 7)
 ```
 
 Now let's stay for some reason, we want to capitalise all the log messages that are warning levels and higher, we can do this by making our own transport by extending the [`Transform`](http://master.caterpillar.bevry.surge.sh/docs/classes/transform.html).
 
-``` javascript
-const { Logger, Transform, Human } = require("caterpillar");
-const logger = new Logger();
+```javascript
+const { Logger, Transform, Human } = require('caterpillar')
+const logger = new Logger()
 
-const { createWriteStream } = require("fs");
-logger.pipe(createWriteStream("./debug.log"));
+const { createWriteStream } = require('fs')
+logger.pipe(createWriteStream('./debug.log'))
 
 class Uppercase extends Transform {
-  format(entry) {
-    if (entry.levelNumber <= 4) {
-      entry.args.forEach(function (value, index) {
-        if (typeof value === "string") {
-          entry.args[index] = value.toUpperCase();
+    format(entry) {
+        if (entry.levelNumber <= 4) {
+            entry.args.forEach(function (value, index) {
+                if (typeof value === 'string') {
+                    entry.args[index] = value.toUpperCase()
+                }
+            })
         }
-      });
+        return entry
     }
-    return entry;
-  }
 }
 
-logger
-  .pipe(new Uppercase())
-  .pipe(new Human())
-  .pipe(process.stdout);
+logger.pipe(new Uppercase()).pipe(new Human()).pipe(process.stdout)
 
-logger.log("warn", "this is a warning, which is level", 4);
-logger.warn("this is a warning, which is level", 4);
-logger.log("debug", "this is a debug message, which is level", 7);
-logger.warn("this is a debug message, which is level", 7);
+logger.log('warn', 'this is a warning, which is level', 4)
+logger.warn('this is a warning, which is level', 4)
+logger.log('debug', 'this is a debug message, which is level', 7)
+logger.warn('this is a debug message, which is level', 7)
 ```
 
 Futhermore, the user probably doesn't need to see debug messages, even though they are useful for debugging. We can filter out the debug messages for the user, but maintain them for the `debug.log` file by applying the [`Filter` transport](http://master.caterpillar.bevry.surge.sh/docs/classes/filter.html) to the pipe that goes to stdout.
 
-``` javascript
-const { Logger, Transform, Filter, Human } = require('caterpillar');
-const logger = new Logger();
+```javascript
+const { Logger, Transform, Filter, Human } = require('caterpillar')
+const logger = new Logger()
 
-const { createWriteStream } = require('fs');
-logger.pipe(createWriteStream('./debug.log'));
+const { createWriteStream } = require('fs')
+logger.pipe(createWriteStream('./debug.log'))
 
 class Uppercase extends Transform {
-  format(entry) {
-    if (entry.levelNumber <= 4) {
-      entry.args.forEach(function (value, index) {
-        if (typeof value === "string") {
-          entry.args[index] = value.toUpperCase();
+    format(entry) {
+        if (entry.levelNumber <= 4) {
+            entry.args.forEach(function (value, index) {
+                if (typeof value === 'string') {
+                    entry.args[index] = value.toUpperCase()
+                }
+            })
         }
-      });
+        return entry
     }
-    return entry;
-  }
 }
 
 logger
-  .pipe(new Uppercase())
-  .pipe(new Filter({ filterLevel: 5 }))
-  .pipe(new Human()).pipe(process.stdout)
+    .pipe(new Uppercase())
+    .pipe(new Filter({ filterLevel: 5 }))
+    .pipe(new Human())
+    .pipe(process.stdout)
 
 logger.log('warn', 'this is a warning, which is level', 4)
 logger.warn('this is a warning, which is level', 4)
@@ -185,31 +183,32 @@ logger.warn('this is a debug message, which is level', 7)
 
 As fetching line information is computationally expensive process, for large applications for performance we probably only want to fetch the line information for messages that we actually show to the user. As such, we should make the [`filterLevel`](http://master.caterpillar.bevry.surge.sh/docs/classes/filter.html#filterlevel) and the [`lineLevel`](http://master.caterpillar.bevry.surge.sh/docs/classes/logger.html#linelevel) the same.
 
-``` javascript
-const { Logger, Transform, Filter, Human } = require('caterpillar');
+```javascript
+const { Logger, Transform, Filter, Human } = require('caterpillar')
 const level = 5
-const logger = new Logger({ lineLevel: level });
+const logger = new Logger({ lineLevel: level })
 
-const { createWriteStream } = require('fs');
-logger.pipe(createWriteStream('./debug.log'));
+const { createWriteStream } = require('fs')
+logger.pipe(createWriteStream('./debug.log'))
 
 class Uppercase extends Transform {
-  format(entry) {
-    if (entry.levelNumber <= 4) {
-      entry.args.forEach(function (value, index) {
-        if (typeof value === "string") {
-          entry.args[index] = value.toUpperCase();
+    format(entry) {
+        if (entry.levelNumber <= 4) {
+            entry.args.forEach(function (value, index) {
+                if (typeof value === 'string') {
+                    entry.args[index] = value.toUpperCase()
+                }
+            })
         }
-      });
+        return entry
     }
-    return entry;
-  }
 }
 
 logger
-  .pipe(new Uppercase())
-  .pipe(new Filter({ filterLevel: level }))
-  .pipe(new Human()).pipe(process.stdout)
+    .pipe(new Uppercase())
+    .pipe(new Filter({ filterLevel: level }))
+    .pipe(new Human())
+    .pipe(process.stdout)
 
 logger.log('warn', 'this is a warning, which is level', 4)
 logger.warn('this is a warning, which is level', 4)
@@ -219,8 +218,8 @@ logger.warn('this is a debug message, which is level', 7)
 
 Finally, if we are using Caterpillar in web browser environments, instead of Node.js, instead of doing:
 
-``` javascript
-const { Logger, Transform, Filter, Human } = require('caterpillar');
+```javascript
+const { Logger, Transform, Filter, Human } = require('caterpillar')
 // ...
 logger.pipe(new Human()).pipe(process.stdout)
 // ...
@@ -228,8 +227,8 @@ logger.pipe(new Human()).pipe(process.stdout)
 
 We would pipe to the Browser transform instead of to stdout.
 
-``` javascript
-const { Logger, Transform, Filter, Human, Browser } = require('caterpillar');
+```javascript
+const { Logger, Transform, Filter, Human, Browser } = require('caterpillar')
 // ...
 logger.pipe(new Human()).pipe(new Browser())
 // ...
@@ -247,12 +246,6 @@ With this, you now have enough information to leverage the cross-platform power 
 <li>Import: <code>import * as pkg from ('caterpillar')</code></li>
 <li>Require: <code>const pkg = require('caterpillar')</code></li>
 </ul>
-
-<a href="https://deno.land" title="Deno is a secure runtime for JavaScript and TypeScript, it is an alternative for Node.js"><h3>Deno</h3></a>
-
-``` typescript
-import * as pkg from 'https://unpkg.com/caterpillar@^6.5.0/edition-deno/index.ts'
-```
 
 <a href="https://www.skypack.dev" title="Skypack is a JavaScript Delivery Network for modern web apps"><h3>Skypack</h3></a>
 
@@ -287,8 +280,7 @@ import * as pkg from 'https://unpkg.com/caterpillar@^6.5.0/edition-deno/index.ts
 <li><code>caterpillar/edition-browsers/index.js</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled against <a href="https://en.wikipedia.org/wiki/ECMAScript#10th_Edition_-_ECMAScript_2019" title="ECMAScript ES2019">ES2019</a> for web browsers with <a href="https://babeljs.io/docs/learn-es2015/#modules" title="ECMAScript Modules">Import</a> for modules</li>
 <li><code>caterpillar/edition-esnext/index.js</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled against <a href="https://en.wikipedia.org/wiki/ECMAScript#ES.Next" title="ECMAScript Next">ESNext</a> for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> 14 with <a href="https://nodejs.org/dist/latest-v5.x/docs/api/modules.html" title="Node/CJS Modules">Require</a> for modules</li>
 <li><code>caterpillar/edition-es2019/index.js</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled against <a href="https://en.wikipedia.org/wiki/ECMAScript#10th_Edition_-_ECMAScript_2019" title="ECMAScript ES2019">ES2019</a> for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> 10 || 12 || 13 || 14 with <a href="https://nodejs.org/dist/latest-v5.x/docs/api/modules.html" title="Node/CJS Modules">Require</a> for modules</li>
-<li><code>caterpillar/edition-es2019-esm/index.js</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled against <a href="https://en.wikipedia.org/wiki/ECMAScript#10th_Edition_-_ECMAScript_2019" title="ECMAScript ES2019">ES2019</a> for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> 12 || 13 || 14 with <a href="https://babeljs.io/docs/learn-es2015/#modules" title="ECMAScript Modules">Import</a> for modules</li>
-<li><code>caterpillar/edition-deno/index.ts</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> source code made to be compatible with <a href="https://deno.land" title="Deno is a secure runtime for JavaScript and TypeScript, it is an alternative to Node.js">Deno</a></li></ul>
+<li><code>caterpillar/edition-es2019-esm/index.js</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled against <a href="https://en.wikipedia.org/wiki/ECMAScript#10th_Edition_-_ECMAScript_2019" title="ECMAScript ES2019">ES2019</a> for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> 12 || 13 || 14 with <a href="https://babeljs.io/docs/learn-es2015/#modules" title="ECMAScript Modules">Import</a> for modules</li></ul>
 
 <!-- /INSTALL -->
 
