@@ -48,7 +48,7 @@ Caterpillar is the ultimate logging system for Deno, Node.js, and Web Browsers. 
 
 The RFC Log Levels are provided by the [`rfc-log-levels` package](https://github.com/bevry/rfc-log-levels) which follows [RFC 3164 - The BSD Syslog Protocol](http://www.faqs.org/rfcs/rfc3164.html).
 
-[Log Entries](http://master.caterpillar.bevry.surge.sh/docs/interfaces/logentry.html) that are within the [lineLevel](http://master.caterpillar.bevry.surge.sh/docs/classes/logger.html#linelevel) range, will have their line information fetched using the [`get-current-line` package](https://github.com/bevry/get-current-lines).
+[Log Entries](http://master.caterpillar.bevry.surge.sh/docs/interfaces/logentry.html) that are within the [lineLevel](http://master.caterpillar.bevry.surge.sh/docs/classes/logger.html#linelevel) range, will have their line information fetched using the [`get-current-line` package](https://github.com/bevry/get-current-line).
 
 The [`Logger`](http://master.caterpillar.bevry.surge.sh/docs/classes/logger.html) is what you write your log messages to, which you then pipe to destinations and transforms.
 
