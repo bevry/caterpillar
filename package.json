@@ -167,7 +167,7 @@
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "dependencies": {
-    "@bevry/ansi": "^2.1.0",
+    "@bevry/ansi": "^3.0.0",
     "editions": "^6.0.0",
     "get-current-line": "^6.2.0",
     "rfc-log-levels": "^3.14.0"
