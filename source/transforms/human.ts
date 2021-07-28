@@ -8,8 +8,8 @@ import * as ansi from '@bevry/ansi'
  * Return the given argument.
  * Used for when there is no formatter.
  */
-export function noop<T>(str: T): T {
-	return str
+function ansiNoop(a: string): string {
+	return a
 }
 
 /** A mapping of log level numbers to their intended colours */
@@ -17,7 +17,7 @@ interface LevelsToColorsMap {
 	[logLevelNumber: string]: ansi.ANSIApplier
 }
 
-/** Configuration optons for the Caterpillar Human Transform */
+/** Configuration options for the Caterpillar Human Transform */
 export interface HumanOptions {
 	/** Use to override the default value of {@link Human.color} */
 	color?: boolean
@@ -54,7 +54,7 @@ export class Human extends Transform {
 		'7': 'green',
 	}
 
-	/** Create our instance and apply our configuraiton options. */
+	/** Create our instance and apply our configuration options. */
 	constructor(opts?: HumanOptions) {
 		super()
 
@@ -141,10 +141,11 @@ export class Human extends Transform {
 		if (format.text) {
 			// Formatters
 			const levelFormatter =
-				(color && format.color && ansi[format.color]) || noop
-			const lineFormatter = (useLine && color && ansi.dim) || noop
+				(color && format.color && ansi[format.color]) || ansiNoop
+			const lineFormatter = (useLine && color && ansi.dim) || ansiNoop
 
 			// Message
+			// @ts-ignore
 			const levelString = levelFormatter(`${entry.levelName}:`)
 			const entryString = format.text
 			const messageString = `${levelString} ${entryString}`

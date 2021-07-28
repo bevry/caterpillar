@@ -79,7 +79,7 @@ export class Transform implements Pipeable {
 				if (pipe.close) {
 					return pipe.close()
 				} else if (pipe.end) {
-					return new Promise(function (resolve) {
+					return new Promise<void>(function (resolve) {
 						pipe.end!(resolve)
 					})
 				} else {
