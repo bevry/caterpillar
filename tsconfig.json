@@ -6,8 +6,8 @@
     "maxNodeModuleJsDepth": 5,
     "moduleResolution": "Node",
     "strict": true,
-    "target": "ESNext",
-    "lib": ["DOM.Iterable", "DOM", "ESNext"],
+    "target": "ES2019",
+    "lib": ["DOM.Iterable", "DOM"],
     "module": "ESNext"
   },
   "include": ["source"]
