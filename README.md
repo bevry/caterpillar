@@ -35,7 +35,7 @@ Caterpillar is the ultimate logging system for Deno, Node.js, and Web Browsers. 
 
 ## Usage
 
-[Complete API Documentation.](http://master.caterpillar.bevry.surge.sh/docs/globals.html)
+[Complete API Documentation.](http://master.caterpillar.bevry.surge.sh/docs/)
 
 ### Examples
 
@@ -251,7 +251,7 @@ With this, you now have enough information to leverage the cross-platform power 
 
 ``` html
 <script type="module">
-    import * as pkg from '//cdn.skypack.dev/caterpillar@^6.7.0'
+    import * as pkg from '//cdn.skypack.dev/caterpillar@^6.8.0'
 </script>
 ```
 
@@ -259,7 +259,7 @@ With this, you now have enough information to leverage the cross-platform power 
 
 ``` html
 <script type="module">
-    import * as pkg from '//unpkg.com/caterpillar@^6.7.0'
+    import * as pkg from '//unpkg.com/caterpillar@^6.8.0'
 </script>
 ```
 
@@ -267,7 +267,7 @@ With this, you now have enough information to leverage the cross-platform power 
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/caterpillar@6.7.0'
+    import * as pkg from '//dev.jspm.io/caterpillar@6.8.0'
 </script>
 ```
 
