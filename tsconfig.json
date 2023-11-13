@@ -6,9 +6,9 @@
     "maxNodeModuleJsDepth": 5,
     "moduleResolution": "Node",
     "strict": true,
-    "target": "ES2019",
-    "lib": ["DOM.Iterable", "DOM"],
-    "module": "ESNext"
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["DOM.Iterable", "DOM"]
   },
   "include": ["source"]
 }
