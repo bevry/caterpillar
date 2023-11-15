@@ -250,7 +250,7 @@ With this, you now have enough information to leverage the cross-platform power 
 
 ``` html
 <script type="module">
-    import * as pkg from '//cdn.skypack.dev/caterpillar@^6.10.0'
+    import * as pkg from '//cdn.skypack.dev/caterpillar@^6.11.0'
 </script>
 ```
 
@@ -258,7 +258,7 @@ With this, you now have enough information to leverage the cross-platform power 
 
 ``` html
 <script type="module">
-    import * as pkg from '//unpkg.com/caterpillar@^6.10.0'
+    import * as pkg from '//unpkg.com/caterpillar@^6.11.0'
 </script>
 ```
 
@@ -266,7 +266,7 @@ With this, you now have enough information to leverage the cross-platform power 
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/caterpillar@6.10.0'
+    import * as pkg from '//dev.jspm.io/caterpillar@6.11.0'
 </script>
 ```
 
