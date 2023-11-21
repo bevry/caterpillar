@@ -8,6 +8,7 @@
     "strict": true,
     "target": "ES2022",
     "module": "ESNext",
+    "downlevelIteration": true,
     "lib": ["DOM.Iterable", "DOM"]
   },
   "include": ["source"]
