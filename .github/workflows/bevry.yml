@@ -68,7 +68,7 @@ jobs:
           npmAuthToken: ${{ secrets.NPM_AUTH_TOKEN }}
           npmBranchTag: ':next'
       - name: publish to surge
-        uses: bevry-actions/surge@v1.0.3
+        uses: bevry-actions/surge@v1.1.0
         with:
           surgeLogin: ${{ secrets.SURGE_LOGIN }}
           surgeToken: ${{ secrets.SURGE_TOKEN }}
