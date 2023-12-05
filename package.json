@@ -1,7 +1,7 @@
 {
   "title": "Caterpillar",
   "name": "caterpillar",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "Caterpillar is the ultimate logging system for Deno, Node.js, and Web Browsers. Log levels are implemented to the RFC standard. Log entries can be filtered and piped to various streams, including coloured output to the terminal, the browser's console, and debug files. You can even write your own transforms.",
   "homepage": "https://github.com/bevry/caterpillar",
   "license": "Artistic-2.0",
@@ -15,9 +15,10 @@
     "deno-entry",
     "denoland",
     "dom",
-    "es2016",
-    "es2019",
+    "es2015",
+    "es2017",
     "es2022",
+    "es5",
     "log",
     "logger",
     "logging",
@@ -86,7 +87,7 @@
     "url": "https://github.com/bevry/caterpillar.git"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=4"
   },
   "editions": [
     {
@@ -115,7 +116,7 @@
       }
     },
     {
-      "description": "TypeScript compiled against ES2022 for Node.js 14 || 16 || 18 || 20 || 21 with Require for modules",
+      "description": "TypeScript compiled against ES2022 for Node.js 21 with Require for modules",
       "directory": "edition-es2022",
       "entry": "index.js",
       "tags": [
@@ -130,13 +131,13 @@
       }
     },
     {
-      "description": "TypeScript compiled against ES2019 for Node.js 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with Require for modules",
-      "directory": "edition-es2019",
+      "description": "TypeScript compiled against ES2017 for Node.js 12 with Require for modules",
+      "directory": "edition-es2017",
       "entry": "index.js",
       "tags": [
         "compiled",
         "javascript",
-        "es2019",
+        "es2017",
         "require"
       ],
       "engines": {
@@ -145,13 +146,13 @@
       }
     },
     {
-      "description": "TypeScript compiled against ES2016 for Node.js 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with Require for modules",
-      "directory": "edition-es2016",
+      "description": "TypeScript compiled against ES2015 for Node.js 6 with Require for modules",
+      "directory": "edition-es2015",
       "entry": "index.js",
       "tags": [
         "compiled",
         "javascript",
-        "es2016",
+        "es2015",
         "require"
       ],
       "engines": {
@@ -160,13 +161,28 @@
       }
     },
     {
-      "description": "TypeScript compiled against ES2019 for Node.js 12 || 14 || 16 || 18 || 20 || 21 with Import for modules",
-      "directory": "edition-es2019-esm",
+      "description": "TypeScript compiled against ES5 for Node.js 4 with Require for modules",
+      "directory": "edition-es5",
       "entry": "index.js",
       "tags": [
         "compiled",
         "javascript",
-        "es2019",
+        "es5",
+        "require"
+      ],
+      "engines": {
+        "node": "4 || 6 || 8 || 10 || 12 || 14 || 16",
+        "browsers": false
+      }
+    },
+    {
+      "description": "TypeScript compiled against ES2017 for Node.js 12 with Import for modules",
+      "directory": "edition-es2017-esm",
+      "entry": "index.js",
+      "tags": [
+        "compiled",
+        "javascript",
+        "es2017",
         "import"
       ],
       "engines": {
@@ -206,7 +222,7 @@
   "exports": {
     "node": {
       "types": "./edition-types/index.d.ts",
-      "import": "./edition-es2019-esm/index.js",
+      "import": "./edition-es2017-esm/index.js",
       "default": "./index.cjs",
       "require": "./edition-es2022/index.js"
     },
@@ -219,40 +235,40 @@
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "dependencies": {
-    "@bevry/ansi": "^6.5.0",
-    "editions": "^6.15.0",
-    "get-current-line": "^7.0.0",
-    "rfc-log-levels": "^3.21.0"
+    "@bevry/ansi": "^6.7.0",
+    "editions": "^6.19.0",
+    "get-current-line": "^7.1.0",
+    "rfc-log-levels": "^4.0.0"
   },
   "devDependencies": {
     "@bevry/update-contributors": "^1.23.0",
-    "@types/node": "^20.10.0",
-    "@typescript-eslint/eslint-plugin": "^6.12.0",
-    "@typescript-eslint/parser": "^6.12.0",
-    "assert-helpers": "^11.6.0",
-    "eslint": "^8.54.0",
-    "eslint-config-bevry": "^5.1.0",
-    "eslint-config-prettier": "^9.0.0",
+    "@types/node": "^20.10.3",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "assert-helpers": "^11.9.0",
+    "eslint": "^8.55.0",
+    "eslint-config-bevry": "^5.2.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.0.1",
-    "kava": "^7.3.0",
-    "make-deno-edition": "^2.0.0",
+    "kava": "^7.5.0",
+    "make-deno-edition": "^2.0.1",
     "prettier": "^3.1.0",
-    "projectz": "^3.3.0",
-    "surge": "^0.23.1",
-    "typedoc": "^0.25.3",
-    "typescript": "5.2.2",
-    "valid-directory": "^4.5.0",
-    "valid-module": "^2.5.0"
+    "projectz": "^3.4.0",
+    "typedoc": "^0.25.4",
+    "typescript": "5.3.2",
+    "valid-directory": "^4.6.0",
+    "valid-module": "^2.6.0"
   },
   "scripts": {
     "our:clean": "rm -rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
-    "our:compile": "npm run our:compile:deno && npm run our:compile:edition-browsers && npm run our:compile:edition-es2016 && npm run our:compile:edition-es2019 && npm run our:compile:edition-es2019-esm && npm run our:compile:edition-es2022 && npm run our:compile:edition-types",
+    "our:compile": "npm run our:compile:deno && npm run our:compile:edition-browsers && npm run our:compile:edition-es2015 && npm run our:compile:edition-es2017 && npm run our:compile:edition-es2017-esm && npm run our:compile:edition-es2022 && npm run our:compile:edition-es5 && npm run our:compile:edition-types",
     "our:compile:deno": "make-deno-edition --attempt",
     "our:compile:edition-browsers": "tsc --module ESNext --target ES2022 --outDir ./edition-browsers --project tsconfig.json && ( test ! -d edition-browsers/source || ( mv edition-browsers/source edition-temp && rm -rf edition-browsers && mv edition-temp edition-browsers ) )",
-    "our:compile:edition-es2016": "tsc --module commonjs --target ES2016 --outDir ./edition-es2016 --project tsconfig.json && ( test ! -d edition-es2016/source || ( mv edition-es2016/source edition-temp && rm -rf edition-es2016 && mv edition-temp edition-es2016 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2016/package.json",
-    "our:compile:edition-es2019": "tsc --module commonjs --target ES2019 --outDir ./edition-es2019 --project tsconfig.json && ( test ! -d edition-es2019/source || ( mv edition-es2019/source edition-temp && rm -rf edition-es2019 && mv edition-temp edition-es2019 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2019/package.json",
-    "our:compile:edition-es2019-esm": "tsc --module ESNext --target ES2019 --outDir ./edition-es2019-esm --project tsconfig.json && ( test ! -d edition-es2019-esm/source || ( mv edition-es2019-esm/source edition-temp && rm -rf edition-es2019-esm && mv edition-temp edition-es2019-esm ) ) && printf '%s' '{\"type\": \"module\"}' > edition-es2019-esm/package.json",
+    "our:compile:edition-es2015": "tsc --module commonjs --target ES2015 --outDir ./edition-es2015 --project tsconfig.json && ( test ! -d edition-es2015/source || ( mv edition-es2015/source edition-temp && rm -rf edition-es2015 && mv edition-temp edition-es2015 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2015/package.json",
+    "our:compile:edition-es2017": "tsc --module commonjs --target ES2017 --outDir ./edition-es2017 --project tsconfig.json && ( test ! -d edition-es2017/source || ( mv edition-es2017/source edition-temp && rm -rf edition-es2017 && mv edition-temp edition-es2017 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2017/package.json",
+    "our:compile:edition-es2017-esm": "tsc --module ESNext --target ES2017 --outDir ./edition-es2017-esm --project tsconfig.json && ( test ! -d edition-es2017-esm/source || ( mv edition-es2017-esm/source edition-temp && rm -rf edition-es2017-esm && mv edition-temp edition-es2017-esm ) ) && printf '%s' '{\"type\": \"module\"}' > edition-es2017-esm/package.json",
     "our:compile:edition-es2022": "tsc --module commonjs --target ES2022 --outDir ./edition-es2022 --project tsconfig.json && ( test ! -d edition-es2022/source || ( mv edition-es2022/source edition-temp && rm -rf edition-es2022 && mv edition-temp edition-es2022 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2022/package.json",
+    "our:compile:edition-es5": "tsc --module commonjs --target ES5 --outDir ./edition-es5 --project tsconfig.json && ( test ! -d edition-es5/source || ( mv edition-es5/source edition-temp && rm -rf edition-es5 && mv edition-temp edition-es5 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es5/package.json",
     "our:compile:edition-types": "tsc --emitDeclarationOnly --declaration --declarationMap --declarationDir ./edition-types --project tsconfig.json && ( test ! -d edition-types/source || ( mv edition-types/source edition-temp && rm -rf edition-types && mv edition-temp edition-types ) )",
     "our:deploy": "printf '%s\n' 'no need for this project'",
     "our:meta": "npm run our:meta:contributors && npm run our:meta:docs && npm run our:meta:projectz",
@@ -287,7 +303,8 @@
   "prettier": {
     "semi": false,
     "singleQuote": true,
-    "trailingComma": "es5"
+    "trailingComma": "es5",
+    "endOfLine": "lf"
   },
   "boundation": {
     "dom": true

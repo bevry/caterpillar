@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "downlevelIteration": true,
     "esModuleInterop": true,
     "isolatedModules": true,
+    "lib": ["DOM.Iterable", "DOM"],
     "maxNodeModuleJsDepth": 5,
+    "module": "ESNext",
     "moduleResolution": "Node",
     "strict": true,
-    "target": "ES2022",
-    "module": "ESNext",
-    "downlevelIteration": true,
-    "lib": ["DOM.Iterable", "DOM"]
+    "target": "ES2022"
   },
   "include": ["source"]
 }
