@@ -121,7 +121,7 @@ export class Logger extends Transform {
 						char: -1,
 						method: '',
 						file: '',
-				  }
+					}
 
 		// put it all together
 		return Object.assign({ date, args }, levelInfo, lineInfo)

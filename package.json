@@ -1,10 +1,18 @@
 {
   "title": "Caterpillar",
   "name": "caterpillar",
-  "version": "8.0.0",
+  "version": "8.1.0",
+  "license": "Artistic-2.0",
   "description": "Caterpillar is the ultimate logging system for Deno, Node.js, and Web Browsers. Log levels are implemented to the RFC standard. Log entries can be filtered and piped to various streams, including coloured output to the terminal, the browser's console, and debug files. You can even write your own transforms.",
   "homepage": "https://github.com/bevry/caterpillar",
-  "license": "Artistic-2.0",
+  "funding": "https://bevry.me/fund",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bevry/caterpillar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bevry/caterpillar/issues"
+  },
   "keywords": [
     "browser",
     "caterpillar",
@@ -69,23 +77,43 @@
       "npmPackageName": "caterpillar"
     }
   },
-  "funding": "https://bevry.me/fund",
-  "author": "2012+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me), 2011 Benjamin Lupton <b@lupton.cc> (https://balupton.com)",
+  "author": "Benjamin Lupton <b@lupton.cc> (https://balupton.com) (https://github.com/balupton)",
+  "authors": [
+    "Benjamin Lupton <b@lupton.cc> (https://balupton.com) (https://github.com/balupton): Accelerating collaborative wisdom."
+  ],
   "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+    "Benjamin Lupton <b@lupton.cc> (https://balupton.com) (https://github.com/balupton): Accelerating collaborative wisdom."
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
-    "Tim Helfensdörfer <tim@visualappeal.de> (https://github.com/thelfensdrfer)",
-    "t-visualappeal (https://github.com/t-visualappeal)"
+    "Benjamin Lupton <b@lupton.cc> (https://balupton.com) (https://github.com/balupton)",
+    "t-visualappeal (https://github.com/t-visualappeal)",
+    "Tim Helfensdörfer <tim@visualappeal.de> (https://thelfensdrfer.de) (https://github.com/thelfensdrfer)"
   ],
-  "bugs": {
-    "url": "https://github.com/bevry/caterpillar/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bevry/caterpillar.git"
-  },
+  "sponsors": [
+    "Andrew Nesbitt (https://nesbitt.io) (https://github.com/andrew): Software engineer and researcher",
+    "Balsa <hello@balsa.com> (https://balsa.com) (https://github.com/balsa): We're Balsa, and we're building tools for builders.",
+    "Codecov <hello-codecov@sentry.io> (https://codecov.io/) (https://github.com/codecov): Empower developers with tools to improve code quality and testing.",
+    "Poonacha Medappa (https://poonachamedappa.com) (https://github.com/km-Poonacha)",
+    "Rob Morris <rob@prismatik.com.au> (https://github.com/Rob-Morris)",
+    "Sentry (https://sentry.io) (https://github.com/getsentry): Real-time crash reporting for your web apps, mobile apps, and games.",
+    "Syntax <scott@syntax.fm> (https://syntax.fm) (https://github.com/syntaxfm): Syntax Podcast"
+  ],
+  "donors": [
+    "Andrew Nesbitt (https://nesbitt.io) (https://github.com/andrew)",
+    "Balsa <hello@balsa.com> (https://balsa.com) (https://github.com/balsa)",
+    "Chad (https://opencollective.com/chad8)",
+    "Codecov <hello-codecov@sentry.io> (https://codecov.io/) (https://github.com/codecov)",
+    "entroniq (https://gitlab.com/entroniq) (https://thanks.dev/d/gl/entroniq)",
+    "Jean-Luc Geering (https://github.com/jlgeering) (https://opencollective.com/jlgeering) (https://twitter.com/jlgeering)",
+    "Michael Duane Mooring (https://mdm.cc) (https://github.com/mikeumus) (https://opencollective.com/mikeumus) (https://twitter.com/mikeumus)",
+    "Mohammed Shah <shah@idk.uno> (https://github.com/smashah) (https://thanks.dev/d/gh/smashah) (https://twitter.com/smashah)",
+    "Poonacha Medappa (https://poonachamedappa.com) (https://github.com/km-Poonacha)",
+    "Rob Morris <rob@prismatik.com.au> (https://github.com/Rob-Morris)",
+    "Sentry (https://sentry.io) (https://github.com/getsentry)",
+    "ServieJS (https://github.com/serviejs) (https://thanks.dev/d/gh/serviejs)",
+    "Skunk Team (https://skunk.team) (https://github.com/skunkteam)",
+    "Syntax <scott@syntax.fm> (https://syntax.fm) (https://github.com/syntaxfm)"
+  ],
   "engines": {
     "node": ">=4"
   },
@@ -116,7 +144,7 @@
       }
     },
     {
-      "description": "TypeScript compiled against ES2022 for Node.js 21 with Require for modules",
+      "description": "TypeScript compiled against ES2022 for Node.js 14 || 16 || 18 || 20 || 21 with Require for modules",
       "directory": "edition-es2022",
       "entry": "index.js",
       "tags": [
@@ -131,7 +159,7 @@
       }
     },
     {
-      "description": "TypeScript compiled against ES2017 for Node.js 12 with Require for modules",
+      "description": "TypeScript compiled against ES2017 for Node.js 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with Require for modules",
       "directory": "edition-es2017",
       "entry": "index.js",
       "tags": [
@@ -146,7 +174,7 @@
       }
     },
     {
-      "description": "TypeScript compiled against ES2015 for Node.js 6 with Require for modules",
+      "description": "TypeScript compiled against ES2015 for Node.js 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with Require for modules",
       "directory": "edition-es2015",
       "entry": "index.js",
       "tags": [
@@ -161,7 +189,7 @@
       }
     },
     {
-      "description": "TypeScript compiled against ES5 for Node.js 4 with Require for modules",
+      "description": "TypeScript compiled against ES5 for Node.js 4 || 6 || 8 || 10 || 12 || 14 || 16 with Require for modules",
       "directory": "edition-es5",
       "entry": "index.js",
       "tags": [
@@ -176,7 +204,7 @@
       }
     },
     {
-      "description": "TypeScript compiled against ES2017 for Node.js 12 with Import for modules",
+      "description": "TypeScript compiled against ES2017 for Node.js 12 || 14 || 16 || 18 || 20 || 21 with Import for modules",
       "directory": "edition-es2017-esm",
       "entry": "index.js",
       "tags": [
@@ -235,28 +263,27 @@
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "dependencies": {
-    "@bevry/ansi": "^6.7.0",
-    "editions": "^6.19.0",
-    "get-current-line": "^7.1.0",
-    "rfc-log-levels": "^4.0.0"
+    "@bevry/ansi": "^6.8.0",
+    "editions": "^6.20.0",
+    "get-current-line": "^7.2.0",
+    "rfc-log-levels": "^4.1.0"
   },
   "devDependencies": {
-    "@bevry/update-contributors": "^1.23.0",
-    "@types/node": "^20.10.3",
-    "@typescript-eslint/eslint-plugin": "^6.13.2",
-    "@typescript-eslint/parser": "^6.13.2",
-    "assert-helpers": "^11.9.0",
-    "eslint": "^8.55.0",
-    "eslint-config-bevry": "^5.2.0",
+    "@types/node": "^20.10.5",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
+    "assert-helpers": "^11.11.0",
+    "eslint": "^8.56.0",
+    "eslint-config-bevry": "^5.3.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "kava": "^7.5.0",
-    "make-deno-edition": "^2.0.1",
-    "prettier": "^3.1.0",
-    "projectz": "^3.4.0",
+    "eslint-plugin-prettier": "^5.1.2",
+    "kava": "^7.6.0",
+    "make-deno-edition": "^2.1.0",
+    "prettier": "^3.1.1",
+    "projectz": "^4.0.0",
     "typedoc": "^0.25.4",
-    "typescript": "5.3.2",
-    "valid-directory": "^4.6.0",
+    "typescript": "5.3.3",
+    "valid-directory": "^4.7.0",
     "valid-module": "^2.6.0"
   },
   "scripts": {
@@ -271,11 +298,10 @@
     "our:compile:edition-es5": "tsc --module commonjs --target ES5 --outDir ./edition-es5 --project tsconfig.json && ( test ! -d edition-es5/source || ( mv edition-es5/source edition-temp && rm -rf edition-es5 && mv edition-temp edition-es5 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es5/package.json",
     "our:compile:edition-types": "tsc --emitDeclarationOnly --declaration --declarationMap --declarationDir ./edition-types --project tsconfig.json && ( test ! -d edition-types/source || ( mv edition-types/source edition-temp && rm -rf edition-types && mv edition-temp edition-types ) )",
     "our:deploy": "printf '%s\n' 'no need for this project'",
-    "our:meta": "npm run our:meta:contributors && npm run our:meta:docs && npm run our:meta:projectz",
-    "our:meta:contributors": "update-contributors",
+    "our:meta": "npm run our:meta:docs && npm run our:meta:projectz",
     "our:meta:docs": "npm run our:meta:docs:typedoc",
     "our:meta:docs:typedoc": "rm -rf ./docs && typedoc --exclude '**/+(*test*|node_modules)' --excludeExternals --out ./docs ./source",
-    "our:meta:projectz": "projectz compile",
+    "our:meta:projectz": "projectz",
     "our:release": "npm run our:release:prepare && npm run our:release:check-changelog && npm run our:release:check-dirty && npm run our:release:tag && npm run our:release:push",
     "our:release:check-changelog": "cat ./HISTORY.md | grep \"v$npm_package_version\" || (printf '%s\n' \"add a changelog entry for v$npm_package_version\" && exit -1)",
     "our:release:check-dirty": "git diff --exit-code",
@@ -285,12 +311,14 @@
     "our:setup": "npm run our:setup:install",
     "our:setup:install": "npm install",
     "our:test": "npm run our:verify && npm test",
-    "our:verify": "npm run our:verify:directory && npm run our:verify:eslint && npm run our:verify:module && npm run our:verify:prettier",
-    "our:verify:directory": "valid-directory",
+    "our:verify": "npm run our:verify:eslint && npm run our:verify:module && npm run our:verify:prettier",
     "our:verify:eslint": "eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx ./source",
     "our:verify:module": "valid-module",
     "our:verify:prettier": "prettier --write .",
     "test": "node ./test.cjs"
+  },
+  "boundation": {
+    "dom": true
   },
   "eslintConfig": {
     "extends": [
@@ -305,8 +333,5 @@
     "singleQuote": true,
     "trailingComma": "es5",
     "endOfLine": "lf"
-  },
-  "boundation": {
-    "dom": true
   }
 }

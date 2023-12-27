@@ -99,7 +99,7 @@ export class Human extends Transform {
 							showHidden: false,
 							depth: 10,
 							colors: this.color,
-					  })
+						})
 			)
 			.join(' ')
 	}
