@@ -18,7 +18,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ contains('macos-latest windows-latest', matrix.os) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install Deno
         uses: denoland/setup-deno@v2
         with:
@@ -49,7 +49,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install Deno
         uses: denoland/setup-deno@v2
         with:
