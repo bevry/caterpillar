@@ -24,7 +24,7 @@ jobs:
         with:
           deno-version: vx.x.x
       - name: Install desired Node.js version
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
       - name: Verify Node.js Versions
@@ -36,7 +36,7 @@ jobs:
       - run: npm run our:verify
       - name: Install targeted Node.js
         if: ${{ matrix.node != 20 }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node }}
       - name: Verify Node.js Versions
@@ -55,7 +55,7 @@ jobs:
         with:
           deno-version: vx.x.x
       - name: Install desired Node.js version
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
       - name: Verify Node.js Versions
